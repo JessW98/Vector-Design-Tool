@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class GUI extends JFrame {
@@ -9,8 +10,8 @@ public class GUI extends JFrame {
         //create the main frame
         super("VectorDesignTool");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container content = getContentPane();
-
+        Container mainContainer = getContentPane();
+        mainContainer.setLayout(new BorderLayout(8,6));
 
         //Create the Menu Bar
         JMenuBar menuBar = new JMenuBar();
@@ -32,10 +33,21 @@ public class GUI extends JFrame {
         JMenu help = new JMenu("Help");
         menuBar.add(help);
 
-        //Side Panel Layout
+        //tools panel
         JPanel tools = new JPanel();
+        tools.setLayout(new GridLayout(5,1,5,5));
+        tools.setBackground(Color.gray);
 
-        //Buttons
+        //left side panel
+        JPanel left = new JPanel(new GridBagLayout());
+        left.setBorder(new LineBorder(Color.black, 1));
+        left.setBackground(Color.gray);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.weighty = 1;
+        left.add(tools,gbc);
+        
+        //Buttons for tools
         JButton rectangleButton = new JButton("Rectangle");
         tools.add(rectangleButton);
 
@@ -52,10 +64,12 @@ public class GUI extends JFrame {
         tools.add(polygonButton);
 
         //add tools to content pane
-        content.add(tools, BorderLayout.WEST);
+        mainContainer.add(left, BorderLayout.WEST);
+
+        //main drawing pane
 
         //Display the window
-        setPreferredSize(new Dimension(300, 100));
+        setPreferredSize(new Dimension(500, 500));
         setLocation(new Point(200, 300));
         pack();
         setVisible(true);

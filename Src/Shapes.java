@@ -1,2 +1,3 @@
-public class Shapes {
+public class Shapes implements Drawable {
+
 }

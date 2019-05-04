@@ -1,2 +1,2 @@
-public class Polygon {
+public class Polygon extends Shapes {
 }

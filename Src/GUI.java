@@ -5,7 +5,7 @@ public class GUI extends JFrame {
     /**
      * Create and show the GUI
      */
-    public GUI(){
+    private GUI(){
         //create the main frame
         super("VectorDesignTool");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,11 +35,23 @@ public class GUI extends JFrame {
         //Side Panel Layout
         JPanel tools = new JPanel();
 
-        //Rectangle button
-        JButton button = new JButton("Rectangle");
-        tools.add(button);
+        //Buttons
+        JButton rectangleButton = new JButton("Rectangle");
+        tools.add(rectangleButton);
 
-        //add to content pane
+        JButton lineButton = new JButton("Line");
+        tools.add(lineButton);
+
+        JButton ellipseButton = new JButton("Ellipse");
+        tools.add(ellipseButton);
+
+        JButton plotButton = new JButton("Plot");
+        tools.add(plotButton);
+
+        JButton polygonButton = new JButton("Polygon");
+        tools.add(polygonButton);
+
+        //add tools to content pane
         content.add(tools, BorderLayout.WEST);
 
         //Display the window

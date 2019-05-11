@@ -42,32 +42,6 @@ public class GUI extends JFrame {
         JButton blueBtn = new JButton(" ");
         JButton cyanBtn = new JButton(" ");
 
-        ActionListener actionListener = e -> {
-            if (e.getSource()== blackBtn){
-                canvas.black();
-            }else if (e.getSource() == greenBtn){
-                canvas.green();
-            }else if (e.getSource() == redBtn){
-                canvas.red();
-            }else if (e.getSource() == pinkBtn){
-                canvas.pink();
-            }else if (e.getSource() == blueBtn){
-                canvas.blue();
-            }else if (e.getSource() == cyanBtn){
-                canvas.cyan();
-            }
-
-        };
-
-        //add action listeners to buttons
-        blackBtn.addActionListener(actionListener);
-        greenBtn.addActionListener(actionListener);
-        redBtn.addActionListener(actionListener);
-        pinkBtn.addActionListener(actionListener);
-        blueBtn.addActionListener(actionListener);
-        cyanBtn.addActionListener(actionListener);
-
-
 
         //create the main frame
         mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +121,9 @@ public class GUI extends JFrame {
         JButton polygonButton = new JButton(new ImageIcon(polygonPicScaled));
         tools.add(polygonButton);
 
+        JButton clearButton = new JButton("Clear");
+        tools.add(clearButton);
+
         //colour buttons
         colours.add(blackBtn);
         colours.add(greenBtn);
@@ -182,6 +159,33 @@ public class GUI extends JFrame {
 
         //add bottom panel to content pane
         mainContainer.add(bottom, BorderLayout.SOUTH);
+
+        ActionListener actionListener = e -> {
+            if (e.getSource()== blackBtn){
+                canvas.black();
+            }else if (e.getSource() == greenBtn){
+                canvas.green();
+            }else if (e.getSource() == redBtn){
+                canvas.red();
+            }else if (e.getSource() == pinkBtn){
+                canvas.pink();
+            }else if (e.getSource() == blueBtn){
+                canvas.blue();
+            }else if (e.getSource() == cyanBtn){
+                canvas.cyan();
+            }else if(e.getSource()== clearButton){
+                    canvas.clear();
+            }
+
+        };
+
+        //add action listeners to buttons
+        blackBtn.addActionListener(actionListener);
+        greenBtn.addActionListener(actionListener);
+        redBtn.addActionListener(actionListener);
+        pinkBtn.addActionListener(actionListener);
+        blueBtn.addActionListener(actionListener);
+        cyanBtn.addActionListener(actionListener);
 
         //Display the window
         mainPanel.setPreferredSize(new Dimension(500, 500));

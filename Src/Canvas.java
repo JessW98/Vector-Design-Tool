@@ -54,7 +54,6 @@ public class Canvas extends JPanel {
         if(captureCanvas == null){
             captureCanvas = createImage(getSize().width, getSize().height);
             graphic = (Graphics2D) captureCanvas.getGraphics();
-            clear();
         }
         g.drawImage(captureCanvas, 0, 0, null);
     }

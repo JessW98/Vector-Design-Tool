@@ -14,12 +14,12 @@ public class GUI extends JFrame {
         JButton blackBtn, greenBtn, redBtn, pinkBtn, blueBtn, cyanBtn;
 
         //Colour initialize buttons
-        blackBtn = new JButton("Black");
-        greenBtn = new JButton("Green");
-        redBtn = new JButton("Red");
-        pinkBtn = new JButton("Pink");
-        blueBtn = new JButton("Blue");
-        cyanBtn = new JButton("Cyan");
+        blackBtn = new JButton(" ");
+        greenBtn = new JButton(" ");
+        redBtn = new JButton(" ");
+        pinkBtn = new JButton(" ");
+        blueBtn = new JButton(" ");
+        cyanBtn = new JButton(" ");
 
         ActionListener actionListener = e -> {
             if (e.getSource()== blackBtn){
@@ -45,6 +45,8 @@ public class GUI extends JFrame {
         pinkBtn.addActionListener(actionListener);
         blueBtn.addActionListener(actionListener);
         cyanBtn.addActionListener(actionListener);
+
+
 
         //create the main frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,6 +129,26 @@ public class GUI extends JFrame {
         colours.add(pinkBtn);
         colours.add(redBtn);
         colours.add(cyanBtn);
+
+        //Make colour buttons their relevant colour
+        blackBtn.setOpaque(true);
+        blackBtn.setBackground(Color.black);
+        blackBtn.setSize(25,25);
+
+        greenBtn.setOpaque(true);
+        greenBtn.setBackground(Color.green);
+
+        blueBtn.setOpaque(true);
+        blueBtn.setBackground(Color.blue);
+
+        pinkBtn.setOpaque(true);
+        pinkBtn.setBackground(Color.PINK);
+
+        redBtn.setOpaque(true);
+        redBtn.setBackground(Color.RED);
+
+        cyanBtn.setOpaque(true);
+        cyanBtn.setBackground(Color.CYAN);
 
         //add left panel to content pane
         mainContainer.add(left, BorderLayout.WEST);

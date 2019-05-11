@@ -20,27 +20,27 @@ public class GUI extends JFrame {
         pinkBtn = new JButton("Pink");
         blueBtn = new JButton("Blue");
 
-        ActionListener actionListener = e -> {
-            if (e.getSource()== blackBtn){
-                canvas.black();
-            }else if (e.getSource() == greenBtn){
-                canvas.green();
-            }else if (e.getSource() == redBtn){
-                canvas.red();
-            }else if (e.getSource() == pinkBtn){
-                canvas.pink();
-            }else if (e.getSource() == blueBtn){
-                canvas.blue();
-            }
+//        ActionListener actionListener = e -> {
+//            if (e.getSource()== blackBtn){
+//                canvas.black();
+//            }else if (e.getSource() == greenBtn){
+//                canvas.green();
+//            }else if (e.getSource() == redBtn){
+//                canvas.red();
+//            }else if (e.getSource() == pinkBtn){
+//                canvas.pink();
+//            }else if (e.getSource() == blueBtn){
+//                canvas.blue();
+//            }
+//
+//        };
 
-        };
-
-        //add action listeners to buttons
-        blackBtn.addActionListener(actionListener);
-        greenBtn.addActionListener(actionListener);
-        redBtn.addActionListener(actionListener);
-        pinkBtn.addActionListener(actionListener);
-        blueBtn.addActionListener(actionListener);
+//        //add action listeners to buttons
+//        blackBtn.addActionListener(actionListener);
+//        greenBtn.addActionListener(actionListener);
+//        redBtn.addActionListener(actionListener);
+//        pinkBtn.addActionListener(actionListener);
+//        blueBtn.addActionListener(actionListener);
 
         //create the main frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,7 +132,6 @@ public class GUI extends JFrame {
         setLocation(new Point(200, 300));
         pack();
         setVisible(true);
-
     }
 
     //Main entry point for program

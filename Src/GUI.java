@@ -11,36 +11,42 @@ public class GUI extends JFrame {
     private GUI() {
         super("VectorDesignTool");
         Canvas canvas = new Canvas();
-        JButton blackBtn, greenBtn, redBtn, pinkBtn, blueBtn;
+        JButton blackBtn, greenBtn, redBtn, pinkBtn, blueBtn, cyanBtn;
 
         //Colour initialize buttons
-        blackBtn = new JButton("Black");
-        greenBtn = new JButton("Green");
-        redBtn = new JButton("Red");
-        pinkBtn = new JButton("Pink");
-        blueBtn = new JButton("Blue");
+        blackBtn = new JButton(" ");
+        greenBtn = new JButton(" ");
+        redBtn = new JButton(" ");
+        pinkBtn = new JButton(" ");
+        blueBtn = new JButton(" ");
+        cyanBtn = new JButton(" ");
 
-//        ActionListener actionListener = e -> {
-//            if (e.getSource()== blackBtn){
-//                canvas.black();
-//            }else if (e.getSource() == greenBtn){
-//                canvas.green();
-//            }else if (e.getSource() == redBtn){
-//                canvas.red();
-//            }else if (e.getSource() == pinkBtn){
-//                canvas.pink();
-//            }else if (e.getSource() == blueBtn){
-//                canvas.blue();
-//            }
-//
-//        };
+        ActionListener actionListener = e -> {
+            if (e.getSource()== blackBtn){
+                canvas.black();
+            }else if (e.getSource() == greenBtn){
+                canvas.green();
+            }else if (e.getSource() == redBtn){
+                canvas.red();
+            }else if (e.getSource() == pinkBtn){
+                canvas.pink();
+            }else if (e.getSource() == blueBtn){
+                canvas.blue();
+            }else if (e.getSource() == cyanBtn){
+                canvas.cyan();
+            }
 
-//        //add action listeners to buttons
-//        blackBtn.addActionListener(actionListener);
-//        greenBtn.addActionListener(actionListener);
-//        redBtn.addActionListener(actionListener);
-//        pinkBtn.addActionListener(actionListener);
-//        blueBtn.addActionListener(actionListener);
+        };
+
+        //add action listeners to buttons
+        blackBtn.addActionListener(actionListener);
+        greenBtn.addActionListener(actionListener);
+        redBtn.addActionListener(actionListener);
+        pinkBtn.addActionListener(actionListener);
+        blueBtn.addActionListener(actionListener);
+        cyanBtn.addActionListener(actionListener);
+
+
 
         //create the main frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,10 +72,7 @@ public class GUI extends JFrame {
         menuBar.add(view);
         JMenu image = new JMenu("Image");
         menuBar.add(image);
-        JMenu colors = new JMenu("Colours");
-        menuBar.add(colors);
-        JMenu help = new JMenu("Help");
-        menuBar.add(help);
+
 
         //tools panel
         JPanel tools = new JPanel();
@@ -78,7 +81,7 @@ public class GUI extends JFrame {
 
         //colours panel
         JPanel colours = new JPanel();
-        colours.setLayout(new GridLayout(5, 1, 1, 1));
+        colours.setLayout(new GridLayout(2, 10, 1, 1));
         colours.setBackground(Color.gray);
 
         //left side panel
@@ -86,18 +89,24 @@ public class GUI extends JFrame {
         left.setBorder(new LineBorder(Color.black, 1));
         left.setBackground(Color.gray);
 
+        //bottom panel
+        JPanel bottom = new JPanel(new GridBagLayout());
+        bottom.setBorder(new LineBorder(Color.black, 1));
+        bottom.setBackground(Color.gray);
+
         //constraints for tools
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.anchor = GridBagConstraints.NORTH;
 
-
         //contracts for colours
         GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.anchor = GridBagConstraints.SOUTH;
+        gbc2.anchor = GridBagConstraints.WEST;
+        gbc2.weightx =1;
 
         //add tools to left panel
         left.add(tools, gbc1);
-        left.add(colours, gbc2);
+        //add colours to bottom panel
+        bottom.add(colours, gbc2);
 
         //Buttons for tools
         JButton rectangleButton = new JButton("Rectangle");
@@ -120,6 +129,26 @@ public class GUI extends JFrame {
         colours.add(blueBtn);
         colours.add(pinkBtn);
         colours.add(redBtn);
+        colours.add(cyanBtn);
+
+        //Make colour buttons their relevant colour
+        blackBtn.setOpaque(true);
+        blackBtn.setBackground(Color.black);
+
+        greenBtn.setOpaque(true);
+        greenBtn.setBackground(Color.green);
+
+        blueBtn.setOpaque(true);
+        blueBtn.setBackground(Color.blue);
+
+        pinkBtn.setOpaque(true);
+        pinkBtn.setBackground(Color.PINK);
+
+        redBtn.setOpaque(true);
+        redBtn.setBackground(Color.RED);
+
+        cyanBtn.setOpaque(true);
+        cyanBtn.setBackground(Color.CYAN);
 
         //add left panel to content pane
         mainContainer.add(left, BorderLayout.WEST);
@@ -127,11 +156,15 @@ public class GUI extends JFrame {
         //add draw area to content
         mainContainer.add(canvas,BorderLayout.CENTER);
 
+        //add bottom panel to content pane
+        mainContainer.add(bottom, BorderLayout.SOUTH);
+
         //Display the window
         setPreferredSize(new Dimension(500, 500));
         setLocation(new Point(200, 300));
         pack();
         setVisible(true);
+
     }
 
     //Main entry point for program

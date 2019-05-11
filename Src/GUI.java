@@ -19,19 +19,19 @@ public class GUI extends JFrame {
 
         //Import and scale images
         Image linePic = ImageIO.read(GUI.class.getResource("images/line.png"));
-        Image linePicScaled= linePic.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        Image linePicScaled= linePic.getScaledInstance(40,40, Image.SCALE_SMOOTH);
 
         BufferedImage ellipsePic = ImageIO.read(GUI.class.getResource("images/ellipse.png"));
-        Image ellipsePicScaled= ellipsePic.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        Image ellipsePicScaled= ellipsePic.getScaledInstance(40,40, Image.SCALE_SMOOTH);
 
         BufferedImage plotPic = ImageIO.read(GUI.class.getResource("images/plot.png"));
-        Image plotPicScaled= plotPic.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        Image plotPicScaled= plotPic.getScaledInstance(40,40, Image.SCALE_SMOOTH);
 
         BufferedImage polygonPic = ImageIO.read(GUI.class.getResource("images/polygon.png"));
-        Image polygonPicScaled= polygonPic.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        Image polygonPicScaled= polygonPic.getScaledInstance(40,40, Image.SCALE_SMOOTH);
 
         BufferedImage rectanglePic = ImageIO.read(GUI.class.getResource("images/rectangle.png"));
-        Image rectanglePicScaled= rectanglePic.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        Image rectanglePicScaled= rectanglePic.getScaledInstance(40,40, Image.SCALE_SMOOTH);
 
 
         //Colour initialize buttons

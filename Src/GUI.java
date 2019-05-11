@@ -100,7 +100,8 @@ public class GUI extends JFrame {
 
         //contracts for colours
         GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.anchor = GridBagConstraints.SOUTH;
+        gbc2.anchor = GridBagConstraints.WEST;
+        gbc2.weightx =1;
 
         //add tools to left panel
         left.add(tools, gbc1);
@@ -133,7 +134,6 @@ public class GUI extends JFrame {
         //Make colour buttons their relevant colour
         blackBtn.setOpaque(true);
         blackBtn.setBackground(Color.black);
-        blackBtn.setSize(25,25);
 
         greenBtn.setOpaque(true);
         greenBtn.setBackground(Color.green);

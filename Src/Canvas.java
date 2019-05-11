@@ -89,5 +89,9 @@ public class Canvas extends JComponent {
         g2d.setPaint(Color.blue);
     }
 
+    public void cyan() {
+        g2d.setPaint(Color.cyan);
+    }
+
 
 }

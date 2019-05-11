@@ -34,18 +34,22 @@ public class GUI extends JFrame {
         Image rectanglePicScaled= rectanglePic.getScaledInstance(40,40, Image.SCALE_SMOOTH);
 
 
-        //Colour initialize buttons
+        //Colour initialize and declare buttons and entry
         JButton blackBtn = new JButton(" ");
         JButton greenBtn = new JButton(" ");
         JButton redBtn = new JButton(" ");
         JButton pinkBtn = new JButton(" ");
         JButton blueBtn = new JButton(" ");
         JButton cyanBtn = new JButton(" ");
+        JTextField hexEntry = new JTextField("Enter Hex");
+
+        hexEntry.setColumns(8);
 
 
         //create the main frame
         mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container mainContainer = mainPanel.getContentPane();
+
         //Create the Menu Bar
         JMenuBar menuBar = new JMenuBar();
         mainPanel.setJMenuBar(menuBar);
@@ -59,7 +63,8 @@ public class GUI extends JFrame {
         //Populate menu bar with menus
         JMenu file = new JMenu("File");
         menuBar.add(file);
-        file.add("exit");
+        file.add("Load");
+        file.add("save");
 
         JMenu edit = new JMenu("Edit");
         menuBar.add(edit);
@@ -79,6 +84,11 @@ public class GUI extends JFrame {
         colours.setLayout(new GridLayout(2, 10, 1, 1));
         colours.setBackground(Color.gray);
 
+        //hexEntry panel
+        JPanel hexPanel = new JPanel();
+        hexPanel.setLayout(new GridLayout(1,1,1,1));
+        hexPanel.setBackground(Color.gray);
+
         //left side panel
         JPanel left = new JPanel(new GridBagLayout());
         left.setBorder(new LineBorder(Color.black, 1));
@@ -94,15 +104,23 @@ public class GUI extends JFrame {
         gbc1.anchor = GridBagConstraints.NORTH;
         gbc1.weighty =1;
 
-        //contracts for colours
+        //constraints for colours
         GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.anchor = GridBagConstraints.WEST;
         gbc2.weightx =1;
 
+        //constraints for colours
+        GridBagConstraints gbc3 = new GridBagConstraints();
+        gbc3.anchor = GridBagConstraints.CENTER;
+        gbc3.weightx =1;
+
+        //hexadecimal entry for colours
+
         //add tools to left panel
         left.add(tools, gbc1);
-        //add colours to bottom panel
+        //add colours and hex entry to bottom panel
         bottom.add(colours, gbc2);
+        bottom.add(hexPanel,gbc3);
 
         //Buttons for tools
 
@@ -131,6 +149,9 @@ public class GUI extends JFrame {
         colours.add(pinkBtn);
         colours.add(redBtn);
         colours.add(cyanBtn);
+
+
+        hexPanel.add(hexEntry);
 
         //Make colour buttons their relevant colour
         blackBtn.setOpaque(true);

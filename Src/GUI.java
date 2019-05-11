@@ -43,7 +43,7 @@ public class GUI extends JFrame {
         JButton cyanBtn = new JButton(" ");
 
         ActionListener actionListener = e -> {
-            if (e.getSource()== blackBtn){
+            if (e.getSource() == blackBtn){
                 canvas.black();
             }else if (e.getSource() == greenBtn){
                 canvas.green();

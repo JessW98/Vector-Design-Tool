@@ -10,9 +10,12 @@ public class Canvas extends JPanel {
     private Image captureCanvas;
     //The graphics 2d object that user will draw on
     private Graphics2D graphic;
+    private Graphics2D draw;
+    private Color drawColour = Color.BLACK;
 
     private Point origin;
     private Point destination;
+
 
     private class Mouse extends MouseAdapter {
         @Override
@@ -61,7 +64,8 @@ public class Canvas extends JPanel {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D line = (Graphics2D) g;
+        draw = (Graphics2D) g;
+        draw.setPaint(drawColour);
 
         if(origin != null && destination != null){
             int x1 = origin.x;
@@ -69,28 +73,29 @@ public class Canvas extends JPanel {
             int x2 = destination.x;
             int y2 = destination.y;
 
-//          line.drawLine(x1, y1, x2, y2);
-            line.drawRect(x1, y1, x2, y2);
+          draw.drawLine(x1, y1, x2, y2);
+
+//            line.drawRect(x1, y1, x2, y2);
         }
     }
 
     public void black() {
-        graphic.setPaint(Color.black);
+        drawColour = Color.BLACK;
     }
     public void green() {
-        graphic.setPaint(Color.green);
+        drawColour = Color.GREEN;
     }
     public void red() {
-        graphic.setPaint(Color.red);
+        drawColour = Color.RED;
     }
     public void pink() {
-        graphic.setPaint(Color.pink);
+        drawColour = Color.PINK;
     }
     public void blue() {
-        graphic.setPaint(Color.blue);
+        drawColour = Color.BLUE;
     }
     public void cyan() {
-        graphic.setPaint(Color.cyan);
+        drawColour = Color.CYAN;
     }
 
 

@@ -1,14 +1,51 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
     /**
      * Create and show the GUI
      */
     private GUI() {
-        //create the main frame
         super("VectorDesignTool");
+        Canvas canvas = new Canvas();
+        JButton blackBtn, greenBtn, redBtn, pinkBtn, blueBtn;
+
+        //Colour initialize buttons
+        blackBtn = new JButton("Black");
+        greenBtn = new JButton("Green");
+        redBtn = new JButton("Red");
+        pinkBtn = new JButton("Pink");
+        blueBtn = new JButton("Blue");
+
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource()== blackBtn){
+                    canvas.black();
+                }else if (e.getSource() == greenBtn){
+                    canvas.green();
+                }else if (e.getSource() == redBtn){
+                    canvas.red();
+                }else if (e.getSource() == pinkBtn){
+                    canvas.pink();
+                }else if (e.getSource() == blueBtn){
+                    canvas.blue();
+                }
+
+            }
+        };
+
+        //add action listeners to buttons
+        blackBtn.addActionListener(actionListener);
+        greenBtn.addActionListener(actionListener);
+        redBtn.addActionListener(actionListener);
+        pinkBtn.addActionListener(actionListener);
+        blueBtn.addActionListener(actionListener);
+
+        //create the main frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container mainContainer = getContentPane();
         //Create the Menu Bar
@@ -42,19 +79,32 @@ public class GUI extends JFrame {
         tools.setLayout(new GridLayout(5, 1, 1, 1));
         tools.setBackground(Color.gray);
 
+        //colours panel
+        JPanel colours = new JPanel();
+        colours.setLayout(new GridLayout(5, 1, 1, 1));
+        colours.setBackground(Color.gray);
+
         //left side panel
         JPanel left = new JPanel(new GridBagLayout());
         left.setBorder(new LineBorder(Color.black, 1));
         left.setBackground(Color.gray);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.weighty = 1;
-        left.add(tools, gbc);
+
+        //constraints for tools
+        GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.anchor = GridBagConstraints.NORTH;
+
+
+        //contracts for colours
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.anchor = GridBagConstraints.SOUTH;
+
+        //add tools to left panel
+        left.add(tools, gbc1);
+        left.add(colours, gbc2);
 
         //Buttons for tools
         JButton rectangleButton = new JButton("Rectangle");
         tools.add(rectangleButton);
-
         JButton lineButton = new JButton("Line");
         tools.add(lineButton);
 
@@ -67,8 +117,18 @@ public class GUI extends JFrame {
         JButton polygonButton = new JButton("Polygon");
         tools.add(polygonButton);
 
-        //add tools to content pane
+        //colour buttons
+        colours.add(blackBtn);
+        colours.add(greenBtn);
+        colours.add(blueBtn);
+        colours.add(pinkBtn);
+        colours.add(redBtn);
+
+        //add left panel to content pane
         mainContainer.add(left, BorderLayout.WEST);
+
+        //add draw area to content
+        mainContainer.add(canvas,BorderLayout.CENTER);
 
         //Display the window
         setPreferredSize(new Dimension(500, 500));

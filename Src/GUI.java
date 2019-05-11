@@ -43,29 +43,29 @@ public class GUI extends JFrame {
         JButton cyanBtn = new JButton(" ");
 
         ActionListener actionListener = e -> {
-//            if (e.getSource()== blackBtn){
-//                canvas.black();
-//            }else if (e.getSource() == greenBtn){
-//                canvas.green();
-//            }else if (e.getSource() == redBtn){
-//                canvas.red();
-//            }else if (e.getSource() == pinkBtn){
-//                canvas.pink();
-//            }else if (e.getSource() == blueBtn){
-//                canvas.blue();
-//            }else if (e.getSource() == cyanBtn){
-//                canvas.cyan();
-//            }
+            if (e.getSource()== blackBtn){
+                canvas.setBackground(Color.BLACK);
+            }else if (e.getSource() == greenBtn){
+                canvas.setBackground(Color.GREEN);
+            }else if (e.getSource() == redBtn){
+                canvas.setBackground(Color.RED);
+            }else if (e.getSource() == pinkBtn){
+                canvas.setBackground(Color.PINK);
+            }else if (e.getSource() == blueBtn){
+                canvas.setBackground(Color.BLUE);
+            }else if (e.getSource() == cyanBtn){
+                canvas.setBackground(Color.CYAN);
+            }
 
         };
 
         //add action listeners to buttons
-//        blackBtn.addActionListener(actionListener);
-//        greenBtn.addActionListener(actionListener);
-//        redBtn.addActionListener(actionListener);
-//        pinkBtn.addActionListener(actionListener);
-//        blueBtn.addActionListener(actionListener);
-//        cyanBtn.addActionListener(actionListener);
+        blackBtn.addActionListener(actionListener);
+        greenBtn.addActionListener(actionListener);
+        redBtn.addActionListener(actionListener);
+        pinkBtn.addActionListener(actionListener);
+        blueBtn.addActionListener(actionListener);
+        cyanBtn.addActionListener(actionListener);
 
 
 

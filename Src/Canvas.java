@@ -69,7 +69,8 @@ public class Canvas extends JPanel {
             int x2 = destination.x;
             int y2 = destination.y;
 
-            line.drawLine(x1, y1, x2, y2);
+//            line.drawLine(x1, y1, x2, y2);
+            line.drawRect(x1, y1, x2, y2);
         }
     }
 

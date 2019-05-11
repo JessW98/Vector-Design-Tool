@@ -20,22 +20,19 @@ public class GUI extends JFrame {
         pinkBtn = new JButton("Pink");
         blueBtn = new JButton("Blue");
 
-        ActionListener actionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource()== blackBtn){
-                    canvas.black();
-                }else if (e.getSource() == greenBtn){
-                    canvas.green();
-                }else if (e.getSource() == redBtn){
-                    canvas.red();
-                }else if (e.getSource() == pinkBtn){
-                    canvas.pink();
-                }else if (e.getSource() == blueBtn){
-                    canvas.blue();
-                }
-
+        ActionListener actionListener = e -> {
+            if (e.getSource()== blackBtn){
+                canvas.black();
+            }else if (e.getSource() == greenBtn){
+                canvas.green();
+            }else if (e.getSource() == redBtn){
+                canvas.red();
+            }else if (e.getSource() == pinkBtn){
+                canvas.pink();
+            }else if (e.getSource() == blueBtn){
+                canvas.blue();
             }
+
         };
 
         //add action listeners to buttons

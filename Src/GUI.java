@@ -8,52 +8,52 @@ public class GUI extends JFrame {
     /**
      * Create and show the GUI
      */
-    private GUI() {
-        super("VectorDesignTool");
+    private static void createAndShowGUI() {
+
+        GUI mainPanel = new GUI();
         Canvas canvas = new Canvas();
-        JButton blackBtn, greenBtn, redBtn, pinkBtn, blueBtn, cyanBtn;
 
         //Colour initialize buttons
-        blackBtn = new JButton(" ");
-        greenBtn = new JButton(" ");
-        redBtn = new JButton(" ");
-        pinkBtn = new JButton(" ");
-        blueBtn = new JButton(" ");
-        cyanBtn = new JButton(" ");
+        JButton blackBtn = new JButton(" ");
+        JButton greenBtn = new JButton(" ");
+        JButton redBtn = new JButton(" ");
+        JButton pinkBtn = new JButton(" ");
+        JButton blueBtn = new JButton(" ");
+        JButton cyanBtn = new JButton(" ");
 
         ActionListener actionListener = e -> {
-            if (e.getSource()== blackBtn){
-                canvas.black();
-            }else if (e.getSource() == greenBtn){
-                canvas.green();
-            }else if (e.getSource() == redBtn){
-                canvas.red();
-            }else if (e.getSource() == pinkBtn){
-                canvas.pink();
-            }else if (e.getSource() == blueBtn){
-                canvas.blue();
-            }else if (e.getSource() == cyanBtn){
-                canvas.cyan();
-            }
+//            if (e.getSource()== blackBtn){
+//                canvas.black();
+//            }else if (e.getSource() == greenBtn){
+//                canvas.green();
+//            }else if (e.getSource() == redBtn){
+//                canvas.red();
+//            }else if (e.getSource() == pinkBtn){
+//                canvas.pink();
+//            }else if (e.getSource() == blueBtn){
+//                canvas.blue();
+//            }else if (e.getSource() == cyanBtn){
+//                canvas.cyan();
+//            }
 
         };
 
         //add action listeners to buttons
-        blackBtn.addActionListener(actionListener);
-        greenBtn.addActionListener(actionListener);
-        redBtn.addActionListener(actionListener);
-        pinkBtn.addActionListener(actionListener);
-        blueBtn.addActionListener(actionListener);
-        cyanBtn.addActionListener(actionListener);
+//        blackBtn.addActionListener(actionListener);
+//        greenBtn.addActionListener(actionListener);
+//        redBtn.addActionListener(actionListener);
+//        pinkBtn.addActionListener(actionListener);
+//        blueBtn.addActionListener(actionListener);
+//        cyanBtn.addActionListener(actionListener);
 
 
 
         //create the main frame
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container mainContainer = getContentPane();
+        mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container mainContainer = mainPanel.getContentPane();
         //Create the Menu Bar
         JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
+        mainPanel.setJMenuBar(menuBar);
 
         //create the canvas and add to main container
         JPanel drawingArea = new JPanel();
@@ -160,16 +160,15 @@ public class GUI extends JFrame {
         mainContainer.add(bottom, BorderLayout.SOUTH);
 
         //Display the window
-        setPreferredSize(new Dimension(500, 500));
-        setLocation(new Point(200, 300));
-        pack();
-        setVisible(true);
+        mainPanel.setPreferredSize(new Dimension(500, 500));
+        mainPanel.setLocation(new Point(200, 300));
+        mainPanel.pack();
+        mainPanel.setVisible(true);
 
     }
 
     //Main entry point for program
     public static void main(String[] args) {
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        new GUI();
+        SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
 }

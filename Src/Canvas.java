@@ -69,10 +69,32 @@ public class Canvas extends JPanel {
             int x2 = destination.x;
             int y2 = destination.y;
 
-//            line.drawLine(x1, y1, x2, y2);
+//          line.drawLine(x1, y1, x2, y2);
             line.drawRect(x1, y1, x2, y2);
         }
     }
+
+    public void black() {
+        graphic.setPaint(Color.black);
+    }
+    public void green() {
+        graphic.setPaint(Color.green);
+    }
+    public void red() {
+        graphic.setPaint(Color.red);
+    }
+    public void pink() {
+        graphic.setPaint(Color.pink);
+    }
+    public void blue() {
+        graphic.setPaint(Color.blue);
+    }
+    public void cyan() {
+        graphic.setPaint(Color.cyan);
+    }
+
+
+
 
 
 }

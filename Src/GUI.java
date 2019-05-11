@@ -44,17 +44,17 @@ public class GUI extends JFrame {
 
         ActionListener actionListener = e -> {
             if (e.getSource()== blackBtn){
-                canvas.setBackground(Color.BLACK);
+                canvas.black();
             }else if (e.getSource() == greenBtn){
-                canvas.setBackground(Color.GREEN);
+                canvas.green();
             }else if (e.getSource() == redBtn){
-                canvas.setBackground(Color.RED);
+                canvas.red();
             }else if (e.getSource() == pinkBtn){
-                canvas.setBackground(Color.PINK);
+                canvas.pink();
             }else if (e.getSource() == blueBtn){
-                canvas.setBackground(Color.BLUE);
+                canvas.blue();
             }else if (e.getSource() == cyanBtn){
-                canvas.setBackground(Color.CYAN);
+                canvas.cyan();
             }
 
         };

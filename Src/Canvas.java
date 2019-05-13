@@ -12,7 +12,7 @@ public class Canvas extends JPanel {
     private Graphics2D graphic;
     private Graphics2D draw;
     private Color drawColour = Color.BLACK;
-
+    private String shape;
     private Point origin;
     private Point destination;
 
@@ -72,12 +72,21 @@ public class Canvas extends JPanel {
             int x2 = destination.x;
             int y2 = destination.y;
 
-          draw.drawLine(x1, y1, x2, y2);
-
-//            line.drawRect(x1, y1, x2, y2);
+            if(shape == "line"){
+                draw.drawLine(x1,y1,x2,y2);
+            }else if(shape == "rec"){
+                draw.drawRect(x1,y1,x2,y2);
+            }else if(shape == "poly"){
+                draw.drawPolygon(new Polygon());
+            }else if (shape == "elli"){
+                draw.drawOval(x1,y1,x2,y2);
+            }else if(shape =="plot"){
+                draw.drawOval(x1,y1,x1,y1);
+            }
         }
     }
 
+    //button responses
     public void black() {
         drawColour = Color.BLACK;
     }
@@ -96,6 +105,22 @@ public class Canvas extends JPanel {
     public void cyan() {
         drawColour = Color.CYAN;
     }
+    public void rectangle() {
+        shape ="rec";
+    }
+    public void line() {
+        shape = "line";
+    }
+    public void polygon() {
+        shape = "poly";
+    }
+    public void ellipse() {
+        shape = "elli";
+    }
+    public void plot() {
+        shape = "plot";
+    }
+
 
 
 

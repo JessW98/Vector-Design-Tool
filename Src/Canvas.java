@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import static java.lang.Math.abs;
 
 public class Canvas extends JPanel {
     //PROPERTIES
@@ -12,9 +15,11 @@ public class Canvas extends JPanel {
     private Graphics2D graphic;
     private Graphics2D draw;
     private Color drawColour = Color.BLACK;
+
     private String shape;
     private Point origin;
     private Point destination;
+    private List<Shape> ShapesDrawn = new ArrayList<>();
 
 
     private class Mouse extends MouseAdapter {
@@ -72,54 +77,38 @@ public class Canvas extends JPanel {
             int x2 = destination.x;
             int y2 = destination.y;
 
-            if(shape == "line"){
+            if(shape == GUI.ShapeType.Line.toString()){
                 draw.drawLine(x1,y1,x2,y2);
-            }else if(shape == "rec"){
-                draw.drawRect(x1,y1,x2,y2);
-            }else if(shape == "poly"){
+            }else if(shape == GUI.ShapeType.Rectangle.toString()){
+//                draw.drawRect(x1,y1, abs(x1 - x2), abs(y1 - y2));
+                ShapesDrawn.add(new Rectangle(origin.x, origin.y, abs(origin.x - destination.x), abs(origin.y - destination.y)));
+            }else if(shape == GUI.ShapeType.Polygon.toString()){
                 draw.drawPolygon(new Polygon());
-            }else if (shape == "elli"){
-                draw.drawOval(x1,y1,x2,y2);
-            }else if(shape =="plot"){
-                draw.drawOval(x1,y1,x1,y1);
+            }else if (shape == GUI.ShapeType.Ellipse.toString()){
+                draw.drawOval(x1,y1, abs(x1 - x2), abs(y1 - y2));
+            }else if(shape == GUI.ShapeType.Plot.toString()){
+                draw.fillOval(x1 - 2, y1 - 2, 4, 4);
             }
+        }
+
+        for(Shape i : ShapesDrawn){
+            draw.draw(i);
         }
     }
 
-    //button responses
-    public void black() {
-        drawColour = Color.BLACK;
+
+    public Color getDrawColour() {
+        return drawColour;
     }
-    public void green() {
-        drawColour = Color.GREEN;
+
+    public void setDrawColour(Color drawColour) {
+        this.drawColour = drawColour;
     }
-    public void red() {
-        drawColour = Color.RED;
+
+    public void setShape(String shape) {
+        this.shape = shape;
     }
-    public void pink() {
-        drawColour = Color.PINK;
-    }
-    public void blue() {
-        drawColour = Color.BLUE;
-    }
-    public void cyan() {
-        drawColour = Color.CYAN;
-    }
-    public void rectangle() {
-        shape ="rec";
-    }
-    public void line() {
-        shape = "line";
-    }
-    public void polygon() {
-        shape = "poly";
-    }
-    public void ellipse() {
-        shape = "elli";
-    }
-    public void plot() {
-        shape = "plot";
-    }
+
 
 
 

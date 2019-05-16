@@ -2,22 +2,25 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class GUI extends JFrame {
     /**
      * Create and show the GUI
      */
+
+    enum ShapeType{
+        Rectangle, Ellipse, Line, Plot, Polygon
+    }
+
     private static void createAndShowGUI() throws IOException {
 
         GUI mainPanel = new GUI();
         Canvas canvas = new Canvas();
 
-        //Import and scale images
+        //Import and scale images for the buttons they will be attached too.
         Image linePic = ImageIO.read(GUI.class.getResource("images/line.png"));
         Image linePicScaled = linePic.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 
@@ -35,16 +38,7 @@ public class GUI extends JFrame {
 
 
         //Colour initialize and declare buttons and entry
-        JButton blackBtn = new JButton(" ");
-        JButton greenBtn = new JButton(" ");
-        JButton redBtn = new JButton(" ");
-        JButton pinkBtn = new JButton(" ");
-        JButton blueBtn = new JButton(" ");
-        JButton cyanBtn = new JButton(" ");
-        JTextField hexEntry = new JTextField("Enter Hex");
-
-        hexEntry.setColumns(8);
-
+        JButton colorPicker = new JButton("Colour");
 
         //create the main frame
         mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,12 +47,6 @@ public class GUI extends JFrame {
         //Create the Menu Bar
         JMenuBar menuBar = new JMenuBar();
         mainPanel.setJMenuBar(menuBar);
-
-        //create the canvas and add to main container
-        JPanel drawingArea = new JPanel();
-        drawingArea.setBackground(Color.WHITE);
-        drawingArea.setBorder(new LineBorder(Color.black));
-        mainContainer.add(drawingArea, BorderLayout.CENTER);
 
         //Populate menu bar with menus
         JMenu file = new JMenu("File");
@@ -94,35 +82,14 @@ public class GUI extends JFrame {
         left.setBorder(new LineBorder(Color.black, 1));
         left.setBackground(Color.gray);
 
-        //bottom panel
-        JPanel bottom = new JPanel(new GridBagLayout());
-        bottom.setBorder(new LineBorder(Color.black, 1));
-        bottom.setBackground(Color.gray);
-
         //constraints for tools
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.anchor = GridBagConstraints.NORTH;
         gbc1.weighty = 1;
 
-        //constraints for colours
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.anchor = GridBagConstraints.WEST;
-        gbc2.weightx = 1;
-
-        //constraints for colours
-        GridBagConstraints gbc3 = new GridBagConstraints();
-        gbc3.anchor = GridBagConstraints.CENTER;
-        gbc3.weightx = 1;
-
-        //hexadecimal entry for colours
-
         //add tools to left panel
         left.add(tools, gbc1);
-        //add colours and hex entry to bottom panel
-        bottom.add(colours, gbc2);
-        bottom.add(hexPanel, gbc3);
 
-        //Buttons for tools
 
         JButton rectangleButton = new JButton(new ImageIcon(rectanglePicScaled));
         tools.add(rectangleButton);
@@ -142,35 +109,9 @@ public class GUI extends JFrame {
         JButton clearButton = new JButton("Clear");
         tools.add(clearButton);
 
-        //colour buttons
-        colours.add(blackBtn);
-        colours.add(greenBtn);
-        colours.add(blueBtn);
-        colours.add(pinkBtn);
-        colours.add(redBtn);
-        colours.add(cyanBtn);
+        colorPicker.setBackground(canvas.getDrawColour());
+        tools.add(colorPicker);
 
-
-        hexPanel.add(hexEntry);
-
-        //Make colour buttons their relevant colour
-        blackBtn.setOpaque(true);
-        blackBtn.setBackground(Color.black);
-
-        greenBtn.setOpaque(true);
-        greenBtn.setBackground(Color.green);
-
-        blueBtn.setOpaque(true);
-        blueBtn.setBackground(Color.blue);
-
-        pinkBtn.setOpaque(true);
-        pinkBtn.setBackground(Color.PINK);
-
-        redBtn.setOpaque(true);
-        redBtn.setBackground(Color.RED);
-
-        cyanBtn.setOpaque(true);
-        cyanBtn.setBackground(Color.CYAN);
 
         //add left panel to content pane
         mainContainer.add(left, BorderLayout.WEST);
@@ -178,53 +119,42 @@ public class GUI extends JFrame {
         //add draw area to content
         mainContainer.add(canvas, BorderLayout.CENTER);
 
-        //add bottom panel to content pane
-        mainContainer.add(bottom, BorderLayout.SOUTH);
 
-        //What happens when a button is pressed
 
+
+        //Action listener that controls the buttons method outputs
         ActionListener actionListener = e -> {
-            if (e.getSource() == blackBtn) {
-                canvas.black();
-            } else if (e.getSource() == greenBtn) {
-                canvas.green();
-            } else if (e.getSource() == redBtn) {
-                canvas.red();
-            } else if (e.getSource() == pinkBtn) {
-                canvas.pink();
-            } else if (e.getSource() == blueBtn) {
-                canvas.blue();
-            } else if (e.getSource() == cyanBtn) {
-                canvas.cyan();
-            } else if (e.getSource() == clearButton) {
+            if (e.getSource() == clearButton) {
                 canvas.clear();
             }else if (e.getSource() == rectangleButton){
-                canvas.rectangle();
-            }else if (e.getSource() == lineButton){
-                canvas.line();
-            }else if (e.getSource() == ellipseButton){
-                canvas.ellipse();
-            }else if (e.getSource() == plotButton){
-                canvas.plot();
-            }else if (e.getSource() == polygonButton){
-                canvas.polygon();
-            }
+                canvas.setShape(ShapeType.Rectangle.toString());
 
+            }else if (e.getSource() == lineButton){
+                canvas.setShape(ShapeType.Line.toString());
+
+            }else if (e.getSource() == ellipseButton){
+                canvas.setShape(ShapeType.Ellipse.toString());
+
+            }else if (e.getSource() == plotButton){
+                canvas.setShape(ShapeType.Plot.toString());
+
+            }else if (e.getSource() == polygonButton){
+                canvas.setShape(ShapeType.Polygon.toString());
+
+            }else if (e.getSource() == colorPicker){
+                canvas.setDrawColour(JColorChooser.showDialog(null, "Pick your colour", canvas.getDrawColour()));
+                colorPicker.setBackground(canvas.getDrawColour());
+            }
 
         };
 
-            //add action listeners to buttons
-            blackBtn.addActionListener(actionListener);
-            greenBtn.addActionListener(actionListener);
-            redBtn.addActionListener(actionListener);
-            pinkBtn.addActionListener(actionListener);
-            blueBtn.addActionListener(actionListener);
-            cyanBtn.addActionListener(actionListener);
+            //add action listener to buttons
             lineButton.addActionListener(actionListener);
             rectangleButton.addActionListener(actionListener);
             polygonButton.addActionListener(actionListener);
             ellipseButton.addActionListener(actionListener);
             plotButton.addActionListener(actionListener);
+            colorPicker.addActionListener(actionListener);
 
 
             //Display the window
@@ -235,7 +165,7 @@ public class GUI extends JFrame {
 
     }
 
-    //Main entry point for program
+    //Main entry point for program invokes creation of the GUI
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {

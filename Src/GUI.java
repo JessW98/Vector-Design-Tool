@@ -12,13 +12,15 @@ public class GUI extends JFrame {
      */
 
     enum ShapeType{
-        Rectangle, Ellipse, Line, Plot, Polygon
+        RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }
+
+
 
     private static void createAndShowGUI() throws IOException {
 
         GUI mainPanel = new GUI();
-        Canvas canvas = new Canvas();
+        Canvas drawingCanvas = new Canvas();
 
         //Import and scale images for the buttons they will be attached too.
         Image linePic = ImageIO.read(GUI.class.getResource("images/line.png"));
@@ -109,7 +111,7 @@ public class GUI extends JFrame {
         JButton clearButton = new JButton("Clear");
         tools.add(clearButton);
 
-        colorPicker.setBackground(canvas.getDrawColour());
+        colorPicker.setBackground(drawingCanvas.getDrawColour());
         tools.add(colorPicker);
 
 
@@ -117,7 +119,7 @@ public class GUI extends JFrame {
         mainContainer.add(left, BorderLayout.WEST);
 
         //add draw area to content
-        mainContainer.add(canvas, BorderLayout.CENTER);
+        mainContainer.add(drawingCanvas, BorderLayout.CENTER);
 
 
 
@@ -125,25 +127,25 @@ public class GUI extends JFrame {
         //Action listener that controls the buttons method outputs
         ActionListener actionListener = e -> {
             if (e.getSource() == clearButton) {
-                canvas.clear();
+                drawingCanvas.clear();
             }else if (e.getSource() == rectangleButton){
-                canvas.setShape(ShapeType.Rectangle.toString());
+                drawingCanvas.setCurrentSelectedShape(ShapeType.RECTANGLE);
 
             }else if (e.getSource() == lineButton){
-                canvas.setShape(ShapeType.Line.toString());
+                drawingCanvas.setCurrentSelectedShape(ShapeType.LINE);
 
             }else if (e.getSource() == ellipseButton){
-                canvas.setShape(ShapeType.Ellipse.toString());
+                drawingCanvas.setCurrentSelectedShape(ShapeType.ELLIPSE);
 
             }else if (e.getSource() == plotButton){
-                canvas.setShape(ShapeType.Plot.toString());
+                drawingCanvas.setCurrentSelectedShape(ShapeType.PLOT);
 
             }else if (e.getSource() == polygonButton){
-                canvas.setShape(ShapeType.Polygon.toString());
+                drawingCanvas.setCurrentSelectedShape(ShapeType.POLYGON);
 
             }else if (e.getSource() == colorPicker){
-                canvas.setDrawColour(JColorChooser.showDialog(null, "Pick your colour", canvas.getDrawColour()));
-                colorPicker.setBackground(canvas.getDrawColour());
+                drawingCanvas.setDrawColour(JColorChooser.showDialog(null, "Pick your colour", drawingCanvas.getDrawColour()));
+                colorPicker.setBackground(drawingCanvas.getDrawColour());
             }
 
         };

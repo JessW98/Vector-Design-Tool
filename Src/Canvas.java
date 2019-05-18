@@ -2,9 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.abs;
+
 
 public class Canvas extends JPanel {
     //PROPERTIES
@@ -16,13 +20,16 @@ public class Canvas extends JPanel {
     private Graphics2D draw;
     private Color drawColour = Color.BLACK;
 
-    private String shape;
+    private Shape shapeToBeAdded;
+
+    private GUI.ShapeType currentSelectedShape;
     private Point origin;
     private Point destination;
     private List<Shape> ShapesDrawn = new ArrayList<>();
 
 
     private class Mouse extends MouseAdapter {
+
         @Override
         public void mousePressed(MouseEvent e) {
             origin = e.getPoint();
@@ -71,23 +78,38 @@ public class Canvas extends JPanel {
         draw = (Graphics2D) g;
         draw.setPaint(drawColour);
 
-        if(origin != null && destination != null){
+        if(origin != null && destination != null) {
             int x1 = origin.x;
             int y1 = origin.y;
             int x2 = destination.x;
             int y2 = destination.y;
+            int plotRadius = 4;
 
-            if(shape == GUI.ShapeType.Line.toString()){
-                draw.drawLine(x1,y1,x2,y2);
-            }else if(shape == GUI.ShapeType.Rectangle.toString()){
-//                draw.drawRect(x1,y1, abs(x1 - x2), abs(y1 - y2));
-                ShapesDrawn.add(new Rectangle(origin.x, origin.y, abs(origin.x - destination.x), abs(origin.y - destination.y)));
-            }else if(shape == GUI.ShapeType.Polygon.toString()){
-                draw.drawPolygon(new Polygon());
-            }else if (shape == GUI.ShapeType.Ellipse.toString()){
-                draw.drawOval(x1,y1, abs(x1 - x2), abs(y1 - y2));
-            }else if(shape == GUI.ShapeType.Plot.toString()){
-                draw.fillOval(x1 - 2, y1 - 2, 4, 4);
+            GUI.ShapeType shape = getCurrentSelectedShape();
+
+            switch (shape) {
+                case RECTANGLE:
+                    Shape Rectangle = new Rectangle2D.Float(x1, y1, abs(x1 - x2),
+                            abs(y1 - y2));
+                    ShapesDrawn.add(Rectangle);
+                    break;
+                case ELLIPSE:
+                    ShapesDrawn.add(new Ellipse2D.Float(x1, y1, abs(x1 - x2),
+                            abs(y1 - y2)));
+                    break;
+                case LINE:
+                    Shape Line = new Line2D.Float(x1, y1, x2, y2);
+                    ShapesDrawn.add(Line);
+                    break;
+                case PLOT:
+                    Shape EllipsePlot =
+                            new Ellipse2D.Float(x1 - (plotRadius / 2),
+                                    y1 - (plotRadius / 2), plotRadius, plotRadius);
+                    draw.fill(EllipsePlot);
+                    ShapesDrawn.add(EllipsePlot);
+                    break;
+                case POLYGON:
+                    break;
             }
         }
 
@@ -105,8 +127,20 @@ public class Canvas extends JPanel {
         this.drawColour = drawColour;
     }
 
-    public void setShape(String shape) {
-        this.shape = shape;
+    public void setCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
+        this.currentSelectedShape = currentSelectedShape;
+    }
+
+    public GUI.ShapeType getCurrentSelectedShape() {
+        return currentSelectedShape;
+    }
+
+    public Shape getShapeToBeAdded() {
+        return shapeToBeAdded;
+    }
+
+    public void setShapeToBeAdded(Shape shapeToBeAdded) {
+        this.shapeToBeAdded = shapeToBeAdded;
     }
 
 

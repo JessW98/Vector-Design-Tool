@@ -15,8 +15,6 @@ public class GUI extends JFrame {
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }
 
-
-
     private static void createAndShowGUI() throws IOException {
 
         GUI mainPanel = new GUI();
@@ -40,7 +38,8 @@ public class GUI extends JFrame {
 
 
         //Colour initialize and declare buttons and entry
-        JButton colorPicker = new JButton("Colour");
+        JButton colorPicker = new JButton("Pen Colour");
+        JButton fillPicker = new JButton("Fill Colour");
 
         //create the main frame
         mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,8 +110,11 @@ public class GUI extends JFrame {
         JButton clearButton = new JButton("Clear");
         tools.add(clearButton);
 
-        colorPicker.setBackground(drawingCanvas.getDrawColour());
+        colorPicker.setBackground(drawingCanvas.getPenColor());
         tools.add(colorPicker);
+
+        fillPicker.setBackground(drawingCanvas.getFillColor());
+        tools.add(fillPicker);
 
 
         //add left panel to content pane
@@ -144,8 +146,12 @@ public class GUI extends JFrame {
                 drawingCanvas.setCurrentSelectedShape(ShapeType.POLYGON);
 
             }else if (e.getSource() == colorPicker){
-                drawingCanvas.setDrawColour(JColorChooser.showDialog(null, "Pick your colour", drawingCanvas.getDrawColour()));
-                colorPicker.setBackground(drawingCanvas.getDrawColour());
+                drawingCanvas.setPenColor(JColorChooser.showDialog(null, "Pick your pen colour!", drawingCanvas.getPenColor()));
+                colorPicker.setBackground(drawingCanvas.getPenColor());
+
+            }else if (e.getSource() == fillPicker){
+                drawingCanvas.setFillColor(JColorChooser.showDialog(null, "Pick your fill colour!", drawingCanvas.getFillColor()));
+                fillPicker.setBackground(drawingCanvas.getFillColor());
             }
 
         };
@@ -157,6 +163,8 @@ public class GUI extends JFrame {
             ellipseButton.addActionListener(actionListener);
             plotButton.addActionListener(actionListener);
             colorPicker.addActionListener(actionListener);
+            clearButton.addActionListener(actionListener);
+            fillPicker.addActionListener(actionListener);
 
 
             //Display the window

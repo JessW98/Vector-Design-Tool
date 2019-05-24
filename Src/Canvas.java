@@ -49,6 +49,7 @@ public class Canvas extends JPanel {
                 ShapesDrawn.remove(ShapesDrawn.size() - 1);
             DrawShapeAt(e);
             repaint();
+            
         }
 
         @Override

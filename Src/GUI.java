@@ -53,7 +53,7 @@ public class GUI extends JFrame {
         JMenu file = new JMenu("File");
         menuBar.add(file);
         file.add("Load");
-        file.add("save");
+        file.add("Save");
 
         JMenu edit = new JMenu("Edit");
         menuBar.add(edit);
@@ -61,7 +61,6 @@ public class GUI extends JFrame {
         menuBar.add(view);
         JMenu image = new JMenu("Image");
         menuBar.add(image);
-
 
         //tools panel
         JPanel tools = new JPanel();

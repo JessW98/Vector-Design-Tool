@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.abs;
@@ -63,14 +60,20 @@ public class Canvas extends JPanel {
 
                 switch(currentSelectedShape){
                     case RECTANGLE:
-                        if(x2 < x1){
-                            ShapesDrawn.add(new CustomRectangle(x2, y1, abs(x1 - x2), abs(y1 - y2), penColor, fillColor));
+                        if (y1 > y2){
+                            int ytemp = y1;
+                            y1=y2;
+                            y2=ytemp;
                         }
-                        else if(y2 < y1){
-                            ShapesDrawn.add(new CustomRectangle(x1, y2, abs(x1 - x2), abs(y1 - y2), penColor, fillColor));
+                        if (x1 > x2){
+                            int xtemp = x1;
+                            x1=x2;
+                            x2=xtemp;
                         }
-                        else
-                        ShapesDrawn.add(new CustomRectangle(x1, y1, abs(x1 - x2), abs(y1 - y2), penColor, fillColor));
+                        Rectangle = new CustomRectangle(x1, y1,
+                                abs(x1 - x2), abs(y1 - y2), penColor,
+                                fillColor);
+                        ShapesDrawn.add(Rectangle);
                         break;
                     case LINE:
                         Line = new CustomLine(x1, y1, x2, y2, penColor);
@@ -82,7 +85,8 @@ public class Canvas extends JPanel {
                         ShapesDrawn.add(Ellipse);
                         break;
                     case PLOT:
-                        Plot = new CustomPlot(x1 - 2, y1 - 2, fillColor, 4, 4);
+                        Plot = new CustomPlot(x1 - 2, y1 - 2,
+                                Color.BLACK, 4, 4);
                         ShapesDrawn.add(Plot);
                         break;
                 }
@@ -104,7 +108,20 @@ public class Canvas extends JPanel {
 
                 switch(currentSelectedShape){
                     case RECTANGLE:
-                        ShapesDrawn.add(new CustomRectangle(x1, y1, abs(x1 - x2), abs(y1 - y2), penColor, fillColor));
+                        if (y1 > y2){
+                            int ytemp = y1;
+                            y1=y2;
+                            y2=ytemp;
+                        }
+                        if (x1 > x2){
+                            int xtemp = x1;
+                            x1=x2;
+                            x2=xtemp;
+                        }
+                        Rectangle = new CustomRectangle(x1, y1,
+                                abs(x1 - x2), abs(y1 - y2), penColor,
+                                fillColor);
+                        ShapesDrawn.add(Rectangle);
                         break;
                     case LINE:
                         Line = new CustomLine(x1, y1, x2, y2, penColor);
@@ -116,7 +133,7 @@ public class Canvas extends JPanel {
                         ShapesDrawn.add(Ellipse);
                         break;
                     case PLOT:
-                        Plot = new CustomPlot(x1 - 2, y1 - 2, fillColor, 4, 4);
+                        Plot = new CustomPlot(x1 - 2, y1 - 2, Color.BLACK, 4, 4);
                         ShapesDrawn.add(Plot);
                         break;
                 }
@@ -153,20 +170,20 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
         drawController = (Graphics2D) g;
 
-
-
         for(ShapeControl i : ShapesDrawn){
-            if(i.getShapePenColour() != null){
-                drawController.setPaint(i.getShapePenColour());
-            }
-
-            drawController.draw(i);
 
             if(i.getShapeFillColour() != null){
                 drawController.setPaint(i.getShapeFillColour());
                 drawController.fill(i);
             }
 
+            drawController.draw(i);
+
+            if(i.getShapePenColour() != null){
+                drawController.setPaint(i.getShapePenColour());
+            }
+
+            drawController.draw(i);
         }
     }
 

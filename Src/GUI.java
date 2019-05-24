@@ -15,7 +15,11 @@ public class GUI extends JFrame {
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }
 
+
+
     private static void createAndShowGUI() throws IOException {
+
+
 
         GUI mainPanel = new GUI();
         Canvas drawingCanvas = new Canvas();
@@ -155,22 +159,32 @@ public class GUI extends JFrame {
 
         };
 
-            //add action listener to buttons
-            lineButton.addActionListener(actionListener);
-            rectangleButton.addActionListener(actionListener);
-            polygonButton.addActionListener(actionListener);
-            ellipseButton.addActionListener(actionListener);
-            plotButton.addActionListener(actionListener);
-            colorPicker.addActionListener(actionListener);
-            clearButton.addActionListener(actionListener);
-            fillPicker.addActionListener(actionListener);
+        //add action listener to buttons
+        lineButton.addActionListener(actionListener);
+        rectangleButton.addActionListener(actionListener);
+        polygonButton.addActionListener(actionListener);
+        ellipseButton.addActionListener(actionListener);
+        plotButton.addActionListener(actionListener);
+        colorPicker.addActionListener(actionListener);
+        clearButton.addActionListener(actionListener);
+        fillPicker.addActionListener(actionListener);
 
+        //Get the screen resolution
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double displayWidth = screenSize.getWidth();
+        double displayHeight = screenSize.getHeight();
+        //How much of the screen will the window take up from 0.0-1.0
+        double windowToScreenRatio = 0.75;
+        int windowStartupHeight = (int)(displayHeight * windowToScreenRatio);
+        int windowStartupWidth = (int)(displayWidth * windowToScreenRatio);
 
-            //Display the window
-            mainPanel.setPreferredSize(new Dimension(500, 500));
-            mainPanel.setLocation(new Point(200, 300));
-            mainPanel.pack();
-            mainPanel.setVisible(true);
+        //Display the window
+        mainPanel.setPreferredSize(new Dimension(windowStartupWidth, windowStartupHeight));
+        mainPanel.setLocation(new Point(
+                (int)(displayWidth - windowStartupWidth) / 2,
+                (int)(displayHeight - windowStartupHeight) / 2));
+        mainPanel.pack();
+        mainPanel.setVisible(true);
 
     }
 

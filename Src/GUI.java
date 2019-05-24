@@ -15,11 +15,7 @@ public class GUI extends JFrame {
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }
 
-
-
     private static void createAndShowGUI() throws IOException {
-
-
 
         GUI mainPanel = new GUI();
         Canvas drawingCanvas = new Canvas();
@@ -56,15 +52,10 @@ public class GUI extends JFrame {
         //Populate menu bar with menus
         JMenu file = new JMenu("File");
         menuBar.add(file);
-        file.add("Load");
-        file.add("Save");
-
-        JMenu edit = new JMenu("Edit");
-        menuBar.add(edit);
-        JMenu view = new JMenu("View");
-        menuBar.add(view);
-        JMenu image = new JMenu("Image");
-        menuBar.add(image);
+        JMenuItem load = new JMenuItem("Load");
+        JMenuItem save = new JMenuItem("Save");
+        file.add(load);
+        file.add(save);
 
         //tools panel
         JPanel tools = new JPanel();
@@ -126,35 +117,45 @@ public class GUI extends JFrame {
         //add draw area to content
         mainContainer.add(drawingCanvas, BorderLayout.CENTER);
 
-
-
-
         //Action listener that controls the buttons method outputs
         ActionListener actionListener = e -> {
             if (e.getSource() == clearButton) {
                 drawingCanvas.clear();
-            }else if (e.getSource() == rectangleButton){
+            }
+            else if (e.getSource() == rectangleButton){
                 drawingCanvas.setCurrentSelectedShape(ShapeType.RECTANGLE);
 
-            }else if (e.getSource() == lineButton){
+            }
+            else if (e.getSource() == lineButton){
                 drawingCanvas.setCurrentSelectedShape(ShapeType.LINE);
 
-            }else if (e.getSource() == ellipseButton){
+            }
+            else if (e.getSource() == ellipseButton){
                 drawingCanvas.setCurrentSelectedShape(ShapeType.ELLIPSE);
 
-            }else if (e.getSource() == plotButton){
+            }
+            else if (e.getSource() == plotButton){
                 drawingCanvas.setCurrentSelectedShape(ShapeType.PLOT);
 
-            }else if (e.getSource() == polygonButton){
+            }
+            else if (e.getSource() == polygonButton){
                 drawingCanvas.setCurrentSelectedShape(ShapeType.POLYGON);
 
-            }else if (e.getSource() == colorPicker){
+            }
+            else if (e.getSource() == colorPicker){
                 drawingCanvas.setPenColor(JColorChooser.showDialog(null, "Pick your pen colour!", drawingCanvas.getPenColor()));
                 colorPicker.setBackground(drawingCanvas.getPenColor());
 
-            }else if (e.getSource() == fillPicker){
+            }
+            else if (e.getSource() == fillPicker){
                 drawingCanvas.setFillColor(JColorChooser.showDialog(null, "Pick your fill colour!", drawingCanvas.getFillColor()));
                 fillPicker.setBackground(drawingCanvas.getFillColor());
+            }
+            else if(e.getSource() == load){
+
+            }
+            else if(e.getSource() == save){
+
             }
 
         };
@@ -168,6 +169,8 @@ public class GUI extends JFrame {
         colorPicker.addActionListener(actionListener);
         clearButton.addActionListener(actionListener);
         fillPicker.addActionListener(actionListener);
+        load.addActionListener(actionListener);
+        save.addActionListener(actionListener);
 
         //Get the screen resolution
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

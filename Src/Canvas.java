@@ -45,103 +45,65 @@ public class Canvas extends JPanel {
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            destination = e.getPoint();
-
-            if(!ShapesDrawn.isEmpty()){
+            if(!ShapesDrawn.isEmpty())
                 ShapesDrawn.remove(ShapesDrawn.size() - 1);
-            }
-
-            if(origin != null && destination != null){
-
-                int x1 = origin.x;
-                int y1 = origin.y;
-                int x2 = destination.x;
-                int y2 = destination.y;
-
-                switch(currentSelectedShape){
-                    case RECTANGLE:
-                        if (y1 > y2){
-                            int ytemp = y1;
-                            y1=y2;
-                            y2=ytemp;
-                        }
-                        if (x1 > x2){
-                            int xtemp = x1;
-                            x1=x2;
-                            x2=xtemp;
-                        }
-                        Rectangle = new CustomRectangle(x1, y1,
-                                abs(x1 - x2), abs(y1 - y2), penColor,
-                                fillColor);
-                        ShapesDrawn.add(Rectangle);
-                        break;
-                    case LINE:
-                        Line = new CustomLine(x1, y1, x2, y2, penColor);
-                        ShapesDrawn.add(Line);
-                        break;
-                    case ELLIPSE:
-                        Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
-                                abs(y1 - y2), penColor,fillColor);
-                        ShapesDrawn.add(Ellipse);
-                        break;
-                    case PLOT:
-                        Plot = new CustomPlot(x1 - 2, y1 - 2,
-                                Color.BLACK, 4, 4);
-                        ShapesDrawn.add(Plot);
-                        break;
-                }
-            }
+            DrawShapeAt(e);
             repaint();
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            destination = e.getPoint();
-
-            if(origin != null && destination != null){
-
-                int x1 = origin.x;
-                int y1 = origin.y;
-                int x2 = destination.x;
-                int y2 = destination.y;
-
-
-                switch(currentSelectedShape){
-                    case RECTANGLE:
-                        if (y1 > y2){
-                            int ytemp = y1;
-                            y1=y2;
-                            y2=ytemp;
-                        }
-                        if (x1 > x2){
-                            int xtemp = x1;
-                            x1=x2;
-                            x2=xtemp;
-                        }
-                        Rectangle = new CustomRectangle(x1, y1,
-                                abs(x1 - x2), abs(y1 - y2), penColor,
-                                fillColor);
-                        ShapesDrawn.add(Rectangle);
-                        break;
-                    case LINE:
-                        Line = new CustomLine(x1, y1, x2, y2, penColor);
-                        ShapesDrawn.add(Line);
-                        break;
-                    case ELLIPSE:
-                        Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
-                                abs(y1 - y2), penColor,fillColor);
-                        ShapesDrawn.add(Ellipse);
-                        break;
-                    case PLOT:
-                        Plot = new CustomPlot(x1 - 2, y1 - 2, Color.BLACK, 4, 4);
-                        ShapesDrawn.add(Plot);
-                        break;
-                }
-            }
+            DrawShapeAt(e);
             repaint();
         }
-
     }
+
+    private void DrawShapeAt(MouseEvent e)
+    {
+        destination = e.getPoint();
+
+        if(origin != null && destination != null){
+
+            int x1 = origin.x;
+            int y1 = origin.y;
+            int x2 = destination.x;
+            int y2 = destination.y;
+
+
+            switch(currentSelectedShape){
+                case RECTANGLE:
+                    if (y1 > y2){
+                        int ytemp = y1;
+                        y1=y2;
+                        y2=ytemp;
+                    }
+                    if (x1 > x2){
+                        int xtemp = x1;
+                        x1=x2;
+                        x2=xtemp;
+                    }
+                    Rectangle = new CustomRectangle(x1, y1,
+                            abs(x1 - x2), abs(y1 - y2), penColor,
+                            fillColor);
+                    ShapesDrawn.add(Rectangle);
+                    break;
+                case LINE:
+                    Line = new CustomLine(x1, y1, x2, y2, penColor);
+                    ShapesDrawn.add(Line);
+                    break;
+                case ELLIPSE:
+                    Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
+                            abs(y1 - y2), penColor,fillColor);
+                    ShapesDrawn.add(Ellipse);
+                    break;
+                case PLOT:
+                    Plot = new CustomPlot(x1 - 2, y1 - 2, Color.BLACK, 4, 4);
+                    ShapesDrawn.add(Plot);
+                    break;
+            }
+        }
+    }
+
     //setup the drawing area, enable mouse input when pressed and dragged.
     public Canvas(){
         setDoubleBuffered(false);

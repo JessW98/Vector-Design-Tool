@@ -31,11 +31,6 @@ public class Canvas extends JPanel {
     //List used to keep a track of which shapes have been drawn
     private List<ShapeControl> ShapesDrawn = new ArrayList<>();
 
-    private CustomPlot Plot;
-    private CustomRectangle Rectangle;
-    private CustomEllipse Ellipse;
-    private CustomLine Line;
-
     private class Mouse extends MouseAdapter {
 
         @Override
@@ -49,7 +44,7 @@ public class Canvas extends JPanel {
                 ShapesDrawn.remove(ShapesDrawn.size() - 1);
             DrawShapeAt(e);
             repaint();
-            
+
         }
 
         @Override
@@ -83,22 +78,22 @@ public class Canvas extends JPanel {
                         x1=x2;
                         x2=xtemp;
                     }
-                    Rectangle = new CustomRectangle(x1, y1,
+                    CustomRectangle Rectangle = new CustomRectangle(x1, y1,
                             abs(x1 - x2), abs(y1 - y2), penColor,
                             fillColor);
                     ShapesDrawn.add(Rectangle);
                     break;
                 case LINE:
-                    Line = new CustomLine(x1, y1, x2, y2, penColor);
+                    CustomLine Line = new CustomLine(x1, y1, x2, y2, penColor);
                     ShapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
-                    Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
+                    CustomEllipse Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
                             abs(y1 - y2), penColor,fillColor);
                     ShapesDrawn.add(Ellipse);
                     break;
                 case PLOT:
-                    Plot = new CustomPlot(x1 - 2, y1 - 2, Color.BLACK, 4, 4);
+                    CustomPlot Plot = new CustomPlot(x1 - 2, y1 - 2, Color.BLACK, 4, 4);
                     ShapesDrawn.add(Plot);
                     break;
             }

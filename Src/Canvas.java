@@ -35,6 +35,7 @@ public class Canvas extends JPanel {
     private CustomRectangle Rectangle;
     private CustomEllipse Ellipse;
     private CustomLine Line;
+    private CustomPolygon Polygon;
 
     private class Mouse extends MouseAdapter {
 
@@ -88,6 +89,9 @@ public class Canvas extends JPanel {
                         Plot = new CustomPlot(x1 - 2, y1 - 2,
                                 Color.BLACK, 4, 4);
                         ShapesDrawn.add(Plot);
+                        break;
+                    case POLYGON:
+
                         break;
                 }
             }

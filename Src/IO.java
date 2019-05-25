@@ -37,7 +37,13 @@ public class IO {
             fileSelected = fileChooser.getSelectedFile();
     }
 
-    public String RetrieveData() throws IOException {
+    public ArrayList<ArrayList<String>> RetrieveData() throws IOException {
+        ArrayList<ArrayList<String>> imageData;
+        imageData = FormatData(RetrieveDataAsString());
+        return imageData;
+    }
+
+    private String RetrieveDataAsString() throws IOException {
         ArrayList<ArrayList<String>> data = new ArrayList<>();
 
         BufferedReader thingThatsReadingTheFiles = new BufferedReader(new FileReader(fileSelected));
@@ -53,9 +59,23 @@ public class IO {
         return sb.toString();
     }
 
-    public ArrayList<ArrayList<String>> FormatData()
-    {
-        return null;
+    private ArrayList<ArrayList<String>> FormatData(String dataString) {
+        ArrayList<ArrayList<String>> formattedData = new ArrayList<>();
+
+        //Separate shapes
+        String[] dataSeperatedShapes = dataString.split("\r\n");
+
+        //Separate arguments
+        for (int i = 0; i < dataSeperatedShapes.length; i++) {
+            ArrayList<String> temp = new ArrayList<>();
+            String[] dataSeperatedbyArgs = dataSeperatedShapes[i].split(" ");
+            for (int o = 0; o < dataSeperatedbyArgs.length; o++) {
+                temp.add(dataSeperatedbyArgs[o]);
+            }
+            formattedData.add(temp);
+        }
+
+        return formattedData;
     }
 
 

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.abs;
 
+
+
 public class Canvas extends JPanel {
     //Permanent canvas color
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
@@ -59,7 +61,7 @@ public class Canvas extends JPanel {
     {
         destination = e.getPoint();
 
-        if(origin != null){
+        if(origin != null && destination != null){
 
             int x1 = origin.x;
             int y1 = origin.y;
@@ -111,7 +113,7 @@ public class Canvas extends JPanel {
                             List<double[]> polygonCoordinates = new ArrayList<>();
                             polygonCoordinates.add(firstPoint);
 
-                            CustomPolygon polygon = new CustomPolygon(polygonCoordinates, Color.BLACK);
+                            CustomPolygon polygon = new CustomPolygon(polygonCoordinates, penColor, fillColor);
                             shapesDrawn.add(polygon);
                         }
                     break;
@@ -132,6 +134,15 @@ public class Canvas extends JPanel {
     public void clear(){
         shapesDrawn.clear();
         repaint();
+    }
+
+    //creates image
+    public void saveImage(Graphics g){
+        if(captureCanvas == null){
+            captureCanvas = createImage(getSize().width, getSize().height);
+            drawController = (Graphics2D) captureCanvas.getGraphics();
+        }
+        g.drawImage(captureCanvas, 0, 0, null);
     }
 
     protected void paintComponent(Graphics g) {
@@ -160,6 +171,13 @@ public class Canvas extends JPanel {
     public void RemoveLastShape()
     {
         shapesDrawn.remove(shapesDrawn.size() - 1);
+    }
+
+    public boolean checkShapeAt(int index, GUI.ShapeType shapeType) {
+        GUI.ShapeType shapeBeingChecked = shapesDrawn.get(index).GetShapeType();
+        if (shapeBeingChecked == shapeType)
+            return true;
+        return false;
     }
 
     public Color getPenColor() {

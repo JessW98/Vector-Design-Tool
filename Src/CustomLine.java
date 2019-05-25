@@ -3,7 +3,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class CustomLine extends Line2D implements ShapeControl{
+public class CustomLine extends Line2D.Double implements ShapeControl{
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.LINE;
 
     private double x1, x2;
@@ -29,11 +29,6 @@ public class CustomLine extends Line2D implements ShapeControl{
     }
 
     @Override
-    public Point2D getP1() {
-        return null;
-    }
-
-    @Override
     public double getX2() {
         return this.x2;
     }
@@ -41,21 +36,6 @@ public class CustomLine extends Line2D implements ShapeControl{
     @Override
     public double getY2() {
         return this.y2;
-    }
-
-    @Override
-    public Point2D getP2() {
-        return null;
-    }
-
-    @Override
-    public void setLine(double v, double v1, double v2, double v3) {
-
-    }
-
-    @Override
-    public Rectangle2D getBounds2D() {
-        return null;
     }
 
     @Override

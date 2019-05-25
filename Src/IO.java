@@ -8,5 +8,4 @@ public class IO {
 
     final JFileChooser selectFile = new JFileChooser();
 
-    
 }

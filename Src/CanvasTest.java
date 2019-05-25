@@ -14,7 +14,6 @@ class CanvasTest {
 
     @BeforeEach
     void setUp() {
-
         testCanvas = new Canvas();
         testShapes = new ArrayList<>();
         testTangle = new CustomRectangle(10, 10, 10, 10,

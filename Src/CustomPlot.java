@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
+    private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.PLOT;
 
     private double x;
     private double y;
@@ -46,6 +47,16 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     @Override
     public void setShapeFillColour(Color colour) {
         this.fillColour = colour;
+    }
+
+    @Override
+    public GUI.ShapeType GetShapeType() {
+        return SHAPE_TYPE;
+    }
+
+    @Override
+    public Shape GetShape() {
+        return this;
     }
 
     @Override

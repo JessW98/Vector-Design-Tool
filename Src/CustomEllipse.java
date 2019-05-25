@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
 public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
+    private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.ELLIPSE;
 
     private double x;
     private double y;
@@ -50,6 +51,16 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     @Override
     public void setShapeFillColour(Color colour) {
         this.fillColour = colour;
+    }
+
+    @Override
+    public GUI.ShapeType GetShapeType() {
+        return SHAPE_TYPE;
+    }
+
+    @Override
+    public Shape GetShape() {
+        return this;
     }
 
     @Override

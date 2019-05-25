@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class CustomRectangle extends Rectangle2D.Double implements ShapeControl {
+    private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.RECTANGLE;
 
     private double x;
     private double y;
@@ -63,6 +64,16 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     @Override
     public void setShapeFillColour(Color colour) {
         this.fillColour = colour;
+    }
+
+    @Override
+    public GUI.ShapeType GetShapeType() {
+        return SHAPE_TYPE;
+    }
+
+    @Override
+    public Shape GetShape() {
+        return this;
     }
 
     @Override

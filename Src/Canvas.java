@@ -93,7 +93,7 @@ public class Canvas extends JPanel {
                     ShapesDrawn.add(Ellipse);
                     break;
                 case PLOT:
-                    CustomPlot Plot = new CustomPlot(x1 - 2, y1 - 2, Color.BLACK, 4, 4);
+                    CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2, Color.BLACK, 4, 4);
                     ShapesDrawn.add(Plot);
                     break;
             }

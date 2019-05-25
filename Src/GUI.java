@@ -16,7 +16,6 @@ public class GUI extends JFrame {
     }
 
     private static void createAndShowGUI() throws IOException {
-
         GUI mainPanel = new GUI();
         Canvas drawingCanvas = new Canvas();
 
@@ -110,6 +109,7 @@ public class GUI extends JFrame {
         fillPicker.setBackground(drawingCanvas.getFillColor());
         tools.add(fillPicker);
 
+        IO io = new IO(mainContainer);
 
         //add left panel to content pane
         mainContainer.add(left, BorderLayout.WEST);
@@ -152,10 +152,15 @@ public class GUI extends JFrame {
                 fillPicker.setBackground(drawingCanvas.getFillColor());
             }
             else if(e.getSource() == load){
-
+                io.GetUserInput(IO.ioOptions.load);
+                try {
+                    io.RetrieveData();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
             else if(e.getSource() == save){
-
+                io.GetUserInput(IO.ioOptions.save);
             }
 
         };

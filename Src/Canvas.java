@@ -112,7 +112,7 @@ public class Canvas extends JPanel {
                             List<double[]> polygonCoordinates = new ArrayList<>();
                             polygonCoordinates.add(firstPoint);
 
-                            CustomPolygon polygon = new CustomPolygon(polygonCoordinates, Color.BLACK);
+                            CustomPolygon polygon = new CustomPolygon(polygonCoordinates, penColor, fillColor);
                             shapesDrawn.add(polygon);
                         }
                     break;
@@ -172,8 +172,12 @@ public class Canvas extends JPanel {
         shapesDrawn.remove(shapesDrawn.size() - 1);
     }
 
-
-
+    public boolean checkShapeAt(int index, GUI.ShapeType shapeType) {
+        GUI.ShapeType shapeBeingChecked = shapesDrawn.get(index).GetShapeType();
+        if (shapeBeingChecked == shapeType)
+            return true;
+        return false;
+    }
 
     public Color getPenColor() {
         return penColor;

@@ -47,10 +47,6 @@ class CanvasTest {
     }
 
     @Test
-    void saveImageTest() {
-    }
-
-    @Test
     void paintComponent() {
 
     }

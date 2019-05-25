@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.abs;
 
-
-
 public class Canvas extends JPanel {
     //Permanent canvas color
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
@@ -61,7 +59,7 @@ public class Canvas extends JPanel {
     {
         destination = e.getPoint();
 
-        if(origin != null && destination != null){
+        if(origin != null){
 
             int x1 = origin.x;
             int y1 = origin.y;
@@ -136,15 +134,6 @@ public class Canvas extends JPanel {
         repaint();
     }
 
-    //creates image
-    public void saveImage(Graphics g){
-        if(captureCanvas == null){
-            captureCanvas = createImage(getSize().width, getSize().height);
-            drawController = (Graphics2D) captureCanvas.getGraphics();
-        }
-        g.drawImage(captureCanvas, 0, 0, null);
-    }
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawController = (Graphics2D) g;
@@ -172,9 +161,6 @@ public class Canvas extends JPanel {
     {
         shapesDrawn.remove(shapesDrawn.size() - 1);
     }
-
-
-
 
     public Color getPenColor() {
         return penColor;

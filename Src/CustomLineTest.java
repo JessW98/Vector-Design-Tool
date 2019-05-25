@@ -42,14 +42,8 @@ class CustomLineTest {
     }
 
     @Test
-    void setShapeFillColour() {
-        testLine.setShapeFillColour(Color.pink);
-        assertEquals(testLine.getShapeFillColour(), Color.pink);
-    }
-
-    @Test
     void getShapeType() {
-        assertEquals(testLine.GetShape(), GUI.ShapeType.LINE );
+        assertEquals(testLine.GetShapeType(), GUI.ShapeType.LINE );
     }
 
     @Test

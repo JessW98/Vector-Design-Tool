@@ -7,6 +7,7 @@ import java.util.List;
 import static java.lang.Math.abs;
 
 
+
 public class Canvas extends JPanel {
     //Permanent canvas color
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;

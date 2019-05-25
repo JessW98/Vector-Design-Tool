@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public class CustomLine extends Line2D implements ShapeControl{
+    private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.LINE;
 
     private double x1, x2;
     private double y1, y2;
@@ -65,6 +66,16 @@ public class CustomLine extends Line2D implements ShapeControl{
     @Override
     public void setShapeFillColour(Color colour) {
         this.fillColour = null;
+    }
+
+    @Override
+    public GUI.ShapeType GetShapeType() {
+        return SHAPE_TYPE;
+    }
+
+    @Override
+    public Shape GetShape() {
+        return this;
     }
 
     @Override

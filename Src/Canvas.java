@@ -29,7 +29,7 @@ public class Canvas extends JPanel {
     private GUI.ShapeType currentSelectedShape = GUI.ShapeType.LINE;
 
     //List used to keep a track of which shapes have been drawn
-    private List<ShapeControl> ShapesDrawn = new ArrayList<>();
+    private List<ShapeControl> shapesDrawn = new ArrayList<>();
 
     private class Mouse extends MouseAdapter {
 
@@ -40,11 +40,13 @@ public class Canvas extends JPanel {
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            if(!ShapesDrawn.isEmpty())
-                ShapesDrawn.remove(ShapesDrawn.size() - 1);
-            DrawShapeAt(e);
-            repaint();
-
+            if (currentSelectedShape != GUI.ShapeType.POLYGON) {
+                if (!shapesDrawn.isEmpty() &&
+                        shapesDrawn.get(shapesDrawn.size() - 1).GetShapeType() == currentSelectedShape)
+                    RemoveLastShape();
+                DrawShapeAt(e);
+                repaint();
+            }
         }
 
         @Override
@@ -81,20 +83,38 @@ public class Canvas extends JPanel {
                     CustomRectangle Rectangle = new CustomRectangle(x1, y1,
                             abs(x1 - x2), abs(y1 - y2), penColor,
                             fillColor);
-                    ShapesDrawn.add(Rectangle);
+                    shapesDrawn.add(Rectangle);
                     break;
                 case LINE:
                     CustomLine Line = new CustomLine(x1, y1, x2, y2, penColor);
-                    ShapesDrawn.add(Line);
+                    shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
                     CustomEllipse Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
                             abs(y1 - y2), penColor,fillColor);
-                    ShapesDrawn.add(Ellipse);
+                    shapesDrawn.add(Ellipse);
                     break;
                 case PLOT:
                     CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2, Color.BLACK, 4, 4);
-                    ShapesDrawn.add(Plot);
+                    shapesDrawn.add(Plot);
+                    break;
+                case POLYGON:
+                        // If there is already a polygon started, add to it, otherwise, create one
+                        if (!shapesDrawn.isEmpty() && shapesDrawn.get(shapesDrawn.size() - 1).GetShapeType() == GUI.ShapeType.POLYGON) {
+                            CustomPolygon polyInProgress = (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).GetShape();
+                            polyInProgress.addPoint(x2, y2);
+                            RemoveLastShape();
+                            shapesDrawn.add(polyInProgress);
+                        }
+                        else {
+                            //Creating a list of coordinates for the polygon
+                            double[] firstPoint = {x2,y2};
+                            List<double[]> polygonCoordinates = new ArrayList<>();
+                            polygonCoordinates.add(firstPoint);
+
+                            CustomPolygon polygon = new CustomPolygon(polygonCoordinates, Color.BLACK);
+                            shapesDrawn.add(polygon);
+                        }
                     break;
             }
         }
@@ -111,7 +131,7 @@ public class Canvas extends JPanel {
 
     //clears the canvas
     public void clear(){
-        ShapesDrawn.clear();
+        shapesDrawn.clear();
         repaint();
     }
 
@@ -128,7 +148,7 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
         drawController = (Graphics2D) g;
 
-        for(ShapeControl i : ShapesDrawn){
+        for(ShapeControl i : shapesDrawn){
 
             if(i.getShapeFillColour() != null){
                 drawController.setPaint(i.getShapeFillColour());
@@ -144,6 +164,15 @@ public class Canvas extends JPanel {
             drawController.draw(i);
         }
     }
+
+    ////////// Methods to manipulate the shape list
+
+    public void RemoveLastShape()
+    {
+        shapesDrawn.remove(shapesDrawn.size() - 1);
+    }
+
+
 
 
     public Color getPenColor() {

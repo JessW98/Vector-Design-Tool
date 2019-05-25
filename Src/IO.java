@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class IO {
     enum ioOptions{
@@ -15,6 +16,28 @@ public class IO {
     public IO(Container parentContainer)
     {
         this.parentContainer = parentContainer;
+    }
+
+    public void SaveImage(List<ShapeControl> shapes)
+    {
+        String outputString = "";
+        for (int i = 0; i < shapes.size(); i++)
+        {
+            Shape shapeToWrite;
+            shapeToWrite = shapes.get(i).GetShape();
+
+            switch (shapes.get(i).GetShapeType())
+            {
+                case LINE:
+                    CustomLine lineToWrite = (CustomLine) shapeToWrite;
+                    outputString += "LINE " +
+                            lineToWrite.getX1() + " " +
+                            lineToWrite.getY1() + " " +
+                            lineToWrite.getX2() + " " +
+                            lineToWrite.getY2();
+                    break;
+            }
+        }
     }
 
     public void GetUserInput(ioOptions options)
@@ -74,7 +97,6 @@ public class IO {
             }
             formattedData.add(temp);
         }
-
         return formattedData;
     }
 

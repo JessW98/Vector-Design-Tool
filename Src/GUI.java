@@ -161,8 +161,8 @@ public class GUI extends JFrame {
             }
             else if(e.getSource() == save){
                 io.GetUserInput(IO.ioOptions.save);
+                io.SaveImage(drawingCanvas.getShapesDrawn());
             }
-
         };
 
         //add action listener to buttons

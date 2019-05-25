@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RectangularShape;
 
 public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.ELLIPSE;

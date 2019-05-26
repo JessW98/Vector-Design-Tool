@@ -18,7 +18,7 @@ public class IO {
         this.parentContainer = parentContainer;
     }
 
-    private void PromptUserToSelectFile(ioOptions options)
+    private Boolean PromptUserToSelectFile(ioOptions options)
     {
         final JFileChooser fileChooser = new JFileChooser();
         int returnVal;
@@ -34,18 +34,23 @@ public class IO {
                 returnVal =  JFileChooser.CANCEL_OPTION;
                 break;
         }
-        if (returnVal == JFileChooser.APPROVE_OPTION)
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             fileSelected = fileChooser.getSelectedFile();
+            return true;
+        }
+        return false;
     }
 
     public void SaveImage(List<ShapeControl> shapes)
     {
-        PromptUserToSelectFile(IO.ioOptions.save);
-        String outputString = FormatShapeControlListToString(shapes);
-        try {
-            WriteStringToFile(outputString);
-        } catch (IOException e) {
-            DisplaySaveError();
+        Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.save);
+        if (fileChosenSuccess) {
+            String outputString = FormatShapeControlListToString(shapes);
+            try {
+                WriteStringToFile(outputString);
+            } catch (IOException e) {
+                DisplaySaveError();
+            }
         }
     }
 
@@ -84,16 +89,18 @@ public class IO {
     }
 
     public ArrayList<ArrayList<String>> LoadDataFromFile() {
-        PromptUserToSelectFile(IO.ioOptions.load);
-        ArrayList<ArrayList<String>> imageData;
+        Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.load);
+        if (fileChosenSuccess) {
+            ArrayList<ArrayList<String>> imageData;
 
-        try {
-            imageData = FormatData(RetrieveDataAsString());
-            return imageData;
-        } catch (IOException e) {
-            DisplayLoadError();
+            try {
+                imageData = FormatData(RetrieveDataAsString());
+                return imageData;
+            } catch (IOException e) {
+                DisplayLoadError();
+            }
         }
-        //Returns an empty list if loading fails
+        //Returns an empty list if loading fails or user cancels
         return new ArrayList<>();
     }
 

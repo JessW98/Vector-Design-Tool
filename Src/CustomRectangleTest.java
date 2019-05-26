@@ -11,7 +11,10 @@ class CustomRectangleTest {
 
     @BeforeEach
     void setUp() {
-        testTangle = new CustomRectangle(10, 12, 26, 20,
+        testTangle = new CustomRectangle(10,
+                12,
+                36,
+                32,
                 Color.BLACK,
                 Color.PINK);
     }

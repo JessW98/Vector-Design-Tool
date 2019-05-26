@@ -84,9 +84,7 @@ public class Canvas extends JPanel {
                         x1=x2;
                         x2=xtemp;
                     }
-                    CustomRectangle Rectangle = new CustomRectangle(x1, y1,
-                            abs(x1 - x2), abs(y1 - y2), penColor,
-                            fillColor);
+                    CustomRectangle Rectangle = new CustomRectangle(x1, y1, x2, y2, penColor, fillColor);
                     shapesDrawn.add(Rectangle);
                     break;
                 case LINE:
@@ -122,6 +120,30 @@ public class Canvas extends JPanel {
                     break;
             }
         }
+    }
+
+    public void OverrideCanvas(ArrayList<ArrayList<String>> shapes)
+    {
+        shapesDrawn.clear();
+        for (int i = 0; i < shapes.size(); i++)
+        {
+            //shapesDrawn.add();
+        }
+    }
+
+    private static ShapeControl ConvertStringToShapeControl(ArrayList<String> shape)
+    {
+        switch (shape.get(0))
+        {
+            case "LINE":
+                int x1 = Integer.parseInt(shape.get(1));
+                int y1 = Integer.parseInt(shape.get(1));
+                int x2 = Integer.parseInt(shape.get(1));
+                int y2 = Integer.parseInt(shape.get(1));
+                //CustomLine lineToAdd = new CustomLine(x1, y1, x2, y2);
+                break;
+        }
+        return null;
     }
 
     //setup the drawing area, enable mouse input when pressed and dragged.
@@ -168,8 +190,6 @@ public class Canvas extends JPanel {
             drawController.draw(i);
         }
     }
-
-    ////////// Methods to manipulate the shape list
 
     public void RemoveLastShape()
     {

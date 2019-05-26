@@ -11,11 +11,13 @@ public class IO {
     }
 
     private Container parentContainer;
+    Canvas drawingCanvas;
     private File fileSelected;
 
-    public IO(Container parentContainer)
+    public IO(Container parentContainer, Canvas drawingCanvas)
     {
         this.parentContainer = parentContainer;
+        this.drawingCanvas = drawingCanvas;
     }
 
     private Boolean PromptUserToSelectFile(ioOptions options)
@@ -65,45 +67,104 @@ public class IO {
             switch (shapes.get(i).GetShapeType())
             {
                 case LINE:
-                    CustomLine lineToWrite = (CustomLine) shapeToWrite;
-                    outputString += "LINE " +
-                            lineToWrite.getX1() + " " +
-                            lineToWrite.getY1() + " " +
-                            lineToWrite.getX2() + " " +
-                            lineToWrite.getY2();
+                    outputString += ConvertLineShapeToString(shapeToWrite);
                     break;
                 case POLYGON:
-                    CustomPolygon polygonToWrite = (CustomPolygon) shapeToWrite;
-                    outputString += "POLYGON ";
-                    for (int o = 0; o < polygonToWrite.npoints; o++)
-                            outputString += (double) polygonToWrite.xpoints[o] + " " +
-                                    (double) polygonToWrite.ypoints[o] + " ";
+                    outputString += ConvertPolygonShapeToString(shapeToWrite);
                     break;
                 case RECTANGLE:
-                    CustomRectangle rectangleToWrite = (CustomRectangle) shapeToWrite;
-                    outputString += "RECTANGLE " +
-                            rectangleToWrite.getX() + " " +
-                            rectangleToWrite.getY() + " " +
-                            rectangleToWrite.getWidth() + " " +
-                            rectangleToWrite.getHeight();
+                    outputString += ConvertRectangleShapeToString(shapeToWrite);
                     break;
                 case PLOT:
-                    CustomPlot plotToWrite = (CustomPlot) shapeToWrite;
-                    outputString += "PLOT " +
-                            plotToWrite.getX() + " " +
-                            plotToWrite.getY();
+                    outputString += ConvertPlotShapeToString(shapeToWrite);
                     break;
                 case ELLIPSE:
-                    CustomEllipse ellipseToWrite = (CustomEllipse) shapeToWrite;
-                    outputString += "ELLIPSE " +
-                            ellipseToWrite.getX() + " " +
-                            ellipseToWrite.getY() + " " +
-                            ellipseToWrite.getWidth() + " " +
-                            ellipseToWrite.getHeight();
+                    outputString += ConvertEllipseShapeToString(shapeToWrite);
                     break;
             }
             outputString += "\r\n";
         }
+        return outputString;
+    }
+
+    private String ConvertLineShapeToString(Shape shapeToWrite)
+    {
+        CustomLine lineToWrite = (CustomLine) shapeToWrite;
+        String outputString = "";
+
+        //Encode absolute coordinates to fractions of the canvas for vec format
+        double x1 = lineToWrite.getX1() / drawingCanvas.getWidth();
+        double y1 = lineToWrite.getY1() / drawingCanvas.getHeight();
+        double x2 = lineToWrite.getX2() / drawingCanvas.getWidth();
+        double y2 = lineToWrite.getY2() / drawingCanvas.getHeight();
+
+        outputString += "LINE " + x1 + " " + y1 + " " + x2 + " " + y2;
+        return outputString;
+    }
+
+    private String ConvertPolygonShapeToString(Shape shapeToWrite)
+    {
+        CustomPolygon polygonToWrite = (CustomPolygon) shapeToWrite;
+        String outputString = "";
+
+        double x = 0;
+        double y = 0;
+
+        outputString += "POLYGON ";
+        for (int o = 0; o < polygonToWrite.npoints; o++) {
+            //Encode absolute coordinates to fractions of the canvas for vec format
+            x = (double) polygonToWrite.xpoints[o] / drawingCanvas.getWidth();
+            y = (double) polygonToWrite.ypoints[o] / drawingCanvas.getHeight();
+
+            outputString += x + " " + y + " ";
+        }
+        return outputString;
+    }
+
+    private String ConvertRectangleShapeToString(Shape shapeToWrite)
+    {
+        CustomRectangle rectangleToWrite = (CustomRectangle) shapeToWrite;
+        String outputString = "";
+
+        //Encode absolute coordinates to fractions of the canvas for vec format
+        double x1 = rectangleToWrite.getX() / drawingCanvas.getWidth();
+        double y1 = rectangleToWrite.getY() / drawingCanvas.getHeight();
+        double x2 = (rectangleToWrite.getX() + rectangleToWrite.getWidth()) / drawingCanvas.getWidth();
+        double y2 = (rectangleToWrite.getY() + rectangleToWrite.getHeight()) / drawingCanvas.getHeight();
+
+        outputString += "RECTANGLE " +
+                x1 + " " +
+                y1 + " " +
+                x2 + " " +
+                y2;
+        return outputString;
+
+    }
+
+    private String ConvertPlotShapeToString(Shape shapeToWrite)
+    {
+        CustomPlot plotToWrite = (CustomPlot) shapeToWrite;
+        String outputString = "";
+        
+        //Encode absolute coordinates to fractions of the canvas for vec format
+        double x = plotToWrite.getX() / drawingCanvas.getWidth();
+        double y = plotToWrite.getY() / drawingCanvas.getHeight();
+
+        outputString += "PLOT " +
+                x + " " +
+                y;
+        return outputString;
+    }
+
+    private String ConvertEllipseShapeToString(Shape shapeToWrite)
+    {
+        String outputString = "";
+        CustomEllipse ellipseToWrite = (CustomEllipse) shapeToWrite;
+        outputString += "ELLIPSE " +
+                ellipseToWrite.getX() + " " +
+                ellipseToWrite.getY() + " " +
+                ellipseToWrite.getWidth() + " " +
+                ellipseToWrite.getHeight();
         return outputString;
     }
 
@@ -135,8 +196,7 @@ public class IO {
 
     private String RetrieveDataAsString() throws IOException {
         BufferedReader thingThatsReadingTheFiles = new BufferedReader(new FileReader(fileSelected));
-
-        StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
         String line = thingThatsReadingTheFiles.readLine();
 
         while (line != null) {

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUI extends JFrame {
     /**
@@ -222,7 +223,7 @@ public class GUI extends JFrame {
                 fillPicker.setBackground(drawingCanvas.getFillColor());
             }
             else if(e.getSource() == load){
-                io.LoadDataFromFile();
+                drawingCanvas.OverrideCanvas(io.LoadDataFromFile());
             }
             else if(e.getSource() == save){
                 io.SaveImage(drawingCanvas.getShapesDrawn());
@@ -240,7 +241,7 @@ public class GUI extends JFrame {
 
         //add draw area to content
         mainContainer.add(drawingCanvas, BorderLayout.CENTER);
-        io = new IO(mainContainer);
+        io = new IO(mainContainer, drawingCanvas);
     }
 
     private static void DimensionGUI(){
@@ -273,7 +274,6 @@ public class GUI extends JFrame {
         fillPicker.addActionListener(actionListener);
         load.addActionListener(actionListener);
         save.addActionListener(actionListener);
-
     }
 
     private static void LaunchProgram() throws IOException {

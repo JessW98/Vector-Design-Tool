@@ -18,29 +18,7 @@ public class IO {
         this.parentContainer = parentContainer;
     }
 
-    public void SaveImage(List<ShapeControl> shapes)
-    {
-        String outputString = "";
-        for (int i = 0; i < shapes.size(); i++)
-        {
-            Shape shapeToWrite;
-            shapeToWrite = shapes.get(i).GetShape();
-
-            switch (shapes.get(i).GetShapeType())
-            {
-                case LINE:
-                    CustomLine lineToWrite = (CustomLine) shapeToWrite;
-                    outputString += "LINE " +
-                            lineToWrite.getX1() + " " +
-                            lineToWrite.getY1() + " " +
-                            lineToWrite.getX2() + " " +
-                            lineToWrite.getY2();
-                    break;
-            }
-        }
-    }
-
-    public void GetUserInput(ioOptions options)
+    private void PromptUserToSelectFile(ioOptions options)
     {
         final JFileChooser fileChooser = new JFileChooser();
         int returnVal;
@@ -60,15 +38,66 @@ public class IO {
             fileSelected = fileChooser.getSelectedFile();
     }
 
-    public ArrayList<ArrayList<String>> RetrieveData() throws IOException {
+    public void SaveImage(List<ShapeControl> shapes)
+    {
+        PromptUserToSelectFile(IO.ioOptions.save);
+        String outputString = FormatShapeControlListToString(shapes);
+        try {
+            WriteStringToFile(outputString);
+        } catch (IOException e) {
+            DisplaySaveError();
+        }
+    }
+
+    private String FormatShapeControlListToString(List<ShapeControl> shapes){
+        String outputString = "";
+        //Iterates over the list of Shape control objects
+        for (int i = 0; i < shapes.size(); i++) {
+            //Convert the ShapeControl to Shape type
+            Shape shapeToWrite;
+            shapeToWrite = shapes.get(i).GetShape();
+
+            switch (shapes.get(i).GetShapeType())
+            {
+                case LINE:
+                    CustomLine lineToWrite = (CustomLine) shapeToWrite;
+                    outputString += "LINE " +
+                            lineToWrite.getX1() + " " +
+                            lineToWrite.getY1() + " " +
+                            lineToWrite.getX2() + " " +
+                            lineToWrite.getY2();
+                    break;
+            }
+            outputString += "\r\n";
+        }
+        return outputString;
+    }
+
+    private void WriteStringToFile (String shapeData) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileSelected));
+        writer.write(shapeData);
+        writer.close();
+    }
+
+    private void DisplaySaveError() {
+
+    }
+
+    public ArrayList<ArrayList<String>> LoadDataFromFile() {
+        PromptUserToSelectFile(IO.ioOptions.load);
         ArrayList<ArrayList<String>> imageData;
-        imageData = FormatData(RetrieveDataAsString());
-        return imageData;
+
+        try {
+            imageData = FormatData(RetrieveDataAsString());
+            return imageData;
+        } catch (IOException e) {
+            DisplayLoadError();
+        }
+        //Returns an empty list if loading fails
+        return new ArrayList<>();
     }
 
     private String RetrieveDataAsString() throws IOException {
-        ArrayList<ArrayList<String>> data = new ArrayList<>();
-
         BufferedReader thingThatsReadingTheFiles = new BufferedReader(new FileReader(fileSelected));
 
         StringBuilder sb = new StringBuilder();
@@ -100,5 +129,7 @@ public class IO {
         return formattedData;
     }
 
+    private void DisplayLoadError() {
 
+    }
 }

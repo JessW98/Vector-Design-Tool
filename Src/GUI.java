@@ -10,9 +10,12 @@ import java.util.ArrayList;
 
 public class GUI extends JFrame {
     /**
-     * Create and show the GUI
+     * <h1>GUI</h1>
+     * <p>
+     * GUI is the graphical display for our Vector Design Tool.
+     * This class contains all graphical objects,
+     * </p>
      */
-
     enum ShapeType{
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }

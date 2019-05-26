@@ -12,6 +12,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
 
     private double x1, x2;
     private double y1, y2;
+    private Color fillColour;
     private Color penColour = Color.BLACK;
 
     public CustomLine(double x, double y, double x2, double y2, Color penColour){
@@ -94,6 +95,24 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
          * @return penColour
          */
         return this.penColour;
+    }
+
+    @Override
+    public Color getShapeFillColour() {
+        /**
+         * Returns the fillColour for the plot object
+         * @return fillColour
+         */
+        return this.fillColour;
+    }
+
+    @Override
+    public void setShapeFillColour(Color colour) {
+        /**
+         * Sets the fillColour for the plot object shape
+         * @return fillColour
+         */
+        this.fillColour = colour;
     }
 
 }

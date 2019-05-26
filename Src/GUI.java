@@ -14,7 +14,6 @@ public class GUI extends JFrame {
      * GUI is the graphical display for our Vector Design Tool.
      * This class contains all graphical objects,
      * </p>
-     *
      */
 
     enum ShapeType{

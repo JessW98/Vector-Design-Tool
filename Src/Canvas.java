@@ -6,36 +6,43 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.abs;
 
-
+/**
+ * <h1>Canvas</h1>
+ * <p>
+ * The Canvas class controls the drawing space for the
+ * vector design tool.
+ * </p>
+ * @author Jessica Williams, William Daley, Jacob Kraut
+ * @version 1.0
+ * @since 2019-05-03
+ */
 
 public class Canvas extends JPanel {
-    //Permanent canvas color
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
 
-    //Used to save a snapshot of the canvas
     private Image captureCanvas;
 
-    //The graphics 2d object that is used by the paintComponent method to draw
     private Graphics2D drawController;
 
-    //Colors used for shape outlines and fills
     private Color penColor = Color.BLACK;
     private Color fillColor = null;
 
-    //Point objects used to track users mouse movements
     private Point origin;
     private Point destination;
 
-    //ShapeType object used to track users shape selection
     private GUI.ShapeType currentSelectedShape = GUI.ShapeType.LINE;
 
-    //List used to keep a track of which shapes have been drawn
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
+
     public List<ShapeControl> getShapesDrawn() {
         return shapesDrawn;
     }
 
     private class Mouse extends MouseAdapter {
+        /**
+         * Controls what happens when input from mouse is received
+         *
+         */
 
         @Override
         public void mousePressed(MouseEvent e) {
@@ -62,6 +69,12 @@ public class Canvas extends JPanel {
 
     private void DrawShapeAt(MouseEvent e)
     {
+        /**
+         *  Draws a shape where the mouse coordinates are.
+         *
+         * @param MouseEvent e This is the event passed from the mouse
+         * @return Nothing.
+         */
         destination = e.getPoint();
 
         if(origin != null && destination != null){
@@ -124,8 +137,10 @@ public class Canvas extends JPanel {
         }
     }
 
-    //setup the drawing area, enable mouse input when pressed and dragged.
     public Canvas(){
+        /**
+         * Setup the drawing area and enable mouse input
+         */
         setDoubleBuffered(false);
         setBackground(DEFAULT_BACKGROUND_COLOUR);
         Mouse minnie = new Mouse();
@@ -133,8 +148,10 @@ public class Canvas extends JPanel {
         addMouseMotionListener(minnie);
     }
 
-    //clears the canvas
     public void clear(){
+        /**
+         * Clear the canvas
+         */
         shapesDrawn.clear();
         repaint();
     }
@@ -149,6 +166,9 @@ public class Canvas extends JPanel {
     }
 
     protected void paintComponent(Graphics g) {
+        /**
+         *  Paints the Shape object onto the canvas
+         */
         super.paintComponent(g);
         drawController = (Graphics2D) g;
 
@@ -169,14 +189,20 @@ public class Canvas extends JPanel {
         }
     }
 
-    ////////// Methods to manipulate the shape list
 
-    public void RemoveLastShape()
-    {
+    public void RemoveLastShape() {
+        /**
+         * Removes the Last Shape drawn on the canvas
+         */
         shapesDrawn.remove(shapesDrawn.size() - 1);
     }
 
     public boolean checkShapeAt(int index, GUI.ShapeType shapeType) {
+        /**
+         * Checks the Shape in shapesDrawn related to the index
+         *  against the shapeType
+         * @param int index, GUi.ShapeType shapeType
+         */
         GUI.ShapeType shapeBeingChecked = shapesDrawn.get(index).GetShapeType();
         if (shapeBeingChecked == shapeType)
             return true;
@@ -184,26 +210,50 @@ public class Canvas extends JPanel {
     }
 
     public Color getPenColor() {
+        /**
+         * Returns the current pen colour in use by the canvas
+         * @return penColor
+         */
         return penColor;
     }
 
     public void setPenColor(Color penColor) {
+        /**
+         * Sets the Pen Color in use by the canvas
+         * @param Color penColor
+         */
         this.penColor = penColor;
     }
 
     public void setCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
+        /**
+         * Sets the currently selected shape
+         * @param GUI.ShapeType currentSelectedShape
+         */
         this.currentSelectedShape = currentSelectedShape;
     }
 
     public GUI.ShapeType getCurrentSelectedShape() {
+        /**
+         * Returns the currentSelected Shape
+         * @returns currentSelectedShape
+         */
         return currentSelectedShape;
     }
 
     public Color getFillColor() {
+        /**
+         * Returns the current fillColor
+         * @return fillColor
+         */
         return fillColor;
     }
 
     public void setFillColor(Color fillColor) {
+        /**
+         * Sets the current fill Color for shapes being drawn on canvas
+         * @return fillColor
+         */
         this.fillColor = fillColor;
     }
 

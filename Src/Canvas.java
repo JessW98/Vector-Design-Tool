@@ -16,7 +16,6 @@ import static java.lang.Math.abs;
  * @version 1.0
  * @since 2019-05-03
  */
-
 public class Canvas extends JPanel {
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
 
@@ -38,12 +37,13 @@ public class Canvas extends JPanel {
         return shapesDrawn;
     }
 
+    /**
+     * Nested class that handles mouse inputs.<br>
+     * Delivers 2 points that pass on x and y co-ordinates
+     * to the shapes to be drawn.
+     *
+     */
     private class Mouse extends MouseAdapter {
-        /**
-         * Controls what happens when input from mouse is received
-         *
-         */
-
         @Override
         public void mousePressed(MouseEvent e) {
             origin = e.getPoint();
@@ -53,7 +53,8 @@ public class Canvas extends JPanel {
         public void mouseDragged(MouseEvent e) {
             if (currentSelectedShape != GUI.ShapeType.POLYGON) {
                 if (!shapesDrawn.isEmpty() &&
-                        shapesDrawn.get(shapesDrawn.size() - 1).GetShapeType() == currentSelectedShape)
+                        shapesDrawn.get(shapesDrawn.size() - 1).
+                                GetShapeType() == currentSelectedShape)
                     RemoveLastShape();
                 DrawShapeAt(e);
                 repaint();
@@ -67,14 +68,14 @@ public class Canvas extends JPanel {
         }
     }
 
+    /**
+     * Draws a shape where the mouse coordinates are.
+     *
+     * @param MouseEvent e This is the event passed from the mouse
+     * @return Nothing.
+     */
     private void DrawShapeAt(MouseEvent e)
     {
-        /**
-         *  Draws a shape where the mouse coordinates are.
-         *
-         * @param MouseEvent e This is the event passed from the mouse
-         * @return Nothing.
-         */
         destination = e.getPoint();
 
         if(origin != null && destination != null){
@@ -89,13 +90,13 @@ public class Canvas extends JPanel {
                 case RECTANGLE:
                     if (y1 > y2){
                         int ytemp = y1;
-                        y1=y2;
-                        y2=ytemp;
+                        y1 = y2;
+                        y2 = ytemp;
                     }
                     if (x1 > x2){
                         int xtemp = x1;
-                        x1=x2;
-                        x2=xtemp;
+                        x1 = x2;
+                        x2 = xtemp;
                     }
                     CustomRectangle Rectangle = new CustomRectangle(x1, y1,
                             abs(x1 - x2), abs(y1 - y2), penColor,
@@ -103,22 +104,29 @@ public class Canvas extends JPanel {
                     shapesDrawn.add(Rectangle);
                     break;
                 case LINE:
-                    CustomLine Line = new CustomLine(x1, y1, x2, y2, penColor);
+                    CustomLine Line = new CustomLine(x1, y1, x2, y2,
+                            penColor);
                     shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
-                    CustomEllipse Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
+                    CustomEllipse Ellipse = new CustomEllipse(x1, y1,
+                            abs(x1 - x2),
                             abs(y1 - y2), penColor,fillColor);
                     shapesDrawn.add(Ellipse);
                     break;
                 case PLOT:
-                    CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2, Color.BLACK, 4, 4);
+                    CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2,
+                            Color.BLACK, 4, 4);
                     shapesDrawn.add(Plot);
                     break;
                 case POLYGON:
                         // If there is already a polygon started, add to it, otherwise, create one
-                        if (!shapesDrawn.isEmpty() && shapesDrawn.get(shapesDrawn.size() - 1).GetShapeType() == GUI.ShapeType.POLYGON) {
-                            CustomPolygon polyInProgress = (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).GetShape();
+                        if (!shapesDrawn.isEmpty() && shapesDrawn.get(
+                                shapesDrawn.size() - 1).GetShapeType() ==
+                                GUI.ShapeType.POLYGON) {
+                            CustomPolygon polyInProgress = (CustomPolygon)
+                                    shapesDrawn.get(shapesDrawn.size() - 1).
+                                            GetShape();
                             polyInProgress.addPoint(x2, y2);
                             RemoveLastShape();
                             shapesDrawn.add(polyInProgress);
@@ -129,7 +137,8 @@ public class Canvas extends JPanel {
                             List<double[]> polygonCoordinates = new ArrayList<>();
                             polygonCoordinates.add(firstPoint);
 
-                            CustomPolygon polygon = new CustomPolygon(polygonCoordinates, penColor, fillColor);
+                            CustomPolygon polygon = new CustomPolygon(
+                                    polygonCoordinates, penColor, fillColor);
                             shapesDrawn.add(polygon);
                         }
                     break;
@@ -137,10 +146,11 @@ public class Canvas extends JPanel {
         }
     }
 
+    /**
+     * Default Constructor.
+     * Sets up the drawing area and enables mouse inputs.
+     */
     public Canvas(){
-        /**
-         * Setup the drawing area and enable mouse input
-         */
         setDoubleBuffered(false);
         setBackground(DEFAULT_BACKGROUND_COLOUR);
         Mouse minnie = new Mouse();
@@ -148,10 +158,11 @@ public class Canvas extends JPanel {
         addMouseMotionListener(minnie);
     }
 
+    /**
+     * Clears the canvas. Removing any drawn shapes on the
+     * canvas.
+     */
     public void clear(){
-        /**
-         * Clear the canvas
-         */
         shapesDrawn.clear();
         repaint();
     }
@@ -165,10 +176,10 @@ public class Canvas extends JPanel {
         g.drawImage(captureCanvas, 0, 0, null);
     }
 
+    /**
+     *  Paints the ShapeControl objects onto the canvas.
+     */
     protected void paintComponent(Graphics g) {
-        /**
-         *  Paints the Shape object onto the canvas
-         */
         super.paintComponent(g);
         drawController = (Graphics2D) g;
 
@@ -189,71 +200,70 @@ public class Canvas extends JPanel {
         }
     }
 
-
+    /**
+     * Removes the Last Shape drawn on the canvas.
+     */
     public void RemoveLastShape() {
-        /**
-         * Removes the Last Shape drawn on the canvas
-         */
         shapesDrawn.remove(shapesDrawn.size() - 1);
     }
 
+    /**
+     * Checks the Shape in shapesDrawn related to the index
+     *  against the shapeType.
+     * @param int index, GUi.ShapeType shapeType
+     */
     public boolean checkShapeAt(int index, GUI.ShapeType shapeType) {
-        /**
-         * Checks the Shape in shapesDrawn related to the index
-         *  against the shapeType
-         * @param int index, GUi.ShapeType shapeType
-         */
         GUI.ShapeType shapeBeingChecked = shapesDrawn.get(index).GetShapeType();
         if (shapeBeingChecked == shapeType)
             return true;
         return false;
     }
 
+    /**
+     * Returns the current pen colour in use by the canvas.
+     * @return Color penColor
+     */
     public Color getPenColor() {
-        /**
-         * Returns the current pen colour in use by the canvas
-         * @return penColor
-         */
         return penColor;
     }
 
+    /**
+     * Sets the Pen Color in use by the canvas to change shape border color.
+     * @param Color penColor
+     */
     public void setPenColor(Color penColor) {
-        /**
-         * Sets the Pen Color in use by the canvas
-         * @param Color penColor
-         */
         this.penColor = penColor;
     }
 
+    /**
+     * Sets the currently selected shape.
+     * @param GUI.ShapeType currentSelectedShape
+     */
     public void setCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
-        /**
-         * Sets the currently selected shape
-         * @param GUI.ShapeType currentSelectedShape
-         */
         this.currentSelectedShape = currentSelectedShape;
     }
 
+    /**
+     * Returns the currentSelected Shape.
+     * @return currentSelectedShape
+     */
     public GUI.ShapeType getCurrentSelectedShape() {
-        /**
-         * Returns the currentSelected Shape
-         * @returns currentSelectedShape
-         */
         return currentSelectedShape;
     }
 
+    /**
+     * Returns the current fill color being used by the canvas to fill shapes.
+     * @return fillColor
+     */
     public Color getFillColor() {
-        /**
-         * Returns the current fillColor
-         * @return fillColor
-         */
         return fillColor;
     }
 
+    /**
+     * Sets the current fill Color for shapes being drawn on the canvas.
+     * @return fillColor
+     */
     public void setFillColor(Color fillColor) {
-        /**
-         * Sets the current fill Color for shapes being drawn on canvas
-         * @return fillColor
-         */
         this.fillColor = fillColor;
     }
 

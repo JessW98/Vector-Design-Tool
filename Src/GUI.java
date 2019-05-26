@@ -15,7 +15,6 @@ public class GUI extends JFrame {
      * This class contains all graphical objects,
      * </p>
      */
-
     enum ShapeType{
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }

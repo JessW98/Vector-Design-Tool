@@ -8,7 +8,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomPolygonTest {
+
     CustomPolygon testPolygon;
+
     @BeforeEach
     void setUp() {
         List<double[]> coordinates = new ArrayList<>();

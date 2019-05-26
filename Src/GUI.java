@@ -240,6 +240,7 @@ public class GUI extends JFrame {
 
         //add draw area to content
         mainContainer.add(drawingCanvas, BorderLayout.CENTER);
+        io = new IO(mainContainer);
     }
 
     private static void DimensionGUI(){
@@ -270,6 +271,8 @@ public class GUI extends JFrame {
         colorPicker.addActionListener(actionListener);
         clearButton.addActionListener(actionListener);
         fillPicker.addActionListener(actionListener);
+        load.addActionListener(actionListener);
+        save.addActionListener(actionListener);
 
     }
 

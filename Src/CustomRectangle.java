@@ -16,7 +16,6 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
         this.y = y;
         this.width = width;
         this.height = height;
-
     }
 
     public CustomRectangle(double x, double y, double width, double height, Color penColour) {

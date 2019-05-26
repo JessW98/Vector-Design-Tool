@@ -72,6 +72,35 @@ public class IO {
                             lineToWrite.getX2() + " " +
                             lineToWrite.getY2();
                     break;
+                case POLYGON:
+                    CustomPolygon polygonToWrite = (CustomPolygon) shapeToWrite;
+                    outputString += "POLYGON ";
+                    for (int o = 0; o < polygonToWrite.npoints; o++)
+                            outputString += (double) polygonToWrite.xpoints[o] + " " +
+                                    (double) polygonToWrite.ypoints[o] + " ";
+                    break;
+                case RECTANGLE:
+                    CustomRectangle rectangleToWrite = (CustomRectangle) shapeToWrite;
+                    outputString += "RECTANGLE " +
+                            rectangleToWrite.getX() + " " +
+                            rectangleToWrite.getY() + " " +
+                            rectangleToWrite.getWidth() + " " +
+                            rectangleToWrite.getHeight();
+                    break;
+                case PLOT:
+                    CustomPlot plotToWrite = (CustomPlot) shapeToWrite;
+                    outputString += "PLOT " +
+                            plotToWrite.getX() + " " +
+                            plotToWrite.getY();
+                    break;
+                case ELLIPSE:
+                    CustomEllipse ellipseToWrite = (CustomEllipse) shapeToWrite;
+                    outputString += "ELLIPSE " +
+                            ellipseToWrite.getX() + " " +
+                            ellipseToWrite.getY() + " " +
+                            ellipseToWrite.getWidth() + " " +
+                            ellipseToWrite.getHeight();
+                    break;
             }
             outputString += "\r\n";
         }

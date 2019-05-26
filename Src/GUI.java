@@ -222,15 +222,10 @@ public class GUI extends JFrame {
                 fillPicker.setBackground(drawingCanvas.getFillColor());
             }
             else if(e.getSource() == load){
-                io.GetUserInput(IO.ioOptions.load);
-                try {
-                    io.RetrieveData();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                io.LoadDataFromFile();
             }
             else if(e.getSource() == save){
-                io.GetUserInput(IO.ioOptions.save);
+                io.SaveImage(drawingCanvas.getShapesDrawn());
             }
         };
     }

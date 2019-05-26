@@ -31,6 +31,9 @@ public class Canvas extends JPanel {
 
     //List used to keep a track of which shapes have been drawn
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
+    public List<ShapeControl> getShapesDrawn() {
+        return shapesDrawn;
+    }
 
     private class Mouse extends MouseAdapter {
 

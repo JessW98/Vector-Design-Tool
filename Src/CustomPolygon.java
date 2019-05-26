@@ -5,12 +5,10 @@ import java.util.List;
 public class CustomPolygon extends Polygon implements ShapeControl{
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.POLYGON;
 
-    private List<double[]> coordinates = new ArrayList<>();
     private Color fillColour = null;
     private Color penColour = Color.BLACK;
 
     public CustomPolygon(List<double[]> coordinates, Color penColour, Color fillColour) {
-        this.coordinates = coordinates;
         for (int i = 0; i < coordinates.size(); i++)
             this.addPoint((int) coordinates.get(i)[0], (int) coordinates.get(i)[1]);
 
@@ -21,14 +19,12 @@ public class CustomPolygon extends Polygon implements ShapeControl{
     public CustomPolygon(List<double[]> coordinates, Color penColour) {
         for (int i = 0; i < coordinates.size(); i++)
             this.addPoint((int) coordinates.get(i)[0], (int) coordinates.get(i)[1]);
-        this.coordinates = coordinates;
         this.penColour = penColour;
     }
 
     public CustomPolygon(List<double[]> coordinates) {
         for (int i = 0; i < coordinates.size(); i++)
             this.addPoint((int) coordinates.get(i)[0], (int) coordinates.get(i)[1]);
-        this.coordinates = coordinates;
     }
 
     @Override

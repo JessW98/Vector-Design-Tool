@@ -51,7 +51,7 @@ class CustomEllipseTest {
 
     @Test
     void getShapeFillColour() {
-        assertEquals(null, testEllipse.getShapeFillColour());
+        assertNull(testEllipse.getShapeFillColour());
     }
 
     @Test

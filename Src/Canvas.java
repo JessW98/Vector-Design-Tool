@@ -109,6 +109,16 @@ public class Canvas extends JPanel {
                     shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
+                    if (y1 > y2){
+                        int ytemp = y1;
+                        y1 = y2;
+                        y2 = ytemp;
+                    }
+                    if (x1 > x2){
+                        int xtemp = x1;
+                        x1 = x2;
+                        x2 = xtemp;
+                    }
                     CustomEllipse Ellipse = new CustomEllipse(x1, y1,
                             abs(x1 - x2),
                             abs(y1 - y2), penColor,fillColor);

@@ -71,7 +71,7 @@ public class Canvas extends JPanel {
     /**
      * Draws a shape where the mouse coordinates are.
      *
-     * @param MouseEvent e This is the event passed from the mouse
+     * @param e This is the event passed from the mouse
      * @return Nothing.
      */
     private void DrawShapeAt(MouseEvent e)
@@ -102,18 +102,25 @@ public class Canvas extends JPanel {
                     shapesDrawn.add(Rectangle);
                     break;
                 case LINE:
-                    CustomLine Line = new CustomLine(x1, y1, x2, y2,
-                            penColor);
+                    CustomLine Line = new CustomLine(x1, y1, x2, y2, penColor);
                     shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
-                    CustomEllipse Ellipse = new CustomEllipse(x1, y1, abs(x1 - x2),
-                            abs(y1 - y2), penColor,fillColor);
+                    if (y1 > y2){
+                        int ytemp = y1;
+                        y1 = y2;
+                        y2 = ytemp;
+                    }
+                    if (x1 > x2){
+                        int xtemp = x1;
+                        x1 = x2;
+                        x2 = xtemp;
+                    }
+                    CustomEllipse Ellipse = new CustomEllipse(x1, y1, x2, y2, penColor,fillColor);
                     shapesDrawn.add(Ellipse);
                     break;
                 case PLOT:
-                    CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2,
-                            Color.BLACK, 4, 4);
+                    CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2, Color.BLACK, 4, 4);
                     shapesDrawn.add(Plot);
                     break;
                 case POLYGON:
@@ -231,7 +238,7 @@ public class Canvas extends JPanel {
     /**
      * Checks the Shape in shapesDrawn related to the index
      *  against the shapeType.
-     * @param int index, GUi.ShapeType shapeType
+     * @param index, GUi.ShapeType shapeType
      */
     public boolean checkShapeAt(int index, GUI.ShapeType shapeType) {
         GUI.ShapeType shapeBeingChecked = shapesDrawn.get(index).GetShapeType();
@@ -250,7 +257,7 @@ public class Canvas extends JPanel {
 
     /**
      * Sets the Pen Color in use by the canvas to change shape border color.
-     * @param Color penColor
+     * @param penColor
      */
     public void setPenColor(Color penColor) {
         this.penColor = penColor;
@@ -258,7 +265,7 @@ public class Canvas extends JPanel {
 
     /**
      * Sets the currently selected shape.
-     * @param GUI.ShapeType currentSelectedShape
+     * @param currentSelectedShape
      */
     public void setCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
         this.currentSelectedShape = currentSelectedShape;

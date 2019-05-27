@@ -145,7 +145,7 @@ public class IO {
     {
         CustomPlot plotToWrite = (CustomPlot) shapeToWrite;
         String outputString = "";
-        
+
         //Encode absolute coordinates to fractions of the canvas for vec format
         double x = plotToWrite.getX() / drawingCanvas.getWidth();
         double y = plotToWrite.getY() / drawingCanvas.getHeight();
@@ -158,13 +158,20 @@ public class IO {
 
     private String ConvertEllipseShapeToString(Shape shapeToWrite)
     {
-        String outputString = "";
         CustomEllipse ellipseToWrite = (CustomEllipse) shapeToWrite;
+        String outputString = "";
+
+        //Encode absolute coordinates to fractions of the canvas for vec format
+        double x1 = ellipseToWrite.getX() / drawingCanvas.getWidth();
+        double y1 = ellipseToWrite.getY() / drawingCanvas.getHeight();
+        double x2 = (ellipseToWrite.getX() + ellipseToWrite.getWidth()) / drawingCanvas.getWidth();
+        double y2 = (ellipseToWrite.getY() + ellipseToWrite.getHeight()) / drawingCanvas.getHeight();
+
         outputString += "ELLIPSE " +
-                ellipseToWrite.getX() + " " +
-                ellipseToWrite.getY() + " " +
-                ellipseToWrite.getWidth() + " " +
-                ellipseToWrite.getHeight();
+                x1 + " " +
+                y1 + " " +
+                x2 + " " +
+                y2;
         return outputString;
     }
 

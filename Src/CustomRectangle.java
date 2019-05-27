@@ -16,6 +16,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     private double y1;
     private double x2;
     private double y2;
+
     private Color fillColour = null;
     private Color penColour = Color.BLACK;
 

@@ -43,7 +43,7 @@ public class IO {
         return false;
     }
 
-    public void SaveImage(List<ShapeControl> shapes)
+    void SaveImage(List<ShapeControl> shapes)
     {
         Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.save);
         if (fileChosenSuccess) {
@@ -57,7 +57,7 @@ public class IO {
     }
 
     private String FormatShapeControlListToString(List<ShapeControl> shapes){
-        String outputString = "";
+        StringBuilder outputString = new StringBuilder();
         //Iterates over the list of Shape control objects
         for (int i = 0; i < shapes.size(); i++) {
             //Convert the ShapeControl to Shape type
@@ -67,24 +67,24 @@ public class IO {
             switch (shapes.get(i).GetShapeType())
             {
                 case LINE:
-                    outputString += ConvertLineShapeToString(shapeToWrite);
+                    outputString.append(ConvertLineShapeToString(shapeToWrite));
                     break;
                 case POLYGON:
-                    outputString += ConvertPolygonShapeToString(shapeToWrite);
+                    outputString.append(ConvertPolygonShapeToString(shapeToWrite));
                     break;
                 case RECTANGLE:
-                    outputString += ConvertRectangleShapeToString(shapeToWrite);
+                    outputString.append(ConvertRectangleShapeToString(shapeToWrite));
                     break;
                 case PLOT:
-                    outputString += ConvertPlotShapeToString(shapeToWrite);
+                    outputString.append(ConvertPlotShapeToString(shapeToWrite));
                     break;
                 case ELLIPSE:
-                    outputString += ConvertEllipseShapeToString(shapeToWrite);
+                    outputString.append(ConvertEllipseShapeToString(shapeToWrite));
                     break;
             }
-            outputString += "\r\n";
+            outputString.append("\r\n");
         }
-        return outputString;
+        return outputString.toString();
     }
 
     private String ConvertLineShapeToString(Shape shapeToWrite)
@@ -181,14 +181,10 @@ public class IO {
         writer.close();
     }
 
-    private void DisplaySaveError() {
-
-    }
-
-    public ArrayList<ArrayList<String>> LoadDataFromFile() {
+    public List<Shape> LoadShapeDataFromFile() {
         Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.load);
         if (fileChosenSuccess) {
-            ArrayList<ArrayList<String>> imageData;
+            List<Shape> imageData;
 
             try {
                 imageData = FormatData(RetrieveDataAsString());
@@ -203,7 +199,7 @@ public class IO {
 
     private String RetrieveDataAsString() throws IOException {
         BufferedReader thingThatsReadingTheFiles = new BufferedReader(new FileReader(fileSelected));
-                StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         String line = thingThatsReadingTheFiles.readLine();
 
         while (line != null) {
@@ -214,8 +210,15 @@ public class IO {
         return sb.toString();
     }
 
-    private ArrayList<ArrayList<String>> FormatData(String dataString) {
-        ArrayList<ArrayList<String>> formattedData = new ArrayList<>();
+    private List<Shape> FormatData(String dataString) {
+        ArrayList<ArrayList<String>> dataAsStrings = splitString(dataString);
+        List<Shape> formattedShapes = ConvertStringsToShapes(dataAsStrings);
+        return formattedShapes;
+    }
+
+    private ArrayList<ArrayList<String>> splitString(String dataString)
+    {
+        ArrayList<ArrayList<String>> dataAsStrings = new ArrayList<>();
 
         //Separate shapes
         String[] dataSeperatedShapes = dataString.split("\r\n");
@@ -227,12 +230,81 @@ public class IO {
             for (int o = 0; o < dataSeperatedbyArgs.length; o++) {
                 temp.add(dataSeperatedbyArgs[o]);
             }
-            formattedData.add(temp);
+            dataAsStrings.add(temp);
         }
-        return formattedData;
+        return dataAsStrings;
+    }
+
+    private List<Shape> ConvertStringsToShapes(ArrayList<ArrayList<String>> dataAsStrings)
+    {
+        List<Shape> formattedShapes = new ArrayList<Shape>();
+        Color currentPenColour = Color.BLACK;
+
+        for (int shapeNo = 0; shapeNo < dataAsStrings.size(); shapeNo++) {
+            Shape shapeBeingRead;
+            String command = dataAsStrings.get(shapeNo).get(0);
+            switch (command) {
+                case "LINE":
+                    formattedShapes.add(
+                            ConvertStringsToLine(dataAsStrings.get(shapeNo), currentPenColour));
+                    break;
+                case "POLYGON":
+
+                    break;
+                case "RECTANGLE":
+
+                    break;
+                case "PLOT":
+
+                    break;
+                case "ELLIPSE":
+
+                    break;
+                case "PENCOLOUR":
+
+                    break;
+                case "FILLCOLOUR":
+
+                    break;
+            }
+        }
+        return formattedShapes;
+    }
+
+    private Shape ConvertStringsToLine(List<String> lineDataAsStrings, Color currentPenColour)
+    {
+        double x1 = Double.parseDouble(lineDataAsStrings.get(1)) *  drawingCanvas.getWidth();
+        double y1 = Double.parseDouble(lineDataAsStrings.get(2)) *  drawingCanvas.getHeight();
+        double x2 = Double.parseDouble(lineDataAsStrings.get(3)) *  drawingCanvas.getWidth();
+        double y2 = Double.parseDouble(lineDataAsStrings.get(4)) *  drawingCanvas.getHeight();
+        return new CustomLine(x1,y1,x2,y2,currentPenColour);
+    }
+
+    private Shape ConvertStringsToPolygon()
+    {
+        return null;
+    }
+
+    private Shape ConvertStringsToRectangle()
+    {
+        return null;
+    }
+
+    private Shape ConvertStringsToPlot()
+    {
+        return null;
+    }
+
+    private Shape ConvertStringsToEllipse()
+    {
+        return null;
     }
 
     private void DisplayLoadError() {
+
+    }
+
+    private void DisplaySaveError() {
 
     }
 }

@@ -150,12 +150,12 @@ public class Canvas extends JPanel {
         }
     }
 
-    public void OverrideCanvas(ArrayList<ArrayList<String>> shapes)
+    public void OverrideCanvas(List<Shape> newShapeList)
     {
         shapesDrawn.clear();
-        for (int i = 0; i < shapes.size(); i++)
+        for (int i = 0; i < newShapeList.size(); i++)
         {
-            //shapesDrawn.add();
+            shapesDrawn.add((ShapeControl) newShapeList.get(i));
         }
     }
 

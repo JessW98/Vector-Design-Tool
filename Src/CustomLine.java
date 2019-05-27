@@ -15,12 +15,12 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     private Color fillColour;
     private Color penColour = Color.BLACK;
 
-    public CustomLine(double x, double y, double x2, double y2, Color penColour){
+    public CustomLine(double x1, double y1, double x2, double y2, Color penColour){
         /**
          * Constructs a CustomLine object with x, y, x2, y2, penColour
          */
-        this.x1 = x;
-        this.y1 = y;
+        this.x1 = x1;
+        this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
         this.penColour = penColour;

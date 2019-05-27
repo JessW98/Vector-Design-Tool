@@ -226,7 +226,7 @@ public class GUI extends JFrame {
                 fillPicker.setBackground(drawingCanvas.getFillColor());
             }
             else if(e.getSource() == load){
-                drawingCanvas.OverrideCanvas(io.LoadDataFromFile());
+                drawingCanvas.OverrideCanvas(io.LoadShapeDataFromFile());
             }
             else if(e.getSource() == save){
                 io.SaveImage(drawingCanvas.getShapesDrawn());

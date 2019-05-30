@@ -120,8 +120,8 @@ public class Canvas extends JPanel {
                     shapesDrawn.add(Ellipse);
                     break;
                 case PLOT:
-                    CustomPlot Plot = new CustomPlot(x2 - 2, y2 - 2, Color.BLACK, 4, 4);
-                    shapesDrawn.add(Plot);
+                    CustomPlot plot = new CustomPlot(x2 - 2, y2 - 2, penColor, 4, 4);
+                    shapesDrawn.add(plot);
                     break;
                 case POLYGON:
                         // If there is already a polygon started, add to it, otherwise, create one

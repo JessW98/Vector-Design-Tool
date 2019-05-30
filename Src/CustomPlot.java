@@ -17,14 +17,14 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     private Color fillColour;
     private Color penColour;
 
-    public CustomPlot(double x, double y, Color fillColour, double width, double height) {
+    public CustomPlot(double x, double y, Color penColour, double width, double height) {
         /**
          * Constructs a plot object with x, y, fillColour, width, height
          * @params double x, double y, Color fillColour, double width, double height
          */
         this.x = x;
         this.y = y;
-        this.fillColour = fillColour;
+        this.penColour = penColour;
         this.width = width;
         this.height = height;
     }
@@ -71,7 +71,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
          * Sets the penColour for the plot object shape
          * @return penColour
          */
-        this.penColour = null;
+        this.penColour = colour;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
          * Returns the fillColour for the plot object
          * @return fillColour
          */
-        return fillColour;
+        return penColour;
     }
 }
 

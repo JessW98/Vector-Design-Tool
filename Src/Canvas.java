@@ -157,21 +157,7 @@ public class Canvas extends JPanel {
         {
             shapesDrawn.add((ShapeControl) newShapeList.get(i));
         }
-    }
-
-    private static ShapeControl ConvertStringToShapeControl(ArrayList<String> shape)
-    {
-        switch (shape.get(0))
-        {
-            case "LINE":
-                int x1 = Integer.parseInt(shape.get(1));
-                int y1 = Integer.parseInt(shape.get(1));
-                int x2 = Integer.parseInt(shape.get(1));
-                int y2 = Integer.parseInt(shape.get(1));
-                //CustomLine lineToAdd = new CustomLine(x1, y1, x2, y2);
-                break;
-        }
-        return null;
+        repaint();
     }
 
     /**

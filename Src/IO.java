@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -212,7 +213,7 @@ public class IO {
 
     private List<Shape> FormatData(String dataString) {
         ArrayList<ArrayList<String>> dataAsStrings = splitString(dataString);
-        List<Shape> formattedShapes = ConvertStringsToShapes(dataAsStrings);
+        List<Shape> formattedShapes = getCommandsFromStrings(dataAsStrings);
         return formattedShapes;
     }
 
@@ -235,10 +236,11 @@ public class IO {
         return dataAsStrings;
     }
 
-    private List<Shape> ConvertStringsToShapes(ArrayList<ArrayList<String>> dataAsStrings)
+    private List<Shape> getCommandsFromStrings(ArrayList<ArrayList<String>> dataAsStrings)
     {
         List<Shape> formattedShapes = new ArrayList<Shape>();
         Color currentPenColour = Color.BLACK;
+        Color currentFillColour = null;
 
         for (int shapeNo = 0; shapeNo < dataAsStrings.size(); shapeNo++) {
             Shape shapeBeingRead;
@@ -246,25 +248,37 @@ public class IO {
             switch (command) {
                 case "LINE":
                     formattedShapes.add(
-                            ConvertStringsToLine(dataAsStrings.get(shapeNo), currentPenColour));
+                            ConvertStringsToLine(dataAsStrings.get(shapeNo), currentPenColour)
+                    );
                     break;
                 case "POLYGON":
-
+                    formattedShapes.add(
+                            ConvertStringsToPolygon(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
+                    );
                     break;
                 case "RECTANGLE":
-
+                    formattedShapes.add(
+                            ConvertStringsToRectangle(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
+                    );
                     break;
                 case "PLOT":
-
+                    formattedShapes.add(
+                            ConvertStringsToPlot(dataAsStrings.get(shapeNo), currentPenColour)
+                    );
                     break;
                 case "ELLIPSE":
-
+                    formattedShapes.add(
+                            ConvertStringsToEllipse(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
+                    );
                     break;
-                case "PENCOLOUR":
-
+                case "PEN":
+                    currentPenColour = new Color(Color.decode(dataAsStrings.get(shapeNo).get(1)).getRGB());
                     break;
-                case "FILLCOLOUR":
-
+                case "FILL":
+                    if (dataAsStrings.get(shapeNo).get(1).equals("OFF"))
+                        currentFillColour = null;
+                    else
+                        currentFillColour = new Color(Color.decode(dataAsStrings.get(shapeNo).get(1)).getRGB());
                     break;
             }
         }
@@ -273,31 +287,61 @@ public class IO {
 
     private Shape ConvertStringsToLine(List<String> lineDataAsStrings, Color currentPenColour)
     {
-        double x1 = Double.parseDouble(lineDataAsStrings.get(1)) *  drawingCanvas.getWidth();
-        double y1 = Double.parseDouble(lineDataAsStrings.get(2)) *  drawingCanvas.getHeight();
-        double x2 = Double.parseDouble(lineDataAsStrings.get(3)) *  drawingCanvas.getWidth();
-        double y2 = Double.parseDouble(lineDataAsStrings.get(4)) *  drawingCanvas.getHeight();
-        return new CustomLine(x1,y1,x2,y2,currentPenColour);
+        double[] coords = {0,0,0,0};
+        for (int i = 1; i < 5; i++)
+            if (i%2 == 0)
+                coords[i-1] = Double.parseDouble(lineDataAsStrings.get(i)) *  drawingCanvas.getHeight();
+            else
+                coords[i-1] = Double.parseDouble(lineDataAsStrings.get(i)) *  drawingCanvas.getWidth();
+        return new CustomLine(coords[0],coords[1],coords[2],coords[3],currentPenColour);
     }
 
-    private Shape ConvertStringsToPolygon()
+    private Shape ConvertStringsToPolygon(List<String> polygonDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
-        return null;
+        List<double[]> coordinates = new ArrayList<>();
+        for (int i = 0; i < polygonDataAsStrings.size(); i++)
+        {
+            try {
+                double x = Double.parseDouble(polygonDataAsStrings.get(i)) * drawingCanvas.getWidth();
+                double y = Double.parseDouble(polygonDataAsStrings.get(++i)) * drawingCanvas.getHeight();
+                double[] coords = {x,y};
+                coordinates.add(coords);
+
+            }
+            catch (Exception e)
+            {
+                DisplayLoadError();
+            }
+        }
+        return new CustomPolygon(coordinates, currentPenColour, currentFillColour);
     }
 
-    private Shape ConvertStringsToRectangle()
-    {
-        return null;
+    private Shape ConvertStringsToRectangle(List<String> rectangleDataAsStrings, Color currentPenColour, Color currentFillColour) {
+        double[] coords = {0,0,0,0};
+        for (int i = 1; i < 5; i++)
+            if (i%2 == 0)
+                coords[i-1] = Double.parseDouble(rectangleDataAsStrings.get(i)) *  drawingCanvas.getHeight();
+            else
+                coords[i-1] = Double.parseDouble(rectangleDataAsStrings.get(i)) *  drawingCanvas.getWidth();
+        return new CustomRectangle(coords[0],coords[1],coords[2],coords[3],currentPenColour, currentFillColour);
     }
 
-    private Shape ConvertStringsToPlot()
+    private Shape ConvertStringsToPlot(List<String> plotDataAsStrings, Color currentPenColour)
     {
-        return null;
+        double x = Double.parseDouble(plotDataAsStrings.get(1)) *  drawingCanvas.getWidth();
+        double y = Double.parseDouble(plotDataAsStrings.get(2)) *  drawingCanvas.getHeight();
+        return new CustomPlot(x, y, currentPenColour, 3, 3);
     }
 
-    private Shape ConvertStringsToEllipse()
+    private Shape ConvertStringsToEllipse(List<String> ellipseDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
-        return null;
+        double[] coords = {0,0,0,0};
+        for (int i = 1; i < 5; i++)
+            if (i%2 == 0)
+                coords[i-1] = Double.parseDouble(ellipseDataAsStrings.get(i)) *  drawingCanvas.getHeight();
+            else
+                coords[i-1] = Double.parseDouble(ellipseDataAsStrings.get(i)) *  drawingCanvas.getWidth();
+        return new CustomEllipse(coords[0],coords[1],coords[2],coords[3],currentPenColour, currentFillColour);
     }
 
     private void DisplayLoadError() {

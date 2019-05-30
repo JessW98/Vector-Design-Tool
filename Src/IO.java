@@ -59,11 +59,34 @@ public class IO {
 
     private String FormatShapeControlListToString(List<ShapeControl> shapes){
         StringBuilder outputString = new StringBuilder();
+
+        Color currentFillColour = null;
+        Color currentPenColour = null;
+
         //Iterates over the list of Shape control objects
         for (int i = 0; i < shapes.size(); i++) {
             //Convert the ShapeControl to Shape type
-            Shape shapeToWrite;
-            shapeToWrite = shapes.get(i).GetShape();
+            Shape shapeToWrite = shapes.get(i).GetShape();
+
+            Color shapeFillColour = shapes.get(i).getShapeFillColour();
+            Color shapePenColour = Color.BLACK;
+            if (shapes.get(i).getShapePenColour() != null)
+                shapePenColour = shapes.get(i).getShapePenColour();
+
+            if (shapeFillColour != currentFillColour)
+            {
+                currentFillColour = shapeFillColour;
+                if (shapeFillColour == null)
+                    outputString.append("FILL OFF\r\n");
+                else
+                    outputString.append("FILL " + RGBToHex(currentFillColour) + "\r\n");
+            }
+
+            if (shapePenColour != currentPenColour)
+            {
+                currentPenColour = shapePenColour;
+                outputString.append("PEN " + RGBToHex(currentPenColour) + "\r\n");
+            }
 
             switch (shapes.get(i).GetShapeType())
             {
@@ -82,10 +105,20 @@ public class IO {
                 case ELLIPSE:
                     outputString.append(ConvertEllipseShapeToString(shapeToWrite));
                     break;
+                default:
+                    DisplaySaveError();
+                    break;
             }
             outputString.append("\r\n");
         }
         return outputString.toString();
+    }
+
+    private String RGBToHex(Color colorToConvert){
+        if (colorToConvert == null)
+            return null;
+        String hex = "#"+Integer.toHexString(colorToConvert.getRGB()).substring(2);
+        return hex;
     }
 
     private String ConvertLineShapeToString(Shape shapeToWrite)
@@ -279,6 +312,9 @@ public class IO {
                         currentFillColour = null;
                     else
                         currentFillColour = new Color(Color.decode(dataAsStrings.get(shapeNo).get(1)).getRGB());
+                    break;
+                default:
+                    DisplayLoadError();
                     break;
             }
         }

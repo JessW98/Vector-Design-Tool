@@ -52,9 +52,7 @@ public class Canvas extends JPanel {
         @Override
         public void mouseDragged(MouseEvent e) {
             if (currentSelectedShape != GUI.ShapeType.POLYGON) {
-                if (!shapesDrawn.isEmpty() &&
-                        shapesDrawn.get(shapesDrawn.size() - 1).
-                                GetShapeType() == currentSelectedShape)
+                if (!shapesDrawn.isEmpty() && checklastShape(currentSelectedShape))
                     RemoveLastShape();
                 DrawShapeAt(e);
                 repaint();
@@ -126,11 +124,9 @@ public class Canvas extends JPanel {
                 case POLYGON:
                         // If there is already a polygon started, add to it, otherwise, create one
                         if (!shapesDrawn.isEmpty() && shapesDrawn.get(
-                                shapesDrawn.size() - 1).GetShapeType() ==
-                                GUI.ShapeType.POLYGON) {
-                            CustomPolygon polyInProgress = (CustomPolygon)
-                                    shapesDrawn.get(shapesDrawn.size() - 1).
-                                            GetShape();
+                                shapesDrawn.size() - 1).GetShapeType() == GUI.ShapeType.POLYGON) {
+                            CustomPolygon polyInProgress =
+                                    (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).GetShape();
                             polyInProgress.addPoint(x2, y2);
                             RemoveLastShape();
                             shapesDrawn.add(polyInProgress);
@@ -226,10 +222,29 @@ public class Canvas extends JPanel {
      *  against the shapeType.
      * @param index, GUi.ShapeType shapeType
      */
-    public boolean checkShapeAt(int index, GUI.ShapeType shapeType) {
-        GUI.ShapeType shapeBeingChecked = shapesDrawn.get(index).GetShapeType();
-        if (shapeBeingChecked == shapeType)
-            return true;
+    public boolean checklastShape(GUI.ShapeType shapeType) {
+        ShapeControl shapeBeingChecked = shapesDrawn.get(shapesDrawn.size()-1);
+        GUI.ShapeType typeOfShapeBeingChecked = shapeBeingChecked.GetShapeType();
+
+        if (typeOfShapeBeingChecked == GUI.ShapeType.POLYGON ||
+                typeOfShapeBeingChecked == GUI.ShapeType.RECTANGLE ||
+                typeOfShapeBeingChecked == GUI.ShapeType.ELLIPSE)
+        {
+            if (typeOfShapeBeingChecked == shapeType && shapeBeingChecked.getShapeFillColour() == fillColor &&
+                    shapeBeingChecked.getShapePenColour() == penColor)
+            {
+                return true;
+            }
+        }
+        else if (typeOfShapeBeingChecked == GUI.ShapeType.LINE ||
+                typeOfShapeBeingChecked == GUI.ShapeType.PLOT)
+        {
+            if (typeOfShapeBeingChecked == shapeType && shapeBeingChecked.getShapePenColour() == penColor)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 

@@ -38,6 +38,16 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
         return this.x;
     }
 
+    public void setX(double x)
+    {
+        this.x = x;
+    }
+
+    public void setY(double y)
+    {
+        this.y = y;
+    }
+
     @Override
     public double getY() {
         /**

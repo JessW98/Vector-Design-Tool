@@ -59,6 +59,40 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
         return this.y;
     }
 
+    public double getX2()
+    {
+        return x2;
+    }
+
+    public double getY2()
+    {
+        return y2;
+    }
+
+    public void setX1(double x1)
+    {
+        this.x1 = x1;
+        this.x = x1;
+    }
+
+    public void setY1(double y1)
+    {
+        this.y1 = y1;
+        this.y = y1;
+    }
+
+    public void setX2(double x2)
+    {
+        this.x2 = x2;
+        this.width = this.x2 - this.x1;
+    }
+
+    public void setY2(double y2)
+    {
+        this.y2 = y2;
+        this.height = this.y2 - this.y1;
+    }
+
     @Override
     public double getWidth() {
         /**

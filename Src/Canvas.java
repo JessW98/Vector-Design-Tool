@@ -66,6 +66,88 @@ public class Canvas extends JPanel {
         }
     }
 
+    public void resizeShapes(double widthFactor, double heightFactor)
+    {
+        for (int i = 0; i < shapesDrawn.size(); i++)
+        {
+            ShapeControl shape = shapesDrawn.get(i);
+            switch (shapesDrawn.get(i).GetShapeType())
+            {
+                case PLOT:
+                    double x =((CustomPlot)shape).getX();
+                    double y =((CustomPlot)shape).getY();
+
+                    x *= widthFactor;
+                    y *= heightFactor;
+
+                    ((CustomPlot)shape).setX(x);
+                    ((CustomPlot)shape).setY(y);
+                    break;
+                case LINE:
+                    double lx1 =((CustomLine)shape).getX1();
+                    double ly1 =((CustomLine)shape).getY1();
+                    double lx2 =((CustomLine)shape).getX2();
+                    double ly2 =((CustomLine)shape).getY2();
+
+                    lx1 *= widthFactor;
+                    ly1 *= heightFactor;
+                    lx2 *= widthFactor;
+                    ly2 *= heightFactor;
+
+                    ((CustomLine)shape).setX1(lx1);
+                    ((CustomLine)shape).setY1(ly1);
+                    ((CustomLine)shape).setX2(lx2);
+                    ((CustomLine)shape).setY2(ly2);
+                    break;
+                case RECTANGLE:
+                    double rx1 =((CustomRectangle)shape).getX();
+                    double ry1 =((CustomRectangle)shape).getY();
+                    double rx2 =((CustomRectangle)shape).getX2();
+                    double ry2 =((CustomRectangle)shape).getY2();
+
+                    rx1 *= widthFactor;
+                    ry1 *= heightFactor;
+                    rx2 *= widthFactor;
+                    ry2 *= heightFactor;
+
+                    ((CustomRectangle)shape).setX1(rx1);
+                    ((CustomRectangle)shape).setY1(ry1);
+                    ((CustomRectangle)shape).setX2(rx2);
+                    ((CustomRectangle)shape).setY2(ry2);
+                    break;
+                case ELLIPSE:
+                    double ex1 =((CustomEllipse)shape).getX();
+                    double ey1 =((CustomEllipse)shape).getY();
+                    double ex2 =((CustomEllipse)shape).getX2();
+                    double ey2 =((CustomEllipse)shape).getY2();
+
+                    ex1 *= widthFactor;
+                    ey1 *= heightFactor;
+                    ex2 *= widthFactor;
+                    ey2 *= heightFactor;
+
+                    ((CustomEllipse)shape).setX1(ex1);
+                    ((CustomEllipse)shape).setY1(ey1);
+                    ((CustomEllipse)shape).setX2(ex2);
+                    ((CustomEllipse)shape).setY2(ey2);
+                    break;
+                case POLYGON:
+                    int[] XCoords = ((CustomPolygon)shape).getXCoordinates();
+                    int[] YCoords = ((CustomPolygon)shape).getYCoordinates();
+
+                    for (int z = 0; z < XCoords.length; z++)
+                    {
+                        XCoords[z] *= widthFactor;
+                        YCoords[z] *= heightFactor;
+                    }
+                    ((CustomPolygon) shape).setXCoordinates(XCoords);
+                    ((CustomPolygon) shape).setYCoordinates(YCoords);
+                    break;
+            }
+        }
+        repaint();
+    }
+
     /**
      * Draws a shape where the mouse coordinates are.
      *

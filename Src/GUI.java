@@ -3,10 +3,11 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GUI extends JFrame {
     /**
@@ -23,8 +24,8 @@ public class GUI extends JFrame {
     private static JButton colorPicker;
     private static JButton fillPicker;
     private static JButton clearButton;
-    private static int windowStartupWidth;
-    private static int windowStartupHeight;
+    private static double windowWidth;
+    private static double windowHeight;
     private static double displayWidth;
     private static double displayHeight;
     private static GUI mainPanel;
@@ -54,6 +55,21 @@ public class GUI extends JFrame {
         shapeNames[2] = "Plot";
         shapeNames[3] = "Polygon";
         shapeNames[4] = "Rectangle";
+    }
+
+    private static void resizeCanvas()
+    {
+        Dimension newWindowSize = mainPanel.getSize();
+        double newHeight = newWindowSize.getHeight();
+        double newWidth = newWindowSize.getWidth();
+
+        double heightDifference = (newHeight-63)/(windowHeight-63);
+        double widthDifference = (newWidth-214)/(windowWidth-214);
+
+        drawingCanvas.resizeShapes(widthDifference, heightDifference);
+
+        windowHeight = newHeight;
+        windowWidth = newWidth;
     }
 
     private static void AssignPathNamesToFileNames(){
@@ -192,7 +208,7 @@ public class GUI extends JFrame {
             }
 
             else if (e.getSource() == shapeButtons[0]){
-                drawingCanvas.setCurrentSelectedShape(ShapeType. LINE);
+                drawingCanvas.setCurrentSelectedShape(ShapeType.LINE);
 
             }
             else if (e.getSource() == shapeButtons[1]){
@@ -254,16 +270,16 @@ public class GUI extends JFrame {
         displayHeight = screenSize.getHeight();
         //How much of the screen will the window take up from 0.0-1.0
         double windowToScreenRatio = 0.75;
-        windowStartupHeight = (int)(displayHeight * windowToScreenRatio);
-        windowStartupWidth = (int)(displayWidth * windowToScreenRatio);
+        windowHeight = (int)(displayHeight * windowToScreenRatio);
+        windowWidth = (int)(displayWidth * windowToScreenRatio);
     }
 
     private static void ShowGUI(){
         //Display the window
-        mainPanel.setPreferredSize(new Dimension(windowStartupWidth, windowStartupHeight));
+        mainPanel.setPreferredSize(new Dimension((int)windowWidth, (int)windowHeight));
         mainPanel.setLocation(new Point(
-                (int)(displayWidth - windowStartupWidth) / 2,
-                (int)(displayHeight - windowStartupHeight) / 2));
+                (int)(displayWidth - windowWidth) / 2,
+                (int)(displayHeight - windowHeight) / 2));
         mainPanel.pack();
         mainPanel.setVisible(true);
     }
@@ -277,6 +293,11 @@ public class GUI extends JFrame {
         fillPicker.addActionListener(actionListener);
         load.addActionListener(actionListener);
         save.addActionListener(actionListener);
+        mainPanel.addComponentListener(new ComponentAdapter( ) {
+            public void componentResized(ComponentEvent ev) {
+                resizeCanvas();
+            }
+        });
     }
 
     private static void LaunchProgram() throws IOException {

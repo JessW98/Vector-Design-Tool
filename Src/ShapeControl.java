@@ -12,4 +12,5 @@ public interface ShapeControl extends Shape {
     Shape GetShape();
     Color getShapePenColour();
     Color getShapeFillColour();
+
 }

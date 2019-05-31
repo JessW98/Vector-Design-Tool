@@ -252,11 +252,16 @@ public class GUI extends JFrame {
             left.getActionMap().put("undo", new AbstractAction("undo") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int i = 0;
+                    undo();
                 }
             });
             left.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "undo");
         };
+    }
+
+    private static void undo()
+    {
+        drawingCanvas.RemoveLastShape();
     }
 
     private static void CreateMainPanel(){

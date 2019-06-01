@@ -24,7 +24,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
      * Constructs a plot object with an x, y, penColour, width, height
      * @param x The desired x location on the canvas.
      * @param y The desired y location on the canvas.
-     * @param penColour
+     * @param penColour The colour of the plot.
      */
     public CustomPlot(double x, double y, Color penColour, double width, double height) {
         this.x = x;

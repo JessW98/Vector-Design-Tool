@@ -2,15 +2,15 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
-
     /**
-     *  <h1>CustomEllipse</h1>
-     *  <p>Describes the customEllipse object by x1, y1, x2, y2,
-     *  fillColour, penColour.
-     *  </p>
-     *  @author Jessica Williams, William Daley, Jacob Kraut
-     *  @version 1.0
-     *  @since 2019-05-03
+     * <h1>CustomEllipse</h1>
+     * <p>
+     *     Describes a customEllipse shape object by its location, outline
+     *     colour and fill colour.
+     * </p>
+     * @author Jessica Williams, William Daley, Jacob Kraut
+     * @version 1.0
+     * @since 2019-05-03
      */
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.ELLIPSE;
 
@@ -23,8 +23,8 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     private Color penColour;
 
     /**
-     * Constructs a custom ellipse object with x, y, width, height,
-     * penColour, fillColour.
+     * Constructs a <i>CustomEllipse</i> object with at the specified location
+     * and colours.
      * @param x1 The x coordinate of the first point.
      * @param y1 The y coordinate of the first point.
      * @param x2 The x coordinate of the second point.
@@ -46,7 +46,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the x coordinate for the CustomEllipse object.
+     * Returns the x coordinate for the <i>CustomEllipse</i> object.
      * @return The x coordinate of the first point.
      */
     @Override
@@ -55,7 +55,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the y coordinate for the CustomEllipse object.
+     * Returns the y coordinate for the  <i>CustomEllipse</i> object.
      * @return The y coordinate of the first point.
      */
     @Override
@@ -64,7 +64,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the x coordinate for the CustomEllipse object.
+     * Returns the x coordinate for the  <i>CustomEllipse</i> object.
      * @return The x coordinate of the second point.
      */
     public double getX2()
@@ -73,7 +73,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the y coordinate for the CustomEllipse object.
+     * Returns the y coordinate for the  <i>CustomEllipse</i> object.
      * @return The y coordinate of the second point.
      */
     public double getY2()
@@ -144,8 +144,8 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Sets the penColour for the CustomEllipse object.
-     * @param colour The desired penColour for the CustomEllipse object.
+     * Sets the outline colour for the <i>CustomEllipse</i> object.
+     * @param colour The desired penColour for the <i>CustomEllipse</i> object.
      */
     @Override
     public void setShapePenColour(Color colour) {
@@ -153,8 +153,8 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Sets the fillColour for the CustomEllipse object.
-     * @param Colour The desired fillColour for the CustomEllipse object.
+     * Sets the fillColour for the <i>CustomEllipse</i> object.
+     * @param Colour The desired fillColour for the <i>CustomEllipse</i> object.
      */
     @Override
     public void setShapeFillColour(Color colour) {
@@ -162,8 +162,8 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the SHAPE_TYPE for the CustomEllipse object.
-     * @return SHAPE_TYPE The SHAPE_TYPE for the CustomEllipse object.
+     * Returns the SHAPE_TYPE for the <i>CustomEllipse</i> object.
+     * @return SHAPE_TYPE The SHAPE_TYPE for the <i>CustomEllipse</i> object.
      */
     @Override
     public GUI.ShapeType GetShapeType() {
@@ -171,7 +171,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the CustomEllipse object.
+     * Returns itself.
      * @return An instance of itself as a <i>Shape</i> object.
      */
     @Override
@@ -180,8 +180,9 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the penColour for the CustomEllipse object.
-     * @return The penColour as a <i>Color</i> object for the CustomEllipse object.
+     * Returns the colour of the outline for the <i>CustomEllipse</i> object.
+     * @return The outline colour as a <i>Color</i> object for the
+     * <i>CustomEllipse</i> object.
      */
     @Override
     public Color getShapePenColour() {
@@ -189,8 +190,8 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Return the fillColour for the CustomEllipse Object.
-     * @return The fillColour as a <i>Color</i> object for the CustomEllipse Object. 
+     * Returns the colour of the fill for the <i>CustomEllipse</i> object.
+     * @return The fill colour as a <i>Color</i> object for the <i>CustomEllipse</i> object.
      */
     @Override
     public Color getShapeFillColour() {

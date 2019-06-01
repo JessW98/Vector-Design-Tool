@@ -109,10 +109,10 @@ public class Canvas extends JPanel {
                     lx2 *= widthFactor;
                     ly2 *= heightFactor;
 
-                    ((CustomLine)shape).setX1(lx1);
-                    ((CustomLine)shape).setY1(ly1);
-                    ((CustomLine)shape).setX2(lx2);
-                    ((CustomLine)shape).setY2(ly2);
+                    ((CustomLine)shape).SetX1(lx1);
+                    ((CustomLine)shape).SetY1(ly1);
+                    ((CustomLine)shape).SetX2(lx2);
+                    ((CustomLine)shape).SetY2(ly2);
                     break;
                 case RECTANGLE:
                     double rx1 =((CustomRectangle)shape).getX();
@@ -400,5 +400,4 @@ public class Canvas extends JPanel {
     public void SetFillColor(Color fillColor) {
         this.fillColor = fillColor;
     }
-
 }

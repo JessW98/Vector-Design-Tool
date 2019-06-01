@@ -16,72 +16,97 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     private Color fillColour;
     private Color penColour = Color.BLACK;
 
+    /**
+     * Constructs a CustomLine object with x, y, x2, y2, penColour
+     */
     public CustomLine(double x1, double y1, double x2, double y2, Color penColour){
-        /**
-         * Constructs a CustomLine object with x, y, x2, y2, penColour
-         */
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
         this.penColour = penColour;
     }
+
+    /**
+     * Returns the x1 coordinate of the line
+     * @return x1
+     */
     @Override
     public double getX1() {
-        /**
-         * Returns the x1 coordinate of the line
-         * @return x1
-         */
         return this.x1;
     }
 
+    /**
+     * Returns the y1 coordinate of the line
+     * @return y1
+     */
     @Override
     public double getY1() {
-        /**
-         * Returns the y1 coordinate of the line
-         * @return y1
-         */
         return this.y1;
     }
 
+    /**
+     * Returns the x2 coordinate of the line
+     * @return x2
+     */
     @Override
     public double getX2() {
-        /**
-         * Returns the x2 coordinate of the line
-         * @return x2
-         */
         return this.x2;
     }
 
+    /**
+     * Returns the y2 coordinate of the line
+     * @return y2
+     */
     @Override
     public double getY2() {
-        /**
-         * Returns the y2 coordinate of the line
-         * @return y2
-         */
         return this.y2;
     }
 
-    public void setX1(double x1)
+    /**
+     * Sets the x1 to a new value.
+     * @param x1 The new value to be assigned.
+     * @return Nothing.
+     */
+    public void SetX1(double x1)
     {
         this.x1 = x1;
     }
 
-    public void setY1(double y1)
+    /**
+     * Sets the y1 to a new value.
+     * @param y1 The new value to be assigned.
+     * @return Nothing.
+     */
+    public void SetY1(double y1)
     {
         this.y1 = y1;
     }
 
-    public void setX2(double x2)
+    /**
+     * Sets the x2 to a new value.
+     * @param x2 The new value to be assigned.
+     * @return Nothing.
+     */
+    public void SetX2(double x2)
     {
         this.x2 = x2;
     }
 
-    public void setY2(double y2)
+    /**
+     * Sets the y2 to a new value.
+     * @param y2 The new value to be assigned.
+     * @return Nothing.
+     */
+    public void SetY2(double y2)
     {
         this.y2 = y2;
     }
 
+    /**
+     * Sets the colour of the pen for the outline.
+     * @param colour the desired <i>Color</i>.
+     */
     @Override
     public void setShapePenColour(Color colour) {
         /**
@@ -91,6 +116,10 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
         this.penColour = colour;
     }
 
+    /**
+     * Returns the type of shape as a <i>GUI.ShapeType</i>
+     * @return The type of shape as a <i>GUI.ShapeType</i>
+     */
     @Override
     public GUI.ShapeType GetShapeType() {
         /**
@@ -100,6 +129,10 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
         return SHAPE_TYPE;
     }
 
+    /**
+     * Returns an instance of itself at a <i>Shape</i> object.
+     * @return An instance of itself at a <i>Shape</i> object.
+     */
     @Override
     public Shape GetShape() {
         /**
@@ -109,30 +142,30 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
         return this;
     }
 
+    /**
+     * Returns the penColour of the CustomLine object
+     * @return penColour
+     */
     @Override
     public Color getShapePenColour() {
-        /**
-         * Returns the penColour of the CustomLine object
-         * @return penColour
-         */
         return this.penColour;
     }
 
+    /**
+     * Returns the fillColour for the plot object
+     * @return fillColour
+     */
     @Override
     public Color getShapeFillColour() {
-        /**
-         * Returns the fillColour for the plot object
-         * @return fillColour
-         */
         return this.fillColour;
     }
 
+    /**
+     * Sets the fillColour for the Line object.
+     * @return The desired <i>Color</i>.
+     */
     @Override
     public void setShapeFillColour(Color colour) {
-        /**
-         * Sets the fillColour for the plot object shape
-         * @return fillColour
-         */
         this.fillColour = colour;
     }
 

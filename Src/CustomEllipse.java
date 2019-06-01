@@ -5,7 +5,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
 
     /**
      *  <h1>CustomEllipse</h1>
-     *  <p>Describes the customEllipse object by x, y, width, height,
+     *  <p>Describes the customEllipse object by x1, y1, x2, y2,
      *  fillColour, penColour.
      *  </p>
      *  @author Jessica Williams, William Daley, Jacob Kraut

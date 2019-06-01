@@ -7,6 +7,8 @@ import java.awt.geom.Ellipse2D;
  *  Describes a plot object by x, y, width, height, fillColour, penColour
  * </p>
  * @author Jessica Williams, William Daley, Jacob Kraut
+ * @version 1.0
+ * @since 2019-05-03
  */
 public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.PLOT;
@@ -19,7 +21,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     private Color penColour;
 
     /**
-     * Constructs a plot object with x, y, fillColour, width, height
+     * Constructs a plot object with an x, y, penColour, width, height
      * @param x The desired x location on the canvas.
      * @param y The desired y location on the canvas.
      * @param penColour
@@ -32,18 +34,18 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
         this.height = height;
     }
 
+    /**
+     * Return the x coordinate for the plot object.
+     * @return The desired x coordinate for the plot object.
+     */
     @Override
     public double getX() {
-        /**
-         * Return the x coordinate for the plot object
-         * @return x
-         */
         return this.x;
     }
 
     /**
-     * Sets the x to a new value.
-     * @param x The new value to be assigned.
+     * Sets the x coordinate to a new value.
+     * @param x The desired x coordinate to be assigned.
      * @return Nothing.
      */
     public void setX(double x)
@@ -52,8 +54,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Sets the y to a new value.
-     * @param y The new value to be assigned.
+     * Sets the y coordinate to a new value.
+     * @param y The desired y coordinate to be assigned.
      * @return Nothing.
      */
     public void setY(double y)
@@ -63,7 +65,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
 
     /**
      * Returns the y coordinate for the plot object
-     * @return y
+     * @return The desired y coordinate for the plot object.
      */
     @Override
     public double getY() {
@@ -71,8 +73,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the width of the plot object
-     * @return width
+     * Returns the width of the plot object.
+     * @return The width of the plot object.
      */
     @Override
     public double getWidth() {
@@ -80,8 +82,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the height of the plot object
-     * @return height
+     * Returns the height of the plot object.
+     * @return The height of the plot object.
      */
     @Override
     public double getHeight() {
@@ -89,8 +91,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Sets the penColour for the plot object shape
-     * @return penColour
+     * Sets the penColour for the plot object shape.
+     * @param colour  The desired penColour for the plot object shape.
      */
     @Override
     public void setShapePenColour(Color colour) {
@@ -98,8 +100,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Sets the fillColour for the plot object shape
-     * @return fillColour
+     * Sets the fillColour for the plot object shape.
+     * @return The fillColour for the plot object shape.
      */
     @Override
     public void setShapeFillColour(Color colour) {
@@ -107,8 +109,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the SHAPE_TYPE of the plot object shape
-     * @return SHAPE_TYPE
+     * Returns the SHAPE_TYPE of the plot object shape.
+     * @return The SHAPE_TYPE of the plot object shape.
      */
     @Override
     public GUI.ShapeType GetShapeType() {
@@ -117,7 +119,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
 
     /**
      * Returns the plot object
-     * @return this
+     * @return An instance of itself as a <i>Shape</i> Object.
      */
     @Override
     public Shape GetShape() {
@@ -125,8 +127,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the penColour for the plot object
-     * @return penColour
+     * Returns the penColour for the plot object.
+     * @return The penColour for the plot object.
      */
     @Override
     public Color getShapePenColour() {
@@ -134,8 +136,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Returns the fillColour for the plot object
-     * @return fillColour
+     * Returns the fillColour for the plot object.
+     * @return The fillColour as a <i>Color</i> object for the plot object.
      */
     @Override
     public Color getShapeFillColour() {

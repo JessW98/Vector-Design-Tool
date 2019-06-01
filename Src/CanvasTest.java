@@ -52,34 +52,34 @@ class CanvasTest {
 
     @Test
     void getPenColor() {
-        assertEquals(Color.BLACK, testCanvas.getPenColor());
+        assertEquals(Color.BLACK, testCanvas.GetPenColor());
     }
 
     @Test
     void setPenColor() {
-        testCanvas.setPenColor(Color.GREEN);
-        assertEquals(Color.GREEN, testCanvas.getPenColor());
+        testCanvas.SetPenColor(Color.GREEN);
+        assertEquals(Color.GREEN, testCanvas.GetPenColor());
     }
 
     @Test
     void setCurrentSelectedShape() {
-        testCanvas.setCurrentSelectedShape(GUI.ShapeType.RECTANGLE);
-        assertEquals(GUI.ShapeType.RECTANGLE, testCanvas.getCurrentSelectedShape());
+        testCanvas.SetCurrentSelectedShape(GUI.ShapeType.RECTANGLE);
+        assertEquals(GUI.ShapeType.RECTANGLE, testCanvas.GetCurrentSelectedShape());
     }
 
     @Test
     void getCurrentSelectedShape() {
-        assertEquals(GUI.ShapeType.LINE, testCanvas.getCurrentSelectedShape());
+        assertEquals(GUI.ShapeType.LINE, testCanvas.GetCurrentSelectedShape());
     }
 
     @Test
     void getFillColor() {
-        assertEquals(null, testCanvas.getFillColor());
+        assertEquals(null, testCanvas.GetFillColor());
     }
 
     @Test
     void setFillColor() {
-        testCanvas.setFillColor(Color.GREEN);
-        assertEquals(Color.GREEN, testCanvas.getFillColor());
+        testCanvas.SetFillColor(Color.GREEN);
+        assertEquals(Color.GREEN, testCanvas.GetFillColor());
     }
 }

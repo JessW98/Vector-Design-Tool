@@ -17,6 +17,7 @@ public class GUI extends JFrame {
      * GUI is the graphical display for our Vector Design Tool.
      * This class contains all graphical objects,
      * </p>
+     * @author Jessica Williams, William Daley, Jacob Kraut
      */
     enum ShapeType{
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
@@ -67,7 +68,7 @@ public class GUI extends JFrame {
         double heightDifference = (newHeight-63)/(windowHeight-63);
         double widthDifference = (newWidth-214)/(windowWidth-214);
 
-        drawingCanvas.resizeShapes(widthDifference, heightDifference);
+        drawingCanvas.ResizeShapes(widthDifference, heightDifference);
 
         windowHeight = newHeight;
         windowWidth = newWidth;
@@ -198,55 +199,55 @@ public class GUI extends JFrame {
         tools.add(colorPicker);
         tools.add(fillPicker);
 
-        colorPicker.setBackground(drawingCanvas.getPenColor());
-        fillPicker.setBackground(drawingCanvas.getFillColor());
+        colorPicker.setBackground(drawingCanvas.GetPenColor());
+        fillPicker.setBackground(drawingCanvas.GetFillColor());
     }
 
     private static void HandleActionListeners(){
         actionListener = e -> {
             if (e.getSource() == clearButton) {
-                drawingCanvas.clear();
+                drawingCanvas.Clear();
             }
 
             else if (e.getSource() == shapeButtons[0]){
-                drawingCanvas.setCurrentSelectedShape(ShapeType.LINE);
+                drawingCanvas.SetCurrentSelectedShape(ShapeType.LINE);
 
             }
             else if (e.getSource() == shapeButtons[1]){
-                drawingCanvas.setCurrentSelectedShape(ShapeType.ELLIPSE);
+                drawingCanvas.SetCurrentSelectedShape(ShapeType.ELLIPSE);
 
             }
             else if (e.getSource() == shapeButtons[2]){
-                drawingCanvas.setCurrentSelectedShape(ShapeType.PLOT);
+                drawingCanvas.SetCurrentSelectedShape(ShapeType.PLOT);
 
             }
             else if (e.getSource() == shapeButtons[3]){
-                drawingCanvas.setCurrentSelectedShape(ShapeType.POLYGON);
+                drawingCanvas.SetCurrentSelectedShape(ShapeType.POLYGON);
 
             }
             else if (e.getSource() == shapeButtons[4]){
-                drawingCanvas.setCurrentSelectedShape(ShapeType.RECTANGLE);
+                drawingCanvas.SetCurrentSelectedShape(ShapeType.RECTANGLE);
 
             }
             else if (e.getSource() == colorPicker){
-                drawingCanvas.setPenColor(JColorChooser.showDialog(
+                drawingCanvas.SetPenColor(JColorChooser.showDialog(
                         null,
                         "Pick your pen colour!",
-                        drawingCanvas.getPenColor()));
-                colorPicker.setBackground(drawingCanvas.getPenColor());
+                        drawingCanvas.GetPenColor()));
+                colorPicker.setBackground(drawingCanvas.GetPenColor());
             }
             else if (e.getSource() == fillPicker){
-                drawingCanvas.setFillColor(JColorChooser.showDialog(
+                drawingCanvas.SetFillColor(JColorChooser.showDialog(
                         null,
                         "Pick your fill colour!",
-                        drawingCanvas.getFillColor()));
-                fillPicker.setBackground(drawingCanvas.getFillColor());
+                        drawingCanvas.GetFillColor()));
+                fillPicker.setBackground(drawingCanvas.GetFillColor());
             }
             else if(e.getSource() == load){
                 drawingCanvas.OverrideCanvas(io.LoadImage());
             }
             else if(e.getSource() == save){
-                io.SaveImage(drawingCanvas.getShapesDrawn());
+                io.SaveImage(drawingCanvas.GetShapesDrawn());
             }
 
             left.getActionMap().put("undo", new AbstractAction("undo") {

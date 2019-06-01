@@ -7,6 +7,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     /**
      * <h1>CustomLine</h1>
      * <p>Describes the CustomLine object by x1, x2, y1, y2, fillColour, penColour</p>
+     * @author Jessica Williams, William Daley, Jacob Kraut
      */
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.LINE;
 

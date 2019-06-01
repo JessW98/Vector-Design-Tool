@@ -33,7 +33,7 @@ public class Canvas extends JPanel {
 
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
 
-    public List<ShapeControl> getShapesDrawn() {
+    public List<ShapeControl> GetShapesDrawn() {
         return shapesDrawn;
     }
 
@@ -52,7 +52,7 @@ public class Canvas extends JPanel {
         @Override
         public void mouseDragged(MouseEvent e) {
             if (currentSelectedShape != GUI.ShapeType.POLYGON) {
-                if (!shapesDrawn.isEmpty() && checklastShape(currentSelectedShape))
+                if (!shapesDrawn.isEmpty() && CheckLastShape(currentSelectedShape))
                     RemoveLastShape();
                 DrawShapeAt(e);
                 repaint();
@@ -66,7 +66,22 @@ public class Canvas extends JPanel {
         }
     }
 
-    public void resizeShapes(double widthFactor, double heightFactor)
+    /**
+     * This method updates the coordinates of all the shapes based off how much
+     * they need to expand/contract and in which direction.
+     * @param widthFactor The new width as a decimal of the current width.
+     *                    for example:
+     *                                1   : no change
+     *                                1.1 : expand width 10%
+     *                                0.9 : shrink width 10%
+     * @param heightFactor The new height as a decimal of the current height.
+     *                     for example:
+     *                                1   : no change
+     *                                1.1 : expand height 10%
+     *                                0.9 : shrink height 10%
+     * @return Nothing.
+     */
+    public void ResizeShapes(double widthFactor, double heightFactor)
     {
         for (int i = 0; i < shapesDrawn.size(); i++)
         {
@@ -149,9 +164,9 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Draws a shape where the mouse coordinates are.
+     * Draws a <i>Shape</i> where the mouse coordinates are.
      *
-     * @param e This is the event passed from the mouse
+     * @param e This is the event passed from the mouse.
      * @return Nothing.
      */
     private void DrawShapeAt(MouseEvent e)
@@ -228,6 +243,11 @@ public class Canvas extends JPanel {
         }
     }
 
+    /**
+     * This method erases the shapes stored in <i>shapesDrawn</i> and replaces it with the a new list of <i>Shape</i> objects.
+     * @param newShapeList The list of <i>Shapes</i> that will override the current list.
+     * @return Nothing.
+     */
     public void OverrideCanvas(List<Shape> newShapeList)
     {
         shapesDrawn.clear();
@@ -253,14 +273,15 @@ public class Canvas extends JPanel {
     /**
      * Clears the canvas. Removing any drawn shapes on the
      * canvas.
+     * @return Nothing.
      */
-    public void clear(){
+    public void Clear(){
         shapesDrawn.clear();
         repaint();
     }
 
     //creates image
-    public void saveImage(Graphics g){
+    private void saveImage(Graphics g){
         if(captureCanvas == null){
             captureCanvas = createImage(getSize().width, getSize().height);
             drawController = (Graphics2D) captureCanvas.getGraphics();
@@ -300,11 +321,11 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Checks the Shape in shapesDrawn related to the index
-     *  against the shapeType.
-     * @param index, GUi.ShapeType shapeType
+     * Checks if the last shape drawn is of the specified type.
+     * @param shapeType The shape type being checked for.
+     * @return True if the last shape is the specified type or not.
      */
-    public boolean checklastShape(GUI.ShapeType shapeType) {
+    public boolean CheckLastShape(GUI.ShapeType shapeType) {
         ShapeControl shapeBeingChecked = shapesDrawn.get(shapesDrawn.size()-1);
         GUI.ShapeType typeOfShapeBeingChecked = shapeBeingChecked.GetShapeType();
 
@@ -331,50 +352,52 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Returns the current pen colour in use by the canvas.
-     * @return Color penColor
+     * Returns the current pen colour in use by the canvas as a <i>Color</i> object.
+     * @return The current pen colour in use by the canvas as a <i>Color</i> object.
      */
-    public Color getPenColor() {
+    public Color GetPenColor() {
         return penColor;
     }
 
     /**
      * Sets the Pen Color in use by the canvas to change shape border color.
-     * @param penColor
+     * @param penColor The desired <i>Color</i>.
      */
-    public void setPenColor(Color penColor) {
+    public void SetPenColor(Color penColor) {
         this.penColor = penColor;
     }
 
     /**
      * Sets the currently selected shape.
-     * @param currentSelectedShape
+     * @param currentSelectedShape The shape to be selected.
+     * @return Nothing.
      */
-    public void setCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
+    public void SetCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
         this.currentSelectedShape = currentSelectedShape;
     }
 
     /**
-     * Returns the currentSelected Shape.
-     * @return currentSelectedShape
+     * Returns the shape that is currently selected.
+     * @return The shape that is currently selected.
      */
-    public GUI.ShapeType getCurrentSelectedShape() {
+    public GUI.ShapeType GetCurrentSelectedShape() {
         return currentSelectedShape;
     }
 
     /**
      * Returns the current fill color being used by the canvas to fill shapes.
-     * @return fillColor
+     * @return The current fill color.
      */
-    public Color getFillColor() {
+    public Color GetFillColor() {
         return fillColor;
     }
 
     /**
      * Sets the current fill Color for shapes being drawn on the canvas.
-     * @return fillColor
+     * @param fillColor The desired <i>Color</i> for the fill.
+     * @return Nothing.
      */
-    public void setFillColor(Color fillColor) {
+    public void SetFillColor(Color fillColor) {
         this.fillColor = fillColor;
     }
 

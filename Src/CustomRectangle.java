@@ -8,6 +8,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
      * Describes a rectangle shape object by its location,
      * width, height, fillColour and penColour.
      * </p>
+     * @author Jessica Williams, William Daley, Jacob Kraut
      */
 
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.RECTANGLE;

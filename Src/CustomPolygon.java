@@ -8,7 +8,7 @@ public class CustomPolygon extends Polygon implements ShapeControl{
      * <p>
      *  Describes a polygon object by it's coordinates, fillColour and penColour
      * </p>
-     *  .
+     *  @author Jessica Williams, William Daley, Jacob Kraut
      */
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.POLYGON;
 

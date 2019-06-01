@@ -12,7 +12,7 @@ import java.util.List;
  * The IO class controls the importing and exporting
  * of .vec files.
  * </p>
- * @author William Daley
+ * @author Jessica Williams, William Daley, Jacob Kraut
  */
 
 public class IO {

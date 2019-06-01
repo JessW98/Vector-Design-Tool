@@ -7,6 +7,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
      * <p>
      *  Describes a plot object by x, y, width, height, fillColour, penColour
      * </p>
+     * @author Jessica Williams, William Daley, Jacob Kraut
      */
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.PLOT;
 

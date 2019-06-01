@@ -35,7 +35,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Return the x coordinate for the plot object.
+     * Returns the x coordinate for the plot object.
      * @return The desired x coordinate for the plot object.
      */
     @Override
@@ -91,8 +91,8 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
     }
 
     /**
-     * Sets the penColour for the plot object shape.
-     * @param colour  The desired penColour for the plot object shape.
+     * Sets the penColour for the plot object.
+     * @param colour  The desired penColour for the plot object.
      */
     @Override
     public void setShapePenColour(Color colour) {

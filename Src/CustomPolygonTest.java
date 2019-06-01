@@ -14,7 +14,7 @@ class CustomPolygonTest {
     @BeforeEach
     void setUp() {
         List<double[]> coordinates = new ArrayList<>();
-        testPolygon = new CustomPolygon(coordinates);
+        testPolygon = new CustomPolygon(coordinates, Color.black, null);
     }
 
     @Test

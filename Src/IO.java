@@ -5,21 +5,39 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * <h1>IO</h1>
+ * <p>
+ * The IO class controls the importing and exporting
+ * of .vec files.
+ * </p>
+ * @author William Daley
+ */
+
 public class IO {
     enum ioOptions{
         save,
         load,
     }
-
     private Container parentContainer;
     Canvas drawingCanvas;
     private File fileSelected;
 
+    /**
+     * Constructs an IO object given the parent container and the drawing canvas.
+     * @param parentContainer The parent container is used to host the file
+     *                        chooser window
+     * @param drawingCanvas The drawing canvas is used to extract all the
+     *                      information needed to generate the .vec file
+     */
     public IO(Container parentContainer, Canvas drawingCanvas)
     {
         this.parentContainer = parentContainer;
         this.drawingCanvas = drawingCanvas;
     }
+
+
 
     private Boolean PromptUserToSelectFile(ioOptions options)
     {
@@ -44,7 +62,13 @@ public class IO {
         return false;
     }
 
-    void SaveImage(List<ShapeControl> shapes)
+    /**
+     * This method prompts the user to select the file they would like to save
+     * to. The .vec file is then generated
+     * @param shapes A list of the shapes as ShapeControl objects that will be
+     *               written to the .vec file.
+     */
+    public void SaveImage(List<ShapeControl> shapes)
     {
         Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.save);
         if (fileChosenSuccess) {
@@ -215,7 +239,13 @@ public class IO {
         writer.close();
     }
 
-    public List<Shape> LoadShapeDataFromFile() {
+    /**
+     * This method prompts the user to select the file they would like to load
+     * using the file chooser. It then formats and returns the data into a list
+     * of Shape objects.
+     * @return A list of shape objects that can then be rendered onto a canvas
+     */
+    public List<Shape> LoadImage() {
         Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.load);
         if (fileChosenSuccess) {
             List<Shape> imageData;

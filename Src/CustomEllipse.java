@@ -9,6 +9,8 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
      *  fillColour, penColour.
      *  </p>
      *  @author Jessica Williams, William Daley, Jacob Kraut
+     *  @version 1.0
+     *  @since 2019-05-03
      */
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.ELLIPSE;
 
@@ -20,14 +22,16 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     private Color fillColour;
     private Color penColour;
 
+    /**
+     * Constructs a custom ellipse object with x, y, width, height,
+     * penColour, fillColour.
+     * @param x1 The x coordinate of the first point.
+     * @param y1 The y coordinate of the first point.
+     * @param x2 The x coordinate of the second point.
+     * @param y2 The y coordinate of the second point.
+     * Color penColour, Color fillColour
+     */
     public CustomEllipse(double x1, double y1, double x2, double y2, Color penColour, Color fillColour) {
-        /**
-         * Constructs a custom ellipse object with x, y, width, height,
-         * penColour, fillColour.
-         * @params double x, double y, double width, double height,
-         * Color penColour, Color fillColour
-         */
-
         x = x1;
         y = y1;
 
@@ -37,132 +41,159 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
         this.y2 = y2;
         this.height = y2 - y1;
         this.width = x2 - x1;
-
         this.penColour = penColour;
         this.fillColour = fillColour;
     }
 
+    /**
+     * Returns the x coordinate for the CustomEllipse object.
+     * @return The x coordinate of the first point.
+     */
     @Override
     public double getX() {
-        /**
-         * Returns the x coordinate for the CustomEllipse object.
-         * @return x
-         */
         return this.x;
     }
 
+    /**
+     * Returns the y coordinate for the CustomEllipse object.
+     * @return The y coordinate of the first point.
+     */
     @Override
     public double getY() {
-        /**
-         * Returns the y coordinate for the CustomEllipse object.
-         * @return y
-         */
         return this.y;
     }
 
+    /**
+     * Returns the x coordinate for the CustomEllipse object.
+     * @return The x coordinate of the second point.
+     */
     public double getX2()
     {
         return x2;
     }
 
+    /**
+     * Returns the y coordinate for the CustomEllipse object.
+     * @return The y coordinate of the second point.
+     */
     public double getY2()
     {
         return y2;
     }
 
+    /**
+     * Sets the x coordinate for the first point.
+     * @param x1 The desired x coordinate for the first point.
+     * @return Nothing.
+     */
     public void setX1(double x1)
     {
         this.x1 = x1;
         this.x = x1;
     }
 
+    /**
+     * Sets the y coordinate for the first point.
+     * @param y1 The desired y coordinate for the first point.
+     * @return Nothing.
+     */
     public void setY1(double y1)
     {
         this.y1 = y1;
         this.y = y1;
     }
 
+    /**
+     * Sets the x2 coordinate for the first point.
+     * @param x2 The desired x2 coordinate for the first point.
+     * @return Nothing.
+     */
     public void setX2(double x2)
     {
         this.x2 = x2;
         this.width = this.x2 - this.x1;
     }
 
+    /**
+     * Sets the y2 coordinate for the first point.
+     * @param y2 The desired y2 coordinate for the first point.
+     * @return Nothing.
+     */
     public void setY2(double y2)
     {
         this.y2 = y2;
         this.height = this.y2 - this.y1;
     }
 
+    /**
+     * Returns the width of the CustomEllipse object.
+     * @return The width of the CustomEllipse object.
+     */
     @Override
     public double getWidth() {
-        /**
-         * Returns the width of the CustomEllipse object.
-         * @return width
-         */
         return this.width;
     }
 
+    /**
+     * Returns the height of the CustomEllipse object.
+     * @return The height of the CustomEllipse object.
+     */
     @Override
     public double getHeight() {
-        /**
-         * Returns the height of the CustomEllipse object.
-         * @return height
-         */
         return this.height;
     }
 
+    /**
+     * Sets the penColour for the CustomEllipse object.
+     * @param colour The desired penColour for the CustomEllipse object.
+     */
     @Override
     public void setShapePenColour(Color colour) {
-        /**
-         * Set the penColour for the CustomEllipse object.
-         * @param Color Colour
-         */
         this.penColour = colour;
     }
 
+    /**
+     * Sets the fillColour for the CustomEllipse object.
+     * @param Colour The desired fillColour for the CustomEllipse object.
+     */
     @Override
     public void setShapeFillColour(Color colour) {
-        /**
-         * Set the fillColour for the CustomEllipse object.
-         * @param Color Colour
-         */
         this.fillColour = colour;
     }
 
+    /**
+     * Returns the SHAPE_TYPE for the CustomEllipse object.
+     * @return SHAPE_TYPE The SHAPE_TYPE for the CustomEllipse object.
+     */
     @Override
     public GUI.ShapeType GetShapeType() {
-        /**
-         * Returns the SHAPE_TYPE for the CustomEllipse object.
-         * @return SHAPE_TYPE
-         */
         return SHAPE_TYPE;
     }
 
+    /**
+     * Returns the CustomEllipse object.
+     * @return An instance of itself as a <i>Shape</i> object.
+     */
     @Override
     public Shape GetShape() {
-        /**
-         * Returns the CustomEllipse object.
-         * @return this
-         */
         return this;
     }
 
+    /**
+     * Returns the penColour for the CustomEllipse object.
+     * @return The penColour as a <i>Color</i> object for the CustomEllipse object.
+     */
     @Override
     public Color getShapePenColour() {
-        /**
-         * Returns the penColour for the CustomEllipse object.
-         * @return penColour
-         */
         return penColour;
     }
 
+    /**
+     * Return the fillColour for the CustomEllipse Object.
+     * @return The fillColour as a <i>Color</i> object for the CustomEllipse Object. 
+     */
     @Override
     public Color getShapeFillColour() {
-        /**
-         * Return the fillColour for the CustomEllipse Object.
-         * @return fillColour
-         */
         return fillColour;
     }
 }

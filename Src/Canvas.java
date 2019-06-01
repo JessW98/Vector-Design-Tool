@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import static java.lang.Math.abs;
 
 /**
  * <h1>Canvas</h1>
@@ -41,7 +40,6 @@ public class Canvas extends JPanel {
      * Nested class that handles mouse inputs.<br>
      * Delivers 2 points that pass on x and y co-ordinates
      * to the shapes to be drawn.
-     *
      */
     private class Mouse extends MouseAdapter {
         @Override
@@ -164,8 +162,7 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Draws a <i>Shape</i> where the mouse coordinates are.
-     *
+     * Draws the currently selected shape where the mouse coordinates are.
      * @param e This is the event passed from the mouse.
      * @return Nothing.
      */
@@ -280,7 +277,6 @@ public class Canvas extends JPanel {
         repaint();
     }
 
-    //creates image
     private void saveImage(Graphics g){
         if(captureCanvas == null){
             captureCanvas = createImage(getSize().width, getSize().height);
@@ -291,6 +287,8 @@ public class Canvas extends JPanel {
 
     /**
      *  Paints the ShapeControl objects onto the canvas.
+     * @param g The graphics object that will draw te shapes.
+     * @return Nothing.
      */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -315,6 +313,7 @@ public class Canvas extends JPanel {
 
     /**
      * Removes the Last Shape drawn on the canvas.
+     * @return Nothing.
      */
     public void RemoveLastShape() {
         shapesDrawn.remove(shapesDrawn.size() - 1);

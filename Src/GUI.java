@@ -52,7 +52,7 @@ public class GUI extends JFrame {
 
     public static boolean superKoolRainbowFunMode = false;
 
-    private static void PopulatePathNamesArray(){
+    private static void populatePathNamesArray(){
         pathNames[0] = "Src/images/line.png";
         pathNames[1] = "Src/images/ellipse.png";
         pathNames[2] = "Src/images/plot.png";
@@ -78,7 +78,6 @@ public class GUI extends JFrame {
         double widthDifference = (newWidth-214)/(windowWidth-214);
 
         drawingCanvas.resizeShapes(widthDifference, heightDifference);
-
         windowHeight = newHeight;
         windowWidth = newWidth;
     }
@@ -394,7 +393,7 @@ public class GUI extends JFrame {
 
     private static void launchProgram() throws IOException {
         mainPanel = new GUI();
-        drawingCanvas = new canvas();
+        drawingCanvas = new Canvas();
         readInImages();
         createMenuNavigationBar();
         createButtons();

@@ -22,17 +22,17 @@ public class IO {
     }
 
     private Container parentContainer;
-    canvas drawingCanvas;
+    Canvas drawingCanvas;
     private File fileSelected;
 
     /**
-     * Constructs an IO object given the parent container and the drawing canvas.
+     * Constructs an IO object given the parent container and the drawing Canvas.
      * @param parentContainer The parent container is used to host the file
      *                        chooser window
-     * @param drawingCanvas The drawing canvas is used to extract all the
+     * @param drawingCanvas The drawing Canvas is used to extract all the
      *                      information needed to generate the .vec file
      */
-    public IO(Container parentContainer, canvas drawingCanvas)
+    public IO(Container parentContainer, Canvas drawingCanvas)
     {
         this.parentContainer = parentContainer;
         this.drawingCanvas = drawingCanvas;
@@ -149,7 +149,7 @@ public class IO {
         customLine lineToWrite = (customLine) shapeToWrite;
         String outputString = "";
 
-        //Encode absolute coordinates to fractions of the canvas for vec format
+        //Encode absolute coordinates to fractions of the Canvas for vec format
         double x1 = lineToWrite.getX1() / drawingCanvas.getWidth();
         double y1 = lineToWrite.getY1() / drawingCanvas.getHeight();
         double x2 = lineToWrite.getX2() / drawingCanvas.getWidth();
@@ -169,7 +169,7 @@ public class IO {
 
         outputString += "POLYGON ";
         for (int o = 0; o < polygonToWrite.npoints; o++) {
-            //Encode absolute coordinates to fractions of the canvas for vec format
+            //Encode absolute coordinates to fractions of the Canvas for vec format
             x = (double) polygonToWrite.xpoints[o] / drawingCanvas.getWidth();
             y = (double) polygonToWrite.ypoints[o] / drawingCanvas.getHeight();
 
@@ -183,7 +183,7 @@ public class IO {
         customRectangle rectangleToWrite = (customRectangle) shapeToWrite;
         String outputString = "";
 
-        //Encode absolute coordinates to fractions of the canvas for vec format
+        //Encode absolute coordinates to fractions of the Canvas for vec format
         double x1 = rectangleToWrite.getX() / drawingCanvas.getWidth();
         double y1 = rectangleToWrite.getY() / drawingCanvas.getHeight();
         double x2 = (rectangleToWrite.getX() + rectangleToWrite.getWidth()) / drawingCanvas.getWidth();
@@ -204,7 +204,7 @@ public class IO {
         customPlot plotToWrite = (customPlot) shapeToWrite;
         String outputString = "";
 
-        //Encode absolute coordinates to fractions of the canvas for vec format
+        //Encode absolute coordinates to fractions of the Canvas for vec format
         double x = plotToWrite.getX() / drawingCanvas.getWidth();
         double y = plotToWrite.getY() / drawingCanvas.getHeight();
 
@@ -219,7 +219,7 @@ public class IO {
         CustomEllipse ellipseToWrite = (CustomEllipse) shapeToWrite;
         String outputString = "";
 
-        //Encode absolute coordinates to fractions of the canvas for vec format
+        //Encode absolute coordinates to fractions of the Canvas for vec format
         double x1 = ellipseToWrite.getX() / drawingCanvas.getWidth();
         double y1 = ellipseToWrite.getY() / drawingCanvas.getHeight();
         double x2 = (ellipseToWrite.getX() + ellipseToWrite.getWidth()) / drawingCanvas.getWidth();
@@ -243,7 +243,7 @@ public class IO {
      * This method prompts the user to select the file they would like to load
      * using the file chooser. It then formats and returns the data into a list
      * of Shape objects.
-     * @return A list of shape objects that can then be rendered onto a canvas
+     * @return A list of shape objects that can then be rendered onto a Canvas
      */
     public List<Shape> loadImage() {
         Boolean fileChosenSuccess = promptUserToSelectFile(IO.ioOptions.load);

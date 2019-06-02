@@ -7,16 +7,16 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * <h1>canvas</h1>
+ * <h1>Canvas</h1>
  * <p>
- * The canvas class controls the drawing space for the
+ * The Canvas class controls the drawing space for the
  * vector design tool.
  * </p>
  * @author Jessica Williams, William Daley, Jacob Kraut
  * @version 1.0
  * @since 2019-05-03
  */
-public class canvas extends JPanel {
+public class Canvas extends JPanel {
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
     private Image captureCanvas;
     private Graphics2D drawController;
@@ -300,7 +300,7 @@ public class canvas extends JPanel {
      * Default Constructor.
      * Sets up the drawing area and enables mouse inputs.
      */
-    public canvas(){
+    public Canvas(){
         setDoubleBuffered(false);
         setBackground(DEFAULT_BACKGROUND_COLOUR);
         Mouse minnie = new Mouse();
@@ -309,8 +309,8 @@ public class canvas extends JPanel {
     }
 
     /**
-     * Clears the canvas. Removing any drawn shapes on the
-     * canvas.
+     * Clears the Canvas. Removing any drawn shapes on the
+     * Canvas.
      * @return Nothing.
      */
     public void clear(){
@@ -320,7 +320,7 @@ public class canvas extends JPanel {
 
 
     /**
-     * Paints all <i>ShapeControl</i> objects onto the canvas.
+     * Paints all <i>ShapeControl</i> objects onto the Canvas.
      * @param g The graphics object that will draw te shapes.
      * @return Nothing.
      */
@@ -334,7 +334,7 @@ public class canvas extends JPanel {
             for (ShapeControl line : getGridLineShapes()) paintShapeToCanvas(line);
     }
 
-    //Generates the line objects that show the grid on the canvas
+    //Generates the line objects that show the grid on the Canvas
     private List<ShapeControl> getGridLineShapes() {
         int width = this.getWidth();
         int height = this.getHeight();
@@ -368,7 +368,7 @@ public class canvas extends JPanel {
     }
 
     /**
-     * Removes the Last Shape drawn on the canvas.
+     * Removes the Last Shape drawn on the Canvas.
      * @return Nothing.
      */
     public void removeLastShape() {
@@ -407,15 +407,15 @@ public class canvas extends JPanel {
     }
 
     /**
-     * Returns the current pen colour in use by the canvas as a <i>Color</i> object.
-     * @return The current pen colour in use by the canvas as a <i>Color</i> object.
+     * Returns the current pen colour in use by the Canvas as a <i>Color</i> object.
+     * @return The current pen colour in use by the Canvas as a <i>Color</i> object.
      */
     public Color getPenColor() {
         return penColor;
     }
 
     /**
-     * Sets the Pen Color in use by the canvas to change shape border color.
+     * Sets the Pen Color in use by the Canvas to change shape border color.
      * @param penColor The desired <i>Color</i>.
      */
     public void setPenColor(Color penColor) {
@@ -440,7 +440,7 @@ public class canvas extends JPanel {
     }
 
     /**
-     * Returns the current fill color being used by the canvas to fill shapes.
+     * Returns the current fill color being used by the Canvas to fill shapes.
      * @return The current fill color.
      */
     public Color getFillColor() {
@@ -448,7 +448,7 @@ public class canvas extends JPanel {
     }
 
     /**
-     * Sets the current fill Color for shapes being drawn on the canvas.
+     * Sets the current fill Color for shapes being drawn on the Canvas.
      * @param fillColor The desired <i>Color</i> for the fill.
      * @return Nothing.
      */

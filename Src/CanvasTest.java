@@ -8,13 +8,13 @@ import java.util.List;
 
 class CanvasTest {
 
-    private canvas testCanvas;
+    private Canvas testCanvas;
     private List<ShapeControl> testShapes;
     private customRectangle testTangle;
 
     @BeforeEach
     void setUp() {
-        testCanvas = new canvas();
+        testCanvas = new Canvas();
         testShapes = new ArrayList<>();
         testTangle = new customRectangle(10, 10, 10, 10,
                 Color.BLACK,

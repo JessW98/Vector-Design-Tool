@@ -283,15 +283,15 @@ public class Canvas extends JPanel {
     /**
      * This method erases the shapes stored in <i>shapesDrawn</i> and replaces
      * it with the a new list of <i>Shape</i> objects.
-     * @param newShapeList The list of <i>Shapes</i> that will override the current list.
+     * @param newShapeList The list of <i>ShapeControl</i>s that will override the current list.
      * @return Nothing.
      */
-    public void overrideCanvas(List<Shape> newShapeList)
+    public void overrideCanvas(List<ShapeControl> newShapeList)
     {
         shapesDrawn.clear();
         for (int i = 0; i < newShapeList.size(); i++)
         {
-            shapesDrawn.add((ShapeControl) newShapeList.get(i));
+            shapesDrawn.add(newShapeList.get(i));
         }
         repaint();
     }

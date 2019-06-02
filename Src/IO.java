@@ -245,10 +245,10 @@ public class IO {
      * of Shape objects.
      * @return A list of shape objects that can then be rendered onto a Canvas
      */
-    public List<Shape> loadImage() {
+    public List<ShapeControl> loadImage() {
         Boolean fileChosenSuccess = promptUserToSelectFile(IO.ioOptions.load);
         if (fileChosenSuccess) {
-            List<Shape> imageData;
+            List<ShapeControl> imageData;
 
             try {
                 imageData = formatData(retrieveDataAsString());
@@ -274,9 +274,9 @@ public class IO {
         return sb.toString();
     }
 
-    private List<Shape> formatData(String dataString) {
+    private List<ShapeControl> formatData(String dataString) {
         ArrayList<ArrayList<String>> dataAsStrings = splitString(dataString);
-        List<Shape> formattedShapes = getCommandsFromStrings(dataAsStrings);
+        List<ShapeControl> formattedShapes = getCommandsFromStrings(dataAsStrings);
         return formattedShapes;
     }
 
@@ -299,9 +299,9 @@ public class IO {
         return dataAsStrings;
     }
 
-    private List<Shape> getCommandsFromStrings(ArrayList<ArrayList<String>> dataAsStrings)
+    private List<ShapeControl> getCommandsFromStrings(ArrayList<ArrayList<String>> dataAsStrings)
     {
-        List<Shape> formattedShapes = new ArrayList<Shape>();
+        List<ShapeControl> formattedShapes = new ArrayList<>();
         Color currentPenColour = Color.BLACK;
         Color currentFillColour = null;
 
@@ -351,7 +351,7 @@ public class IO {
         return formattedShapes;
     }
 
-    private Shape convertStringsToLine(List<String> lineDataAsStrings, Color currentPenColour)
+    private ShapeControl convertStringsToLine(List<String> lineDataAsStrings, Color currentPenColour)
     {
         double[] coords = {0,0,0,0};
         for (int i = 1; i < 5; i++)
@@ -362,7 +362,7 @@ public class IO {
         return new customLine(coords[0],coords[1],coords[2],coords[3],currentPenColour);
     }
 
-    private Shape convertStringsToPolygon(List<String> polygonDataAsStrings, Color currentPenColour, Color currentFillColour)
+    private ShapeControl convertStringsToPolygon(List<String> polygonDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
         List<double[]> coordinates = new ArrayList<>();
         for (int i = 0; i < polygonDataAsStrings.size(); i++)
@@ -382,7 +382,7 @@ public class IO {
         return new CustomPolygon(coordinates, currentPenColour, currentFillColour);
     }
 
-    private Shape convertStringsToRectangle(List<String> rectangleDataAsStrings, Color currentPenColour, Color currentFillColour) {
+    private ShapeControl convertStringsToRectangle(List<String> rectangleDataAsStrings, Color currentPenColour, Color currentFillColour) {
         double[] coords = {0,0,0,0};
         for (int i = 1; i < 5; i++)
             if (i%2 == 0)
@@ -392,14 +392,14 @@ public class IO {
         return new customRectangle(coords[0],coords[1],coords[2],coords[3],currentPenColour, currentFillColour);
     }
 
-    private Shape convertStringsToPlot(List<String> plotDataAsStrings, Color currentPenColour)
+    private ShapeControl convertStringsToPlot(List<String> plotDataAsStrings, Color currentPenColour)
     {
         double x = Double.parseDouble(plotDataAsStrings.get(1)) *  drawingCanvas.getWidth();
         double y = Double.parseDouble(plotDataAsStrings.get(2)) *  drawingCanvas.getHeight();
         return new customPlot(x, y, currentPenColour, 3, 3);
     }
 
-    private Shape convertStringsToEllipse(List<String> ellipseDataAsStrings, Color currentPenColour, Color currentFillColour)
+    private ShapeControl convertStringsToEllipse(List<String> ellipseDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
         double[] coords = {0,0,0,0};
         for (int i = 1; i < 5; i++)

@@ -11,6 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <h1>GUI</h1>
@@ -275,7 +276,9 @@ public class GUI extends JFrame {
                 fillPicker.setBackground(drawingCanvas.getFillColor());
             }
             else if(e.getSource() == load){
-                drawingCanvas.overrideCanvas(io.loadImage());
+                List<ShapeControl> newShapes = io.loadImage();
+                if (!newShapes.isEmpty())
+                    drawingCanvas.overrideCanvas(newShapes);
             }
             else if(e.getSource() == save){
                 io.saveImage(drawingCanvas.getShapesDrawn());

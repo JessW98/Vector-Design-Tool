@@ -27,6 +27,8 @@ public class GUI extends JFrame {
     private static JButton colorPicker;
     private static JButton fillPicker;
     private static JButton clearButton;
+    private static JButton gridButton;
+    private static JTextField gridEntry;
     private static double windowWidth;
     private static double windowHeight;
     private static double displayWidth;
@@ -151,6 +153,8 @@ public class GUI extends JFrame {
         colorPicker = new JButton("Pen Colour");
         fillPicker = new JButton("Fill Colour");
         clearButton = new JButton("Clear");
+        gridButton = new JButton("Grid View");
+        gridEntry = new JTextField();
 
         for(int i = 0; i < shapeButtons.length; i++){
             if(fileNames[i].exists()){
@@ -199,6 +203,8 @@ public class GUI extends JFrame {
         tools.add(clearButton);
         tools.add(colorPicker);
         tools.add(fillPicker);
+        tools.add(gridButton);
+        tools.add(gridEntry);
 
         colorPicker.setBackground(drawingCanvas.GetPenColor());
         fillPicker.setBackground(drawingCanvas.GetFillColor());
@@ -307,6 +313,8 @@ public class GUI extends JFrame {
         colorPicker.addActionListener(actionListener);
         clearButton.addActionListener(actionListener);
         fillPicker.addActionListener(actionListener);
+        gridButton.addActionListener(actionListener);
+        gridEntry.addActionListener(actionListener);
         load.addActionListener(actionListener);
         save.addActionListener(actionListener);
         mainPanel.addComponentListener(new ComponentAdapter( ) {

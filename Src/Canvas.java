@@ -17,9 +17,7 @@ import java.util.List;
  */
 public class Canvas extends JPanel {
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
-
     private Image captureCanvas;
-
     private Graphics2D drawController;
 
     private Color penColor = Color.BLACK;
@@ -29,8 +27,9 @@ public class Canvas extends JPanel {
     private Point destination;
 
     private GUI.ShapeType currentSelectedShape = GUI.ShapeType.LINE;
-
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
+
+    private int gridSize = 10;
 
     public List<ShapeControl> GetShapesDrawn() {
         return shapesDrawn;
@@ -172,11 +171,10 @@ public class Canvas extends JPanel {
 
         if(origin != null){
 
-            double x1 = origin.x;
-            double y1 = origin.y;
-            double x2 = destination.x;
-            double y2 = destination.y;
-
+            double x1 = roundIntForGrid(origin.x);
+            double y1 = roundIntForGrid(origin.y);
+            double x2 = roundIntForGrid(destination.x);
+            double y2 = roundIntForGrid(destination.y);
 
             switch(currentSelectedShape){
                 case RECTANGLE:
@@ -247,6 +245,12 @@ public class Canvas extends JPanel {
                     polygonCoordinates, penColor, fillColor);
             shapesDrawn.add(polygon);
         }
+    }
+
+    //Rounds value to the grid size, allowing the shapes to snap to the grid.
+    private double roundIntForGrid(int valueToRound)
+    {
+        return Math.round(valueToRound / gridSize) * gridSize;
     }
 
     /**

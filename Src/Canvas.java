@@ -256,6 +256,13 @@ public class Canvas extends JPanel {
             CustomPolygon polyInProgress =
                     (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).getShape();
             polyInProgress.addPoint((int) x2, (int) y2);
+
+            //If any colour has changed, update it
+            if (fillColor != polyInProgress.getShapeFillColour())
+                polyInProgress.setShapeFillColour(fillColor);
+            if (penColor != polyInProgress.getShapePenColour())
+                polyInProgress.setShapePenColour(penColor);
+
             removeLastShape();
             shapesDrawn.add(polyInProgress);
         }

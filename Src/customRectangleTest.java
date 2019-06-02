@@ -5,13 +5,13 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CustomRectangleTest {
+class customRectangleTest {
 
-    CustomRectangle testTangle;
+    customRectangle testTangle;
 
     @BeforeEach
     void setUp() {
-        testTangle = new CustomRectangle(10,
+        testTangle = new customRectangle(10,
                 12,
                 36,
                 32,
@@ -53,12 +53,12 @@ class CustomRectangleTest {
 
     @Test
     void getShapeType() {
-        assertEquals(GUI.ShapeType.RECTANGLE, testTangle.GetShapeType());
+        assertEquals(GUI.ShapeType.RECTANGLE, testTangle.getShapeType());
     }
 
     @Test
     void getShape() {
-        assertEquals(testTangle, testTangle.GetShape());
+        assertEquals(testTangle, testTangle.getShape());
     }
 
     @Test

@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 /**
- * <h1>CustomPlot</h1>
+ * <h1>customPlot</h1>
  * <p>
  *  Describes a plot object by x, y, width, height, fillColour, penColour
  * </p>
@@ -10,7 +10,7 @@ import java.awt.geom.Ellipse2D;
  * @version 1.0
  * @since 2019-05-03
  */
-public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
+public class customPlot extends Ellipse2D.Double implements ShapeControl {
     private static final GUI.ShapeType SHAPE_TYPE = GUI.ShapeType.PLOT;
 
     private double x;
@@ -26,7 +26,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
      * @param y The desired y location on the canvas.
      * @param penColour The colour of the plot.
      */
-    public CustomPlot(double x, double y, Color penColour, double width, double height) {
+    public customPlot(double x, double y, Color penColour, double width, double height) {
         this.x = x;
         this.y = y;
         this.penColour = penColour;
@@ -113,7 +113,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
      * @return The SHAPE_TYPE of the plot object shape.
      */
     @Override
-    public GUI.ShapeType GetShapeType() {
+    public GUI.ShapeType getShapeType() {
         return SHAPE_TYPE;
     }
 
@@ -122,7 +122,7 @@ public class CustomPlot extends Ellipse2D.Double implements ShapeControl {
      * @return An instance of itself as a <i>Shape</i> Object.
      */
     @Override
-    public Shape GetShape() {
+    public Shape getShape() {
         return this;
     }
 

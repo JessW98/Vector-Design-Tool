@@ -2,11 +2,11 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 
 
-public class CustomLine extends Line2D.Double implements ShapeControl{
+public class customLine extends Line2D.Double implements ShapeControl{
     /**
-     * <h1>CustomLine</h1>
+     * <h1>customLine</h1>
      * <p>
-     *     Describes a CustomLine shape  shape object by its location and colour.
+     *     Describes a customLine shape  shape object by its location and colour.
      * </p>
      * @author Jessica Williams, William Daley, Jacob Kraut
      * @version 1.0
@@ -20,7 +20,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     private Color penColour;
 
     /**
-     * Constructs a new <i>CustomLine</i> object at the specified coordinates
+     * Constructs a new <i>customLine</i> object at the specified coordinates
      * with the specified colour.
      * @param x1 The x coordinate for the starting location.
      * @param y1 The y coordinate for the starting location.
@@ -28,7 +28,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @param y2 The y coordinate for the end location.
      * @param penColour The colour of the line.
      */
-    public CustomLine(double x1, double y1, double x2, double y2, Color penColour){
+    public customLine(double x1, double y1, double x2, double y2, Color penColour){
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -37,7 +37,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     }
 
     /**
-     * Returns the x1 coordinate of the <i>CustomLine</i> object.
+     * Returns the x1 coordinate of the <i>customLine</i> object.
      * @return The x1 coordinate of the line as a double.
      */
     @Override
@@ -46,8 +46,8 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     }
 
     /**
-     * Returns the y1 coordinate of the <i>CustomLine</i> object.
-     * @return The y1 coordinate of the <i>CustomLine</i> object as a double.
+     * Returns the y1 coordinate of the <i>customLine</i> object.
+     * @return The y1 coordinate of the <i>customLine</i> object as a double.
      */
     @Override
     public double getY1() {
@@ -55,8 +55,8 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     }
 
     /**
-     * Returns the x2 coordinate of the <i>CustomLine</i> object.
-     * @return The x2 coordinate of the <i>CustomLine</i> object as a double.
+     * Returns the x2 coordinate of the <i>customLine</i> object.
+     * @return The x2 coordinate of the <i>customLine</i> object as a double.
      */
     @Override
     public double getX2() {
@@ -64,8 +64,8 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     }
 
     /**
-     * Returns the y2 coordinate of the <i>CustomLine</i> object.
-     * @return The y2 coordinate of the <i>CustomLine</i> object as a double.
+     * Returns the y2 coordinate of the <i>customLine</i> object.
+     * @return The y2 coordinate of the <i>customLine</i> object as a double.
      */
     @Override
     public double getY2() {
@@ -77,7 +77,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @param x1 The desired x coordinate for the first point.
      * @return Nothing.
      */
-    public void SetX1(double x1)
+    public void setX1(double x1)
     {
         this.x1 = x1;
     }
@@ -87,7 +87,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @param y1 The new value to be assigned.
      * @return Nothing.
      */
-    public void SetY1(double y1)
+    public void setY1(double y1)
     {
         this.y1 = y1;
     }
@@ -97,7 +97,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @param x2 The new value to be assigned.
      * @return Nothing.
      */
-    public void SetX2(double x2)
+    public void setX2(double x2)
     {
         this.x2 = x2;
     }
@@ -107,7 +107,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @param y2 The new value to be assigned.
      * @return Nothing.
      */
-    public void SetY2(double y2)
+    public void setY2(double y2)
     {
         this.y2 = y2;
     }
@@ -126,7 +126,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @return The type of shape as a <i>GUI.ShapeType</i>.
      */
     @Override
-    public GUI.ShapeType GetShapeType() {
+    public GUI.ShapeType getShapeType() {
         /**
          * Returns the SHAPE_TYPE for the line object
          * @return SHAPE_TYPE
@@ -139,13 +139,13 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
      * @return An instance of itself as a <i>Shape</i> object.
      */
     @Override
-    public Shape GetShape() {
+    public Shape getShape() {
         return this;
     }
 
     /**
-     * Returns the colour of the outline for the <i>CustomLine</i> object.
-     * @return The outline colour as a <i>Color</i> object for the <i>CustomLine</i> object.
+     * Returns the colour of the outline for the <i>customLine</i> object.
+     * @return The outline colour as a <i>Color</i> object for the <i>customLine</i> object.
      */
     @Override
     public Color getShapePenColour() {
@@ -153,8 +153,8 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     }
 
     /**
-     * Returns the colour of the fill for the <i>CustomLine</i> object.
-     * @return The fill colour as a <i>Color</i> object for the <i>CustomLine</i> object.
+     * Returns the colour of the fill for the <i>customLine</i> object.
+     * @return The fill colour as a <i>Color</i> object for the <i>customLine</i> object.
      */
     @Override
     public Color getShapeFillColour() {
@@ -162,7 +162,7 @@ public class CustomLine extends Line2D.Double implements ShapeControl{
     }
 
     /**
-     * Sets the fillColour for the <i>CustomLine</i> object.
+     * Sets the fillColour for the <i>customLine</i> object.
      * @return The desired <i>Color</i>.
      */
     @Override

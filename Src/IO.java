@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class IO {
     }
 
     private Container parentContainer;
-    Canvas drawingCanvas;
+    canvas drawingCanvas;
     private File fileSelected;
 
     /**
@@ -33,13 +32,13 @@ public class IO {
      * @param drawingCanvas The drawing canvas is used to extract all the
      *                      information needed to generate the .vec file
      */
-    public IO(Container parentContainer, Canvas drawingCanvas)
+    public IO(Container parentContainer, canvas drawingCanvas)
     {
         this.parentContainer = parentContainer;
         this.drawingCanvas = drawingCanvas;
     }
 
-    private Boolean PromptUserToSelectFile(ioOptions options)
+    private Boolean promptUserToSelectFile(ioOptions options)
     {
         final JFileChooser fileChooser = new JFileChooser();
         int returnVal;
@@ -68,20 +67,20 @@ public class IO {
      * @param shapes A list of the shapes as ShapeControl objects that will be
      *               written to the .vec file.
      */
-    public void SaveImage(List<ShapeControl> shapes)
+    public void saveImage(List<ShapeControl> shapes)
     {
-        Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.save);
+        Boolean fileChosenSuccess = promptUserToSelectFile(IO.ioOptions.save);
         if (fileChosenSuccess) {
-            String outputString = FormatShapeControlListToString(shapes);
+            String outputString = formatShapeControlListToString(shapes);
             try {
-                WriteStringToFile(outputString);
+                writeStringToFile(outputString);
             } catch (IOException e) {
-                DisplaySaveError();
+                displaySaveError();
             }
         }
     }
 
-    private String FormatShapeControlListToString(List<ShapeControl> shapes){
+    private String formatShapeControlListToString(List<ShapeControl> shapes){
         StringBuilder outputString = new StringBuilder();
 
         Color currentFillColour = null;
@@ -90,7 +89,7 @@ public class IO {
         //Iterates over the list of Shape control objects
         for (int i = 0; i < shapes.size(); i++) {
             //Convert the ShapeControl to Shape type
-            Shape shapeToWrite = shapes.get(i).GetShape();
+            Shape shapeToWrite = shapes.get(i).getShape();
 
             Color shapeFillColour = shapes.get(i).getShapeFillColour();
             Color shapePenColour = Color.BLACK;
@@ -103,34 +102,34 @@ public class IO {
                 if (shapeFillColour == null)
                     outputString.append("FILL OFF\r\n");
                 else
-                    outputString.append("FILL " + RGBToHex(currentFillColour) + "\r\n");
+                    outputString.append("FILL " + rgbToHex(currentFillColour) + "\r\n");
             }
 
             if (shapePenColour != currentPenColour)
             {
                 currentPenColour = shapePenColour;
-                outputString.append("PEN " + RGBToHex(currentPenColour) + "\r\n");
+                outputString.append("PEN " + rgbToHex(currentPenColour) + "\r\n");
             }
 
-            switch (shapes.get(i).GetShapeType())
+            switch (shapes.get(i).getShapeType())
             {
                 case LINE:
-                    outputString.append(ConvertLineShapeToString(shapeToWrite));
+                    outputString.append(convertLineShapeToString(shapeToWrite));
                     break;
                 case POLYGON:
-                    outputString.append(ConvertPolygonShapeToString(shapeToWrite));
+                    outputString.append(convertPolygonShapeToString(shapeToWrite));
                     break;
                 case RECTANGLE:
-                    outputString.append(ConvertRectangleShapeToString(shapeToWrite));
+                    outputString.append(convertRectangleShapeToString(shapeToWrite));
                     break;
                 case PLOT:
-                    outputString.append(ConvertPlotShapeToString(shapeToWrite));
+                    outputString.append(convertPlotShapeToString(shapeToWrite));
                     break;
                 case ELLIPSE:
-                    outputString.append(ConvertEllipseShapeToString(shapeToWrite));
+                    outputString.append(convertEllipseShapeToString(shapeToWrite));
                     break;
                 default:
-                    DisplaySaveError();
+                    displaySaveError();
                     break;
             }
             outputString.append("\r\n");
@@ -138,16 +137,16 @@ public class IO {
         return outputString.toString();
     }
 
-    private String RGBToHex(Color colorToConvert){
+    private String rgbToHex(Color colorToConvert){
         if (colorToConvert == null)
             return null;
         String hex = "#"+Integer.toHexString(colorToConvert.getRGB()).substring(2);
         return hex;
     }
 
-    private String ConvertLineShapeToString(Shape shapeToWrite)
+    private String convertLineShapeToString(Shape shapeToWrite)
     {
-        CustomLine lineToWrite = (CustomLine) shapeToWrite;
+        customLine lineToWrite = (customLine) shapeToWrite;
         String outputString = "";
 
         //Encode absolute coordinates to fractions of the canvas for vec format
@@ -160,7 +159,7 @@ public class IO {
         return outputString;
     }
 
-    private String ConvertPolygonShapeToString(Shape shapeToWrite)
+    private String convertPolygonShapeToString(Shape shapeToWrite)
     {
         CustomPolygon polygonToWrite = (CustomPolygon) shapeToWrite;
         String outputString = "";
@@ -179,9 +178,9 @@ public class IO {
         return outputString;
     }
 
-    private String ConvertRectangleShapeToString(Shape shapeToWrite)
+    private String convertRectangleShapeToString(Shape shapeToWrite)
     {
-        CustomRectangle rectangleToWrite = (CustomRectangle) shapeToWrite;
+        customRectangle rectangleToWrite = (customRectangle) shapeToWrite;
         String outputString = "";
 
         //Encode absolute coordinates to fractions of the canvas for vec format
@@ -200,9 +199,9 @@ public class IO {
 
     }
 
-    private String ConvertPlotShapeToString(Shape shapeToWrite)
+    private String convertPlotShapeToString(Shape shapeToWrite)
     {
-        CustomPlot plotToWrite = (CustomPlot) shapeToWrite;
+        customPlot plotToWrite = (customPlot) shapeToWrite;
         String outputString = "";
 
         //Encode absolute coordinates to fractions of the canvas for vec format
@@ -215,7 +214,7 @@ public class IO {
         return outputString;
     }
 
-    private String ConvertEllipseShapeToString(Shape shapeToWrite)
+    private String convertEllipseShapeToString(Shape shapeToWrite)
     {
         CustomEllipse ellipseToWrite = (CustomEllipse) shapeToWrite;
         String outputString = "";
@@ -234,7 +233,7 @@ public class IO {
         return outputString;
     }
 
-    private void WriteStringToFile (String shapeData) throws IOException {
+    private void writeStringToFile(String shapeData) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileSelected));
         writer.write(shapeData);
         writer.close();
@@ -246,23 +245,23 @@ public class IO {
      * of Shape objects.
      * @return A list of shape objects that can then be rendered onto a canvas
      */
-    public List<Shape> LoadImage() {
-        Boolean fileChosenSuccess = PromptUserToSelectFile(IO.ioOptions.load);
+    public List<Shape> loadImage() {
+        Boolean fileChosenSuccess = promptUserToSelectFile(IO.ioOptions.load);
         if (fileChosenSuccess) {
             List<Shape> imageData;
 
             try {
-                imageData = FormatData(RetrieveDataAsString());
+                imageData = formatData(retrieveDataAsString());
                 return imageData;
             } catch (IOException e) {
-                DisplayLoadError();
+                displayLoadError();
             }
         }
         //Returns an empty list if loading fails or user cancels
         return new ArrayList<>();
     }
 
-    private String RetrieveDataAsString() throws IOException {
+    private String retrieveDataAsString() throws IOException {
         BufferedReader thingThatsReadingTheFiles = new BufferedReader(new FileReader(fileSelected));
         StringBuilder sb = new StringBuilder();
         String line = thingThatsReadingTheFiles.readLine();
@@ -275,7 +274,7 @@ public class IO {
         return sb.toString();
     }
 
-    private List<Shape> FormatData(String dataString) {
+    private List<Shape> formatData(String dataString) {
         ArrayList<ArrayList<String>> dataAsStrings = splitString(dataString);
         List<Shape> formattedShapes = getCommandsFromStrings(dataAsStrings);
         return formattedShapes;
@@ -312,27 +311,27 @@ public class IO {
             switch (command) {
                 case "LINE":
                     formattedShapes.add(
-                            ConvertStringsToLine(dataAsStrings.get(shapeNo), currentPenColour)
+                            convertStringsToLine(dataAsStrings.get(shapeNo), currentPenColour)
                     );
                     break;
                 case "POLYGON":
                     formattedShapes.add(
-                            ConvertStringsToPolygon(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
+                            convertStringsToPolygon(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
                     );
                     break;
                 case "RECTANGLE":
                     formattedShapes.add(
-                            ConvertStringsToRectangle(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
+                            convertStringsToRectangle(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
                     );
                     break;
                 case "PLOT":
                     formattedShapes.add(
-                            ConvertStringsToPlot(dataAsStrings.get(shapeNo), currentPenColour)
+                            convertStringsToPlot(dataAsStrings.get(shapeNo), currentPenColour)
                     );
                     break;
                 case "ELLIPSE":
                     formattedShapes.add(
-                            ConvertStringsToEllipse(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
+                            convertStringsToEllipse(dataAsStrings.get(shapeNo), currentPenColour, currentFillColour)
                     );
                     break;
                 case "PEN":
@@ -345,14 +344,14 @@ public class IO {
                         currentFillColour = new Color(Color.decode(dataAsStrings.get(shapeNo).get(1)).getRGB());
                     break;
                 default:
-                    DisplayLoadError();
+                    displayLoadError();
                     break;
             }
         }
         return formattedShapes;
     }
 
-    private Shape ConvertStringsToLine(List<String> lineDataAsStrings, Color currentPenColour)
+    private Shape convertStringsToLine(List<String> lineDataAsStrings, Color currentPenColour)
     {
         double[] coords = {0,0,0,0};
         for (int i = 1; i < 5; i++)
@@ -360,10 +359,10 @@ public class IO {
                 coords[i-1] = Double.parseDouble(lineDataAsStrings.get(i)) *  drawingCanvas.getHeight();
             else
                 coords[i-1] = Double.parseDouble(lineDataAsStrings.get(i)) *  drawingCanvas.getWidth();
-        return new CustomLine(coords[0],coords[1],coords[2],coords[3],currentPenColour);
+        return new customLine(coords[0],coords[1],coords[2],coords[3],currentPenColour);
     }
 
-    private Shape ConvertStringsToPolygon(List<String> polygonDataAsStrings, Color currentPenColour, Color currentFillColour)
+    private Shape convertStringsToPolygon(List<String> polygonDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
         List<double[]> coordinates = new ArrayList<>();
         for (int i = 0; i < polygonDataAsStrings.size(); i++)
@@ -377,30 +376,30 @@ public class IO {
             }
             catch (Exception e)
             {
-                DisplayLoadError();
+                displayLoadError();
             }
         }
         return new CustomPolygon(coordinates, currentPenColour, currentFillColour);
     }
 
-    private Shape ConvertStringsToRectangle(List<String> rectangleDataAsStrings, Color currentPenColour, Color currentFillColour) {
+    private Shape convertStringsToRectangle(List<String> rectangleDataAsStrings, Color currentPenColour, Color currentFillColour) {
         double[] coords = {0,0,0,0};
         for (int i = 1; i < 5; i++)
             if (i%2 == 0)
                 coords[i-1] = Double.parseDouble(rectangleDataAsStrings.get(i)) *  drawingCanvas.getHeight();
             else
                 coords[i-1] = Double.parseDouble(rectangleDataAsStrings.get(i)) *  drawingCanvas.getWidth();
-        return new CustomRectangle(coords[0],coords[1],coords[2],coords[3],currentPenColour, currentFillColour);
+        return new customRectangle(coords[0],coords[1],coords[2],coords[3],currentPenColour, currentFillColour);
     }
 
-    private Shape ConvertStringsToPlot(List<String> plotDataAsStrings, Color currentPenColour)
+    private Shape convertStringsToPlot(List<String> plotDataAsStrings, Color currentPenColour)
     {
         double x = Double.parseDouble(plotDataAsStrings.get(1)) *  drawingCanvas.getWidth();
         double y = Double.parseDouble(plotDataAsStrings.get(2)) *  drawingCanvas.getHeight();
-        return new CustomPlot(x, y, currentPenColour, 3, 3);
+        return new customPlot(x, y, currentPenColour, 3, 3);
     }
 
-    private Shape ConvertStringsToEllipse(List<String> ellipseDataAsStrings, Color currentPenColour, Color currentFillColour)
+    private Shape convertStringsToEllipse(List<String> ellipseDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
         double[] coords = {0,0,0,0};
         for (int i = 1; i < 5; i++)
@@ -411,11 +410,11 @@ public class IO {
         return new CustomEllipse(coords[0],coords[1],coords[2],coords[3],currentPenColour, currentFillColour);
     }
 
-    private void DisplayLoadError() {
+    private void displayLoadError() {
         JOptionPane.showMessageDialog(null, "Sorry! There was an error loading this file.");
     }
 
-    private void DisplaySaveError() {
+    private void displaySaveError() {
         JOptionPane.showMessageDialog(null, "Sorry! There was an error loading this file");
     }
 }

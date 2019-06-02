@@ -31,12 +31,12 @@ class CustomPolygonTest {
 
     @Test
     void getShapeType() {
-        assertEquals(testPolygon.GetShapeType(), GUI.ShapeType.POLYGON);
+        assertEquals(testPolygon.getShapeType(), GUI.ShapeType.POLYGON);
     }
 
     @Test
     void getShape() {
-        assertEquals(testPolygon.GetShape(), testPolygon);
+        assertEquals(testPolygon.getShape(), testPolygon);
     }
 
     @Test

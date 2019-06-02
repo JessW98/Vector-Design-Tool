@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public class CustomRectangle extends Rectangle2D.Double implements ShapeControl {
+public class customRectangle extends Rectangle2D.Double implements ShapeControl {
     /**
-     * <h1>CustomRectangle</h1>
+     * <h1>customRectangle</h1>
      * <p>
      *     Describes a rectangle shape object by its location, width, height,
      *     fillColour and penColour.
@@ -24,7 +24,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     private Color penColour = Color.BLACK;
 
     /**
-     * Constructs a new <i>CustomRectangle</i> object at the specified coordinates
+     * Constructs a new <i>customRectangle</i> object at the specified coordinates
      * with the specified colour.
      * @param x1 The x coordinate for the top left corner.
      * @param y1 The y coordinate for the top left corner.
@@ -33,7 +33,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
      * @param penColour The colour of the outline.
      * @param fillColour The inside colour of the shape.
      */
-    public CustomRectangle(double x1, double y1, double x2, double y2, Color penColour, Color fillColour) {
+    public customRectangle(double x1, double y1, double x2, double y2, Color penColour, Color fillColour) {
         x = x1;
         y = y1;
 
@@ -48,7 +48,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Returns the x coordinate for the <i>CustomRectangle</i> object.
+     * Returns the x coordinate for the <i>customRectangle</i> object.
      * @return The x coordinate of the first point.
      */
     @Override
@@ -57,7 +57,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Returns the y coordinate for the <i>CustomRectangle</i> object.
+     * Returns the y coordinate for the <i>customRectangle</i> object.
      * @return The y coordinate of the first point.
      */
     @Override
@@ -70,7 +70,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Returns the x coordinate for the second point of the <i>CustomRectangle</i> object.
+     * Returns the x coordinate for the second point of the <i>customRectangle</i> object.
      * @return The x coordinate of the second point.
      */
     public double getX2()
@@ -79,7 +79,7 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Returns the y coordinate for the second point of the <i>CustomRectangle</i> object.
+     * Returns the y coordinate for the second point of the <i>customRectangle</i> object.
      * @return The y coordinate of the second point.
      */
     public double getY2()
@@ -132,8 +132,8 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Sets the outline colour for the <i>CustomRectangle</i> object.
-     * @param colour The desired outline colour for the <i>CustomRectangle</i>
+     * Sets the outline colour for the <i>customRectangle</i> object.
+     * @param colour The desired outline colour for the <i>customRectangle</i>
      *               object.
      */
     @Override
@@ -142,8 +142,8 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Sets the fill colour for the <i>CustomRectangle</i> object.
-     * @param colour The desired fill colour for the <i>CustomRectangle</i> object.
+     * Sets the fill colour for the <i>customRectangle</i> object.
+     * @param colour The desired fill colour for the <i>customRectangle</i> object.
      */
     @Override
     public void setShapeFillColour(Color colour) {
@@ -151,11 +151,11 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Returns the SHAPE_TYPE for the <i>CustomRectangle</i> object.
-     * @return The SHAPE_TYPE for the <i>CustomRectangle</i> object.
+     * Returns the SHAPE_TYPE for the <i>customRectangle</i> object.
+     * @return The SHAPE_TYPE for the <i>customRectangle</i> object.
      */
     @Override
-    public GUI.ShapeType GetShapeType() {
+    public GUI.ShapeType getShapeType() {
         return SHAPE_TYPE;
     }
 
@@ -164,13 +164,13 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
      * @return An instance of itself as a <i>Shape</i> object.
      */
     @Override
-    public Shape GetShape() {
+    public Shape getShape() {
         return this;
     }
 
     /**
-     * Returns the colour of the outline for the <i>CustomRectangle</i> object.
-     * @return The penColour as a <i>Color</i> object for the <i>CustomRectangle</i> object.
+     * Returns the colour of the outline for the <i>customRectangle</i> object.
+     * @return The penColour as a <i>Color</i> object for the <i>customRectangle</i> object.
      */
     @Override
     public Color getShapePenColour() {
@@ -178,8 +178,8 @@ public class CustomRectangle extends Rectangle2D.Double implements ShapeControl 
     }
 
     /**
-     * Returns the colour of the fill for the <i>CustomRectangle</i> object.
-     * @return The fill colour as a <i>Color</i> object for the <i>CustomRectangle</i> object.
+     * Returns the colour of the fill for the <i>customRectangle</i> object.
+     * @return The fill colour as a <i>Color</i> object for the <i>customRectangle</i> object.
      */
     @Override
     public Color getShapeFillColour() {

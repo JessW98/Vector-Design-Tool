@@ -5,12 +5,12 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CustomPlotTest {
-    CustomPlot testPlot;
+class customPlotTest {
+    customPlot testPlot;
 
     @BeforeEach
     void setUp() {
-        testPlot = new CustomPlot(1,1,Color.black,1,1);
+        testPlot = new customPlot(1,1,Color.black,1,1);
     }
 
     @Test
@@ -47,12 +47,12 @@ class CustomPlotTest {
 
     @Test
     void getShapeType() {
-        assertEquals(testPlot.GetShapeType(), GUI.ShapeType.PLOT);
+        assertEquals(testPlot.getShapeType(), GUI.ShapeType.PLOT);
     }
 
     @Test
     void getShape() {
-        assertEquals(testPlot.GetShape(), testPlot);
+        assertEquals(testPlot.getShape(), testPlot);
     }
 
     @Test

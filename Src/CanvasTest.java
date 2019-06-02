@@ -8,15 +8,15 @@ import java.util.List;
 
 class CanvasTest {
 
-    private Canvas testCanvas;
+    private canvas testCanvas;
     private List<ShapeControl> testShapes;
-    private CustomRectangle testTangle;
+    private customRectangle testTangle;
 
     @BeforeEach
     void setUp() {
-        testCanvas = new Canvas();
+        testCanvas = new canvas();
         testShapes = new ArrayList<>();
-        testTangle = new CustomRectangle(10, 10, 10, 10,
+        testTangle = new customRectangle(10, 10, 10, 10,
                 Color.BLACK,
                 Color.WHITE);
     }
@@ -52,34 +52,34 @@ class CanvasTest {
 
     @Test
     void getPenColor() {
-        assertEquals(Color.BLACK, testCanvas.GetPenColor());
+        assertEquals(Color.BLACK, testCanvas.getPenColor());
     }
 
     @Test
     void setPenColor() {
-        testCanvas.SetPenColor(Color.GREEN);
-        assertEquals(Color.GREEN, testCanvas.GetPenColor());
+        testCanvas.setPenColor(Color.GREEN);
+        assertEquals(Color.GREEN, testCanvas.getPenColor());
     }
 
     @Test
     void setCurrentSelectedShape() {
-        testCanvas.SetCurrentSelectedShape(GUI.ShapeType.RECTANGLE);
-        assertEquals(GUI.ShapeType.RECTANGLE, testCanvas.GetCurrentSelectedShape());
+        testCanvas.setCurrentSelectedShape(GUI.ShapeType.RECTANGLE);
+        assertEquals(GUI.ShapeType.RECTANGLE, testCanvas.getCurrentSelectedShape());
     }
 
     @Test
     void getCurrentSelectedShape() {
-        assertEquals(GUI.ShapeType.LINE, testCanvas.GetCurrentSelectedShape());
+        assertEquals(GUI.ShapeType.LINE, testCanvas.getCurrentSelectedShape());
     }
 
     @Test
     void getFillColor() {
-        assertEquals(null, testCanvas.GetFillColor());
+        assertEquals(null, testCanvas.getFillColor());
     }
 
     @Test
     void setFillColor() {
-        testCanvas.SetFillColor(Color.GREEN);
-        assertEquals(Color.GREEN, testCanvas.GetFillColor());
+        testCanvas.setFillColor(Color.GREEN);
+        assertEquals(Color.GREEN, testCanvas.getFillColor());
     }
 }

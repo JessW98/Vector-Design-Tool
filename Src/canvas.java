@@ -7,16 +7,16 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * <h1>Canvas</h1>
+ * <h1>canvas</h1>
  * <p>
- * The Canvas class controls the drawing space for the
+ * The canvas class controls the drawing space for the
  * vector design tool.
  * </p>
  * @author Jessica Williams, William Daley, Jacob Kraut
  * @version 1.0
  * @since 2019-05-03
  */
-public class Canvas extends JPanel {
+public class canvas extends JPanel {
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
     private Image captureCanvas;
     private Graphics2D drawController;
@@ -33,7 +33,7 @@ public class Canvas extends JPanel {
     private boolean gridOn = false;
     private int gridSize = 10;
 
-    public List<ShapeControl> GetShapesDrawn() {
+    public List<ShapeControl> getShapesDrawn() {
         return shapesDrawn;
     }
 
@@ -62,8 +62,8 @@ public class Canvas extends JPanel {
         @Override
         public void mouseDragged(MouseEvent e) {
             if (currentSelectedShape != GUI.ShapeType.POLYGON) {
-                if (!shapesDrawn.isEmpty() && CheckLastShape(currentSelectedShape))
-                    RemoveLastShape();
+                if (!shapesDrawn.isEmpty() && checkLastShape(currentSelectedShape))
+                    removeLastShape();
                 addShape(e);
                 repaint();
             }
@@ -91,54 +91,54 @@ public class Canvas extends JPanel {
      *                                0.9 : shrink height 10%
      * @return Nothing.
      */
-    public void ResizeShapes(double widthFactor, double heightFactor)
+    public void resizeShapes(double widthFactor, double heightFactor)
     {
         for (int i = 0; i < shapesDrawn.size(); i++)
         {
             ShapeControl shape = shapesDrawn.get(i);
-            switch (shapesDrawn.get(i).GetShapeType())
+            switch (shapesDrawn.get(i).getShapeType())
             {
                 case PLOT:
-                    double x =((CustomPlot)shape).getX();
-                    double y =((CustomPlot)shape).getY();
+                    double x =((customPlot)shape).getX();
+                    double y =((customPlot)shape).getY();
 
                     x *= widthFactor;
                     y *= heightFactor;
 
-                    ((CustomPlot)shape).setX(x);
-                    ((CustomPlot)shape).setY(y);
+                    ((customPlot)shape).setX(x);
+                    ((customPlot)shape).setY(y);
                     break;
                 case LINE:
-                    double lx1 =((CustomLine)shape).getX1();
-                    double ly1 =((CustomLine)shape).getY1();
-                    double lx2 =((CustomLine)shape).getX2();
-                    double ly2 =((CustomLine)shape).getY2();
+                    double lx1 =((customLine)shape).getX1();
+                    double ly1 =((customLine)shape).getY1();
+                    double lx2 =((customLine)shape).getX2();
+                    double ly2 =((customLine)shape).getY2();
 
                     lx1 *= widthFactor;
                     ly1 *= heightFactor;
                     lx2 *= widthFactor;
                     ly2 *= heightFactor;
 
-                    ((CustomLine)shape).SetX1(lx1);
-                    ((CustomLine)shape).SetY1(ly1);
-                    ((CustomLine)shape).SetX2(lx2);
-                    ((CustomLine)shape).SetY2(ly2);
+                    ((customLine)shape).setX1(lx1);
+                    ((customLine)shape).setY1(ly1);
+                    ((customLine)shape).setX2(lx2);
+                    ((customLine)shape).setY2(ly2);
                     break;
                 case RECTANGLE:
-                    double rx1 =((CustomRectangle)shape).getX();
-                    double ry1 =((CustomRectangle)shape).getY();
-                    double rx2 =((CustomRectangle)shape).getX2();
-                    double ry2 =((CustomRectangle)shape).getY2();
+                    double rx1 =((customRectangle)shape).getX();
+                    double ry1 =((customRectangle)shape).getY();
+                    double rx2 =((customRectangle)shape).getX2();
+                    double ry2 =((customRectangle)shape).getY2();
 
                     rx1 *= widthFactor;
                     ry1 *= heightFactor;
                     rx2 *= widthFactor;
                     ry2 *= heightFactor;
 
-                    ((CustomRectangle)shape).setX1(rx1);
-                    ((CustomRectangle)shape).setY1(ry1);
-                    ((CustomRectangle)shape).setX2(rx2);
-                    ((CustomRectangle)shape).setY2(ry2);
+                    ((customRectangle)shape).setX1(rx1);
+                    ((customRectangle)shape).setY1(ry1);
+                    ((customRectangle)shape).setX2(rx2);
+                    ((customRectangle)shape).setY2(ry2);
                     break;
                 case ELLIPSE:
                     double ex1 =((CustomEllipse)shape).getX();
@@ -193,14 +193,14 @@ public class Canvas extends JPanel {
                     addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape);
                     break;
                 case LINE:
-                    CustomLine Line = new CustomLine(x1, y1, x2, y2, penColor);
+                    customLine Line = new customLine(x1, y1, x2, y2, penColor);
                     shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
                     addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape);
                     break;
                 case PLOT:
-                    CustomPlot plot = new CustomPlot(x2 - 2, y2 - 2, penColor, 4, 4);
+                    customPlot plot = new customPlot(x2 - 2, y2 - 2, penColor, 4, 4);
                     shapesDrawn.add(plot);
                     break;
                 case POLYGON:
@@ -239,7 +239,7 @@ public class Canvas extends JPanel {
         switch (shapeTypeToDraw)
         {
             case RECTANGLE:
-                CustomRectangle Rectangle = new CustomRectangle(x1, y1, x2, y2, penColor, fillColor);
+                customRectangle Rectangle = new customRectangle(x1, y1, x2, y2, penColor, fillColor);
                 shapesDrawn.add(Rectangle);
                 break;
             case ELLIPSE:
@@ -252,11 +252,11 @@ public class Canvas extends JPanel {
     {
         // If there is already a polygon started, add to it, otherwise, create one
         if (!shapesDrawn.isEmpty() && shapesDrawn.get(
-                shapesDrawn.size() - 1).GetShapeType() == GUI.ShapeType.POLYGON) {
+                shapesDrawn.size() - 1).getShapeType() == GUI.ShapeType.POLYGON) {
             CustomPolygon polyInProgress =
-                    (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).GetShape();
+                    (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).getShape();
             polyInProgress.addPoint((int) x2, (int) y2);
-            RemoveLastShape();
+            removeLastShape();
             shapesDrawn.add(polyInProgress);
         }
         else {
@@ -286,7 +286,7 @@ public class Canvas extends JPanel {
      * @param newShapeList The list of <i>Shapes</i> that will override the current list.
      * @return Nothing.
      */
-    public void OverrideCanvas(List<Shape> newShapeList)
+    public void overrideCanvas(List<Shape> newShapeList)
     {
         shapesDrawn.clear();
         for (int i = 0; i < newShapeList.size(); i++)
@@ -300,7 +300,7 @@ public class Canvas extends JPanel {
      * Default Constructor.
      * Sets up the drawing area and enables mouse inputs.
      */
-    public Canvas(){
+    public canvas(){
         setDoubleBuffered(false);
         setBackground(DEFAULT_BACKGROUND_COLOUR);
         Mouse minnie = new Mouse();
@@ -313,18 +313,11 @@ public class Canvas extends JPanel {
      * canvas.
      * @return Nothing.
      */
-    public void Clear(){
+    public void clear(){
         shapesDrawn.clear();
         repaint();
     }
 
-    private void saveImage(Graphics g){
-        if(captureCanvas == null){
-            captureCanvas = createImage(getSize().width, getSize().height);
-            drawController = (Graphics2D) captureCanvas.getGraphics();
-        }
-        g.drawImage(captureCanvas, 0, 0, null);
-    }
 
     /**
      * Paints all <i>ShapeControl</i> objects onto the canvas.
@@ -352,9 +345,9 @@ public class Canvas extends JPanel {
         List<ShapeControl> gridLines = new ArrayList<>();
 
         for (int i = 1; i < numOfHorizontalGridLines+1; i++)
-            gridLines.add(new CustomLine(0,i*gridSize, width, i*gridSize, Color.BLACK));
+            gridLines.add(new customLine(0,i*gridSize, width, i*gridSize, Color.BLACK));
         for (int i = 1; i < numOfVerticalGridLines+1; i++)
-            gridLines.add(new CustomLine(i*gridSize,0, i*gridSize,height, Color.BLACK));
+            gridLines.add(new customLine(i*gridSize,0, i*gridSize,height, Color.BLACK));
         return gridLines;
 
     }
@@ -378,7 +371,7 @@ public class Canvas extends JPanel {
      * Removes the Last Shape drawn on the canvas.
      * @return Nothing.
      */
-    public void RemoveLastShape() {
+    public void removeLastShape() {
         shapesDrawn.remove(shapesDrawn.size() - 1);
     }
 
@@ -387,9 +380,9 @@ public class Canvas extends JPanel {
      * @param shapeType The shape type being checked for.
      * @return True if the last shape is the specified type or not.
      */
-    public boolean CheckLastShape(GUI.ShapeType shapeType) {
+    public boolean checkLastShape(GUI.ShapeType shapeType) {
         ShapeControl shapeBeingChecked = shapesDrawn.get(shapesDrawn.size()-1);
-        GUI.ShapeType typeOfShapeBeingChecked = shapeBeingChecked.GetShapeType();
+        GUI.ShapeType typeOfShapeBeingChecked = shapeBeingChecked.getShapeType();
 
         if (typeOfShapeBeingChecked == GUI.ShapeType.POLYGON ||
                 typeOfShapeBeingChecked == GUI.ShapeType.RECTANGLE ||
@@ -417,7 +410,7 @@ public class Canvas extends JPanel {
      * Returns the current pen colour in use by the canvas as a <i>Color</i> object.
      * @return The current pen colour in use by the canvas as a <i>Color</i> object.
      */
-    public Color GetPenColor() {
+    public Color getPenColor() {
         return penColor;
     }
 
@@ -425,7 +418,7 @@ public class Canvas extends JPanel {
      * Sets the Pen Color in use by the canvas to change shape border color.
      * @param penColor The desired <i>Color</i>.
      */
-    public void SetPenColor(Color penColor) {
+    public void setPenColor(Color penColor) {
         this.penColor = penColor;
     }
 
@@ -434,7 +427,7 @@ public class Canvas extends JPanel {
      * @param currentSelectedShape The shape to be selected.
      * @return Nothing.
      */
-    public void SetCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
+    public void setCurrentSelectedShape(GUI.ShapeType currentSelectedShape) {
         this.currentSelectedShape = currentSelectedShape;
     }
 
@@ -442,7 +435,7 @@ public class Canvas extends JPanel {
      * Returns the shape that is currently selected.
      * @return The shape that is currently selected.
      */
-    public GUI.ShapeType GetCurrentSelectedShape() {
+    public GUI.ShapeType getCurrentSelectedShape() {
         return currentSelectedShape;
     }
 
@@ -450,7 +443,7 @@ public class Canvas extends JPanel {
      * Returns the current fill color being used by the canvas to fill shapes.
      * @return The current fill color.
      */
-    public Color GetFillColor() {
+    public Color getFillColor() {
         return fillColor;
     }
 
@@ -459,7 +452,7 @@ public class Canvas extends JPanel {
      * @param fillColor The desired <i>Color</i> for the fill.
      * @return Nothing.
      */
-    public void SetFillColor(Color fillColor) {
+    public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
     }
 }

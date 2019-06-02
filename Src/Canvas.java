@@ -30,6 +30,11 @@ public class Canvas extends JPanel {
     private GUI.ShapeType currentSelectedShape = GUI.ShapeType.LINE;
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
 
+    // When clicking and dragging, this shape will be displayed to show what
+    // the result will be when the mouse is released.
+    private ShapeControl displayShape;
+    boolean shapeBeingPreviewed = false;
+
     private boolean gridOn = false;
     private int gridSize = 10;
 
@@ -57,20 +62,44 @@ public class Canvas extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             origin = e.getPoint();
+            shapeBeingPreviewed = true;
+            displayPreviewShape(e);
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            if (currentSelectedShape != GUI.ShapeType.POLYGON) {
-                if (!shapesDrawn.isEmpty() && checkLastShape(currentSelectedShape))
-                    removeLastShape();
-                addShape(e);
+            displayPreviewShape(e);
+        }
+        
+        private void displayPreviewShape(MouseEvent e)
+        {
+            if (shapeBeingPreviewed) {
+                destination = e.getPoint();
+                double x1 = roundIntForGrid(origin.x);
+                double y1 = roundIntForGrid(origin.y);
+                double x2 = roundIntForGrid(destination.x);
+                double y2 = roundIntForGrid(destination.y);
+                switch(currentSelectedShape){
+                    case RECTANGLE:
+                        displayShape = addRectangleEllipse(x1, y1, x2, y2, GUI.ShapeType.RECTANGLE);
+                        break;
+                    case LINE:
+                        displayShape = new customLine(x1, y1, x2, y2, penColor);
+                        break;
+                    case ELLIPSE:
+                        displayShape = addRectangleEllipse(x1, y1, x2, y2, GUI.ShapeType.ELLIPSE);
+                        break;
+                    case PLOT:
+                        displayShape = new customPlot(x2 - 2, y2 - 2, penColor, 4, 4);
+                        break;
+                }
                 repaint();
             }
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
+            shapeBeingPreviewed = false;
             addShape(e);
             repaint();
         }
@@ -190,14 +219,14 @@ public class Canvas extends JPanel {
 
             switch(currentSelectedShape){
                 case RECTANGLE:
-                    addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape);
+                    shapesDrawn.add(addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape));
                     break;
                 case LINE:
                     customLine Line = new customLine(x1, y1, x2, y2, penColor);
                     shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
-                    addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape);
+                    shapesDrawn.add(addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape));
                     break;
                 case PLOT:
                     customPlot plot = new customPlot(x2 - 2, y2 - 2, penColor, 4, 4);
@@ -223,7 +252,7 @@ public class Canvas extends JPanel {
     }
 
     //Ellipse and Rectangle are both drawn the same so can be combined.
-    private void addRectangleEllipse(double x1, double y1, double x2, double y2, GUI.ShapeType shapeTypeToDraw) {
+    private ShapeControl addRectangleEllipse(double x1, double y1, double x2, double y2, GUI.ShapeType shapeTypeToDraw) {
         //If y1 is greater, swap them so that y2 is always greater. This ensures that y1 is always the top value.
         if (y1 > y2){
             double yTemp = y1;
@@ -239,14 +268,13 @@ public class Canvas extends JPanel {
         switch (shapeTypeToDraw)
         {
             case RECTANGLE:
-                customRectangle Rectangle = new customRectangle(x1, y1, x2, y2, penColor, fillColor);
-                shapesDrawn.add(Rectangle);
-                break;
+                customRectangle rectangle = new customRectangle(x1, y1, x2, y2, penColor, fillColor);
+                return rectangle;
             case ELLIPSE:
-                CustomEllipse Ellipse = new CustomEllipse(x1, y1, x2, y2, penColor, fillColor);
-                shapesDrawn.add(Ellipse);
-                break;
+                CustomEllipse ellipse = new CustomEllipse(x1, y1, x2, y2, penColor, fillColor);
+                return ellipse;
         }
+        return null;
     }
     private void addPolygon(double x1, double y1, double x2, double y2)
     {
@@ -335,10 +363,14 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
         drawController = (Graphics2D) g;
 
+        //Draws the drawn shapes
         for(ShapeControl shape : shapesDrawn) paintShapeToCanvas(shape);
-
+        //Draws grid lines
         if (gridOn)
             for (ShapeControl line : getGridLineShapes()) paintShapeToCanvas(line);
+         //Draws the preview shape
+        if (shapeBeingPreviewed)
+            paintShapeToCanvas(displayShape);
     }
 
     //Generates the line objects that show the grid on the Canvas

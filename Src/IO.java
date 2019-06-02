@@ -365,14 +365,13 @@ public class IO {
     private ShapeControl convertStringsToPolygon(List<String> polygonDataAsStrings, Color currentPenColour, Color currentFillColour)
     {
         List<double[]> coordinates = new ArrayList<>();
-        for (int i = 0; i < polygonDataAsStrings.size(); i++)
+        for (int i = 1; i < polygonDataAsStrings.size()-1; i++)
         {
             try {
                 double x = Double.parseDouble(polygonDataAsStrings.get(i)) * drawingCanvas.getWidth();
                 double y = Double.parseDouble(polygonDataAsStrings.get(++i)) * drawingCanvas.getHeight();
                 double[] coords = {x,y};
                 coordinates.add(coords);
-
             }
             catch (Exception e)
             {

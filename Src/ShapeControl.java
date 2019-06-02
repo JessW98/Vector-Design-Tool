@@ -9,8 +9,8 @@ import java.awt.*;
 public interface ShapeControl extends Shape {
     void setShapePenColour(Color colour);
     void setShapeFillColour(Color colour);
-    GUI.ShapeType GetShapeType();
-    Shape GetShape();
+    GUI.ShapeType getShapeType();
+    Shape getShape();
     Color getShapePenColour();
     Color getShapeFillColour();
 

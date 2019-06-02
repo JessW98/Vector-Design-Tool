@@ -56,11 +56,11 @@ class CustomEllipseTest {
 
     @Test
     void GetShapeType(){
-        assertEquals(GUI.ShapeType.ELLIPSE, testEllipse.GetShapeType());
+        assertEquals(GUI.ShapeType.ELLIPSE, testEllipse.getShapeType());
     }
 
     @Test
     void GetShape() {
-        assertEquals(testEllipse, testEllipse.GetShape());
+        assertEquals(testEllipse, testEllipse.getShape());
     }
 }

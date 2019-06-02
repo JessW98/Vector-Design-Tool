@@ -5,13 +5,13 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CustomLineTest {
+class customLineTest {
 
-    private CustomLine testLine;
+    private customLine testLine;
 
     @BeforeEach
     void setUp() {
-        testLine = new CustomLine(1,1,5,5, Color.black);
+        testLine = new customLine(1,1,5,5, Color.black);
     }
 
     @Test
@@ -43,12 +43,12 @@ class CustomLineTest {
 
     @Test
     void getShapeType() {
-        assertEquals(testLine.GetShapeType(), GUI.ShapeType.LINE );
+        assertEquals(testLine.getShapeType(), GUI.ShapeType.LINE );
     }
 
     @Test
     void getShape() {
-        assertEquals(testLine.GetShape(), testLine);
+        assertEquals(testLine.getShape(), testLine);
     }
 
     @Test

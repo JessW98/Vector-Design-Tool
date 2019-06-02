@@ -38,7 +38,7 @@ public class GUI extends JFrame {
     private static GUI mainPanel;
     private static JPanel left;
     private static JPanel bottom;
-    private static Canvas drawingCanvas;
+    private static canvas drawingCanvas;
     private static ActionListener actionListener;
     private static IO io;
     private static JMenuItem load;
@@ -49,7 +49,7 @@ public class GUI extends JFrame {
     private static JButton[] shapeButtons = new JButton[5];
     private static Image[] buttonImageIcons = new Image[5];
 
-    private static void PopulatePathNamesArray(){
+    private static void populatePathNamesArray(){
         pathNames[0] = "Src/images/line.png";
         pathNames[1] = "Src/images/ellipse.png";
         pathNames[2] = "Src/images/plot.png";
@@ -57,7 +57,7 @@ public class GUI extends JFrame {
         pathNames[4] = "Src/images/rectangle.png";
     }
 
-    private static void PopulateShapeNamesArray(){
+    private static void populateShapeNamesArray(){
         shapeNames[0] = "Line";
         shapeNames[1] = "Ellipse";
         shapeNames[2] = "Plot";
@@ -74,14 +74,14 @@ public class GUI extends JFrame {
         double heightDifference = (newHeight-63)/(windowHeight-63);
         double widthDifference = (newWidth-214)/(windowWidth-214);
 
-        drawingCanvas.ResizeShapes(widthDifference, heightDifference);
+        drawingCanvas.resizeShapes(widthDifference, heightDifference);
 
         windowHeight = newHeight;
         windowWidth = newWidth;
     }
 
-    private static void AssignPathNamesToFileNames(){
-        PopulatePathNamesArray();
+    private static void assignPathNamesToFileNames(){
+        populatePathNamesArray();
         for(int i = 0; i < fileNames.length; i++){
             try {
                 fileNames[i] = new File(pathNames[i]);
@@ -92,7 +92,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void ReadInLinePNG()throws IOException{
+    private static void readInLinePNG()throws IOException{
         if(fileNames[0].exists()) {
             BufferedImage linePic = ImageIO.read(GUI.class.getResource(
                     "images/line.png"));
@@ -102,7 +102,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void ReadInEllipsePNG() throws IOException{
+    private static void readInEllipsePNG() throws IOException{
         if(fileNames[1].exists()) {
             BufferedImage ellipsePic = ImageIO.read(GUI.class.getResource(
                     "images/ellipse.png"));
@@ -112,7 +112,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void ReadInPlotPNG() throws IOException{
+    private static void readInPlotPNG() throws IOException{
         if(fileNames[2].exists()) {
             BufferedImage plotPic = ImageIO.read(GUI.class.getResource(
                     "images/plot.png"));
@@ -122,7 +122,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void ReadInPolygonPNG() throws IOException{
+    private static void readInPolygonPNG() throws IOException{
         if(fileNames[3].exists()) {
             BufferedImage polygonPic = ImageIO.read(GUI.class.getResource(
                     "images/polygon.png"));
@@ -132,7 +132,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void ReadInRectanglePNG() throws IOException{
+    private static void readInRectanglePNG() throws IOException{
         if(fileNames[4].exists()) {
             BufferedImage rectanglePic = ImageIO.read(GUI.class.getResource(
                     "images/rectangle.png"));
@@ -142,20 +142,20 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void ReadInImages() throws IOException{
-        AssignPathNamesToFileNames();
-        PopulateShapeNamesArray();
-        ReadInLinePNG();
-        ReadInEllipsePNG();
-        ReadInPlotPNG();
-        ReadInPolygonPNG();
-        ReadInRectanglePNG();
+    private static void readInImages() throws IOException{
+        assignPathNamesToFileNames();
+        populateShapeNamesArray();
+        readInLinePNG();
+        readInEllipsePNG();
+        readInPlotPNG();
+        readInPolygonPNG();
+        readInRectanglePNG();
     }
 
-    private static void CreateButtons(){
+    private static void createButtons(){
         colorPicker = new JButton("Pen Colour");
         fillPicker = new JButton("Fill Colour");
-        clearButton = new JButton("Clear");
+        clearButton = new JButton("clear");
         gridButton = new JButton("Grid View");
         gridEntry = new JTextField();
 
@@ -170,7 +170,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void CreateMenuNavigationBar(){
+    private static void createMenuNavigationBar(){
         //Create the Menu Bar
         JMenuBar menuBar = new JMenuBar();
         mainPanel.setJMenuBar(menuBar);
@@ -184,7 +184,7 @@ public class GUI extends JFrame {
         file.add(save);
     }
 
-    private static void CreateToolBar(){
+    private static void createToolBar(){
         JPanel tools = new JPanel();
         tools.setLayout(new GridLayout(5, 1, 1, 1));
         tools.setBackground(Color.gray);
@@ -226,55 +226,55 @@ public class GUI extends JFrame {
         colours.add(colorPicker);
         colours.add(fillPicker);
 
-        colorPicker.setBackground(drawingCanvas.GetPenColor());
-        fillPicker.setBackground(drawingCanvas.GetFillColor());
+        colorPicker.setBackground(drawingCanvas.getPenColor());
+        fillPicker.setBackground(drawingCanvas.getFillColor());
     }
 
-    private static void HandleActionListeners(){
+    private static void handleActionListeners(){
         actionListener = e -> {
             if (e.getSource() == clearButton) {
-                drawingCanvas.Clear();
+                drawingCanvas.clear();
             }
 
             else if (e.getSource() == shapeButtons[0]){
-                drawingCanvas.SetCurrentSelectedShape(ShapeType.LINE);
+                drawingCanvas.setCurrentSelectedShape(ShapeType.LINE);
 
             }
             else if (e.getSource() == shapeButtons[1]){
-                drawingCanvas.SetCurrentSelectedShape(ShapeType.ELLIPSE);
+                drawingCanvas.setCurrentSelectedShape(ShapeType.ELLIPSE);
 
             }
             else if (e.getSource() == shapeButtons[2]){
-                drawingCanvas.SetCurrentSelectedShape(ShapeType.PLOT);
+                drawingCanvas.setCurrentSelectedShape(ShapeType.PLOT);
 
             }
             else if (e.getSource() == shapeButtons[3]){
-                drawingCanvas.SetCurrentSelectedShape(ShapeType.POLYGON);
+                drawingCanvas.setCurrentSelectedShape(ShapeType.POLYGON);
 
             }
             else if (e.getSource() == shapeButtons[4]){
-                drawingCanvas.SetCurrentSelectedShape(ShapeType.RECTANGLE);
+                drawingCanvas.setCurrentSelectedShape(ShapeType.RECTANGLE);
 
             }
             else if (e.getSource() == colorPicker){
-                drawingCanvas.SetPenColor(JColorChooser.showDialog(
+                drawingCanvas.setPenColor(JColorChooser.showDialog(
                         null,
                         "Pick your pen colour!",
-                        drawingCanvas.GetPenColor()));
-                colorPicker.setBackground(drawingCanvas.GetPenColor());
+                        drawingCanvas.getPenColor()));
+                colorPicker.setBackground(drawingCanvas.getPenColor());
             }
             else if (e.getSource() == fillPicker){
-                drawingCanvas.SetFillColor(JColorChooser.showDialog(
+                drawingCanvas.setFillColor(JColorChooser.showDialog(
                         null,
                         "Pick your fill colour!",
-                        drawingCanvas.GetFillColor()));
-                fillPicker.setBackground(drawingCanvas.GetFillColor());
+                        drawingCanvas.getFillColor()));
+                fillPicker.setBackground(drawingCanvas.getFillColor());
             }
             else if(e.getSource() == load){
-                drawingCanvas.OverrideCanvas(io.LoadImage());
+                drawingCanvas.overrideCanvas(io.loadImage());
             }
             else if(e.getSource() == save){
-                io.SaveImage(drawingCanvas.GetShapesDrawn());
+                io.saveImage(drawingCanvas.getShapesDrawn());
             }
             else if(e.getSource() == gridButton){
                 drawingCanvas.toggleGrid();
@@ -295,10 +295,10 @@ public class GUI extends JFrame {
 
     private static void undo()
     {
-        drawingCanvas.RemoveLastShape();
+        drawingCanvas.removeLastShape();
     }
 
-    private static void CreateMainPanel(){
+    private static void createMainPanel(){
         //create the main frame
         mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container mainContainer = mainPanel.getContentPane();
@@ -312,7 +312,7 @@ public class GUI extends JFrame {
         io = new IO(mainContainer, drawingCanvas);
     }
 
-    private static void DimensionGUI(){
+    private static void dimensionGUI(){
         //Get the screen resolution
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         displayWidth = screenSize.getWidth();
@@ -323,7 +323,7 @@ public class GUI extends JFrame {
         windowWidth = (int)(displayWidth * windowToScreenRatio);
     }
 
-    private static void ShowGUI(){
+    private static void showGUI(){
         //Display the window
         mainPanel.setPreferredSize(new Dimension((int)windowWidth, (int)windowHeight));
         mainPanel.setLocation(new Point(
@@ -344,7 +344,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private static void AttachActionListeners(){
+    private static void attachActionListeners(){
         for(int i = 0; i < shapeButtons.length; i++){
             shapeButtons[i].addActionListener(actionListener);
         }
@@ -375,19 +375,19 @@ public class GUI extends JFrame {
         });
     }
 
-    private static void LaunchProgram() throws IOException {
+    private static void launchProgram() throws IOException {
         mainPanel = new GUI();
-        drawingCanvas = new Canvas();
-        ReadInImages();
-        CreateMenuNavigationBar();
-        CreateButtons();
+        drawingCanvas = new canvas();
+        readInImages();
+        createMenuNavigationBar();
+        createButtons();
         createColourBar();
-        CreateToolBar();
-        HandleActionListeners();
-        CreateMainPanel();
-        DimensionGUI();
-        ShowGUI();
-        AttachActionListeners();
+        createToolBar();
+        handleActionListeners();
+        createMainPanel();
+        dimensionGUI();
+        showGUI();
+        attachActionListeners();
     }
 
     /**
@@ -396,7 +396,7 @@ public class GUI extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                LaunchProgram();
+                launchProgram();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -155,7 +155,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
 
     /**
      * Sets the fillColour for the <i>CustomEllipse</i> object.
-     * @param Colour The desired fillColour for the <i>CustomEllipse</i> object.
+     * @param colour The desired fillColour for the <i>CustomEllipse</i> object.
      */
     @Override
     public void setShapeFillColour(Color colour) {
@@ -167,7 +167,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
      * @return SHAPE_TYPE The SHAPE_TYPE for the <i>CustomEllipse</i> object.
      */
     @Override
-    public GUI.ShapeType GetShapeType() {
+    public GUI.ShapeType getShapeType() {
         return SHAPE_TYPE;
     }
 
@@ -176,7 +176,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
      * @return An instance of itself as a <i>Shape</i> object.
      */
     @Override
-    public Shape GetShape() {
+    public Shape getShape() {
         return this;
     }
 

@@ -93,7 +93,7 @@ public class CustomPolygon extends Polygon implements ShapeControl{
      * @return The type of the polygon as a <i>SHAPE_TYPE</i>.
      */
     @Override
-    public GUI.ShapeType GetShapeType() {
+    public GUI.ShapeType getShapeType() {
         return SHAPE_TYPE;
     }
 
@@ -102,7 +102,7 @@ public class CustomPolygon extends Polygon implements ShapeControl{
      * @return An instance of itself as a <i>Shape</i> Object.
      */
     @Override
-    public Shape GetShape() {
+    public Shape getShape() {
         return this;
     }
 

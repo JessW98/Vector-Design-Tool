@@ -37,6 +37,7 @@ public class GUI extends JFrame {
     private static double displayHeight;
     private static GUI mainPanel;
     private static JPanel left;
+    private static JPanel bottom;
     private static Canvas drawingCanvas;
     private static ActionListener actionListener;
     private static IO io;
@@ -203,10 +204,27 @@ public class GUI extends JFrame {
             tools.add(shapeButtons[i]);
         }
         tools.add(clearButton);
-        tools.add(colorPicker);
-        tools.add(fillPicker);
         tools.add(gridButton);
         tools.add(gridEntry);
+
+    }
+    private static void createColourBar(){
+        JPanel colours = new JPanel();
+        colours.setLayout(new GridLayout(1,4,1,1));
+        colours.setBackground(Color.gray);
+
+        bottom = new JPanel(new GridBagLayout());
+        bottom.setBorder(new LineBorder(Color.black, 1));
+        bottom.setBackground(Color.gray);
+
+        GridBagConstraints toolGridBagConstraints = new GridBagConstraints();
+        toolGridBagConstraints.anchor = GridBagConstraints.WEST;
+        toolGridBagConstraints.weighty = 1;
+
+        //add tools to left panel
+        bottom.add(colours, toolGridBagConstraints);
+        colours.add(colorPicker);
+        colours.add(fillPicker);
 
         colorPicker.setBackground(drawingCanvas.GetPenColor());
         fillPicker.setBackground(drawingCanvas.GetFillColor());
@@ -287,6 +305,7 @@ public class GUI extends JFrame {
 
         //add left panel to content pane
         mainContainer.add(left, BorderLayout.WEST);
+        mainContainer.add(bottom, BorderLayout.SOUTH);
 
         //add draw area to content
         mainContainer.add(drawingCanvas, BorderLayout.CENTER);
@@ -362,6 +381,7 @@ public class GUI extends JFrame {
         ReadInImages();
         CreateMenuNavigationBar();
         CreateButtons();
+        createColourBar();
         CreateToolBar();
         HandleActionListeners();
         CreateMainPanel();

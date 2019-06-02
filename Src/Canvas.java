@@ -18,7 +18,6 @@ import java.util.Random;
  */
 public class Canvas extends JPanel {
     private static final Color DEFAULT_BACKGROUND_COLOUR = Color.WHITE;
-    private Image captureCanvas;
     private Graphics2D drawController;
 
     private Color penColor = Color.BLACK;
@@ -62,7 +61,8 @@ public class Canvas extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             origin = e.getPoint();
-            shapeBeingPreviewed = true;
+            if (currentSelectedShape != GUI.ShapeType.POLYGON)
+                shapeBeingPreviewed = true;
             displayPreviewShape(e);
         }
 

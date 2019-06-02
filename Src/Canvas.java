@@ -52,14 +52,14 @@ public class Canvas extends JPanel {
             if (currentSelectedShape != GUI.ShapeType.POLYGON) {
                 if (!shapesDrawn.isEmpty() && CheckLastShape(currentSelectedShape))
                     RemoveLastShape();
-                DrawShapeAt(e);
+                addShape(e);
                 repaint();
             }
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            DrawShapeAt(e);
+            addShape(e);
             repaint();
         }
     }
@@ -162,81 +162,90 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Draws the currently selected shape where the mouse coordinates are.
+     * Adds a shape of the currently selected type at the location of the cursor.
      * @param e The event passed from the mouse.
      * @return Nothing.
      */
-    private void DrawShapeAt(MouseEvent e)
+    private void addShape(MouseEvent e)
     {
         destination = e.getPoint();
 
-        if(origin != null && destination != null){
+        if(origin != null){
 
-            int x1 = origin.x;
-            int y1 = origin.y;
-            int x2 = destination.x;
-            int y2 = destination.y;
+            double x1 = origin.x;
+            double y1 = origin.y;
+            double x2 = destination.x;
+            double y2 = destination.y;
 
 
             switch(currentSelectedShape){
                 case RECTANGLE:
-                    if (y1 > y2){
-                        int ytemp = y1;
-                        y1 = y2;
-                        y2 = ytemp;
-                    }
-                    if (x1 > x2){
-                        int xtemp = x1;
-                        x1 = x2;
-                        x2 = xtemp;
-                    }
-                    CustomRectangle Rectangle = new CustomRectangle(x1, y1, x2, y2, penColor, fillColor);
-                    shapesDrawn.add(Rectangle);
+                    addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape);
                     break;
                 case LINE:
                     CustomLine Line = new CustomLine(x1, y1, x2, y2, penColor);
                     shapesDrawn.add(Line);
                     break;
                 case ELLIPSE:
-                    if (y1 > y2){
-                        int ytemp = y1;
-                        y1 = y2;
-                        y2 = ytemp;
-                    }
-                    if (x1 > x2){
-                        int xtemp = x1;
-                        x1 = x2;
-                        x2 = xtemp;
-                    }
-                    CustomEllipse Ellipse = new CustomEllipse(x1, y1, x2, y2, penColor,fillColor);
-                    shapesDrawn.add(Ellipse);
+                    addRectangleEllipse(x1, y1, x2, y2, currentSelectedShape);
                     break;
                 case PLOT:
                     CustomPlot plot = new CustomPlot(x2 - 2, y2 - 2, penColor, 4, 4);
                     shapesDrawn.add(plot);
                     break;
                 case POLYGON:
-                        // If there is already a polygon started, add to it, otherwise, create one
-                        if (!shapesDrawn.isEmpty() && shapesDrawn.get(
-                                shapesDrawn.size() - 1).GetShapeType() == GUI.ShapeType.POLYGON) {
-                            CustomPolygon polyInProgress =
-                                    (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).GetShape();
-                            polyInProgress.addPoint(x2, y2);
-                            RemoveLastShape();
-                            shapesDrawn.add(polyInProgress);
-                        }
-                        else {
-                            //Creating a list of coordinates for the polygon
-                            double[] firstPoint = {x2,y2};
-                            List<double[]> polygonCoordinates = new ArrayList<>();
-                            polygonCoordinates.add(firstPoint);
-
-                            CustomPolygon polygon = new CustomPolygon(
-                                    polygonCoordinates, penColor, fillColor);
-                            shapesDrawn.add(polygon);
-                        }
+                    addPolygon(x1, y1, x2, y2);
                     break;
             }
+        }
+    }
+
+    //Ellipse and Rectangle are both drawn the same so can be combined.
+    private void addRectangleEllipse(double x1, double y1, double x2, double y2, GUI.ShapeType shapeTypeToDraw) {
+        //If y1 is greater, swap them so that y2 is always greater. This ensures that y1 is always the top value.
+        if (y1 > y2){
+            double yTemp = y1;
+            y1 = y2;
+            y2 = yTemp;
+        }
+        //If x1 is greater, swap them so that x2 is always greater. This ensures that x1 is always the top value.
+        if (x1 > x2){
+            double xTemp = x1;
+            x1 = x2;
+            x2 = xTemp;
+        }
+        switch (shapeTypeToDraw)
+        {
+            case RECTANGLE:
+                CustomRectangle Rectangle = new CustomRectangle(x1, y1, x2, y2, penColor, fillColor);
+                shapesDrawn.add(Rectangle);
+                break;
+            case ELLIPSE:
+                CustomEllipse Ellipse = new CustomEllipse(x1, y1, x2, y2, penColor, fillColor);
+                shapesDrawn.add(Ellipse);
+                break;
+        }
+    }
+    private void addPolygon(double x1, double y1, double x2, double y2)
+    {
+        // If there is already a polygon started, add to it, otherwise, create one
+        if (!shapesDrawn.isEmpty() && shapesDrawn.get(
+                shapesDrawn.size() - 1).GetShapeType() == GUI.ShapeType.POLYGON) {
+            CustomPolygon polyInProgress =
+                    (CustomPolygon) shapesDrawn.get(shapesDrawn.size() - 1).GetShape();
+            polyInProgress.addPoint((int) x2, (int) y2);
+            RemoveLastShape();
+            shapesDrawn.add(polyInProgress);
+        }
+        else {
+            //Creating a list of coordinates for the polygon
+            double[] firstPoint = {x2,y2};
+            List<double[]> polygonCoordinates = new ArrayList<>();
+            polygonCoordinates.add(firstPoint);
+
+            CustomPolygon polygon = new CustomPolygon(
+                    polygonCoordinates, penColor, fillColor);
+            shapesDrawn.add(polygon);
         }
     }
 
@@ -286,7 +295,7 @@ public class Canvas extends JPanel {
     }
 
     /**
-     *  Paints the ShapeControl objects onto the canvas.
+     * Paints all <i>ShapeControl</i> objects onto the canvas.
      * @param g The graphics object that will draw te shapes.
      * @return Nothing.
      */
@@ -294,21 +303,22 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
         drawController = (Graphics2D) g;
 
-        for(ShapeControl i : shapesDrawn){
+        for(ShapeControl shape : shapesDrawn) paintShapeToCanvas(shape);
+    }
 
-            if(i.getShapeFillColour() != null){
-                drawController.setPaint(i.getShapeFillColour());
-                drawController.fill(i);
-            }
-
-            drawController.draw(i);
-
-            if(i.getShapePenColour() != null){
-                drawController.setPaint(i.getShapePenColour());
-            }
-
-            drawController.draw(i);
+    private void paintShapeToCanvas(ShapeControl shapeToDraw)
+    {
+        if(shapeToDraw.getShapeFillColour() != null){
+            drawController.setPaint(shapeToDraw.getShapeFillColour());
+            drawController.fill(shapeToDraw);
         }
+
+        drawController.draw(shapeToDraw);
+
+        if(shapeToDraw.getShapePenColour() != null){
+            drawController.setPaint(shapeToDraw.getShapePenColour());
+        }
+        drawController.draw(shapeToDraw);
     }
 
     /**

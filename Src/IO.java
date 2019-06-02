@@ -194,6 +194,7 @@ public class IO {
                 x1 + " " +
                 y1 + " " +
                 x2 + " " +
+
                 y2;
         return outputString;
 
@@ -411,10 +412,10 @@ public class IO {
     }
 
     private void DisplayLoadError() {
-
+        JOptionPane.showMessageDialog(null, "Sorry! There was an error loading this file.");
     }
 
     private void DisplaySaveError() {
-
+        JOptionPane.showMessageDialog(null, "Sorry! There was an error loading this file");
     }
 }

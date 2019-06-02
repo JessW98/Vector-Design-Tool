@@ -19,6 +19,7 @@ public class CustomEllipse extends Ellipse2D.Double implements ShapeControl {
     private double x2;
     private double y2;
 
+
     private Color fillColour;
     private Color penColour;
 

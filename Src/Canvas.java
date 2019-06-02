@@ -29,7 +29,8 @@ public class Canvas extends JPanel {
     private GUI.ShapeType currentSelectedShape = GUI.ShapeType.LINE;
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
 
-    private int gridSize = 10;
+    private boolean gridOn = true;
+    private int gridnumbertest = 100;
 
     public List<ShapeControl> GetShapesDrawn() {
         return shapesDrawn;
@@ -250,11 +251,15 @@ public class Canvas extends JPanel {
     //Rounds value to the grid size, allowing the shapes to snap to the grid.
     private double roundIntForGrid(int valueToRound)
     {
-        return Math.round(valueToRound / gridSize) * gridSize;
+        if (gridOn)
+            return Math.round(valueToRound / (double)getGridSize()) * getGridSize();
+        else
+            return valueToRound;
     }
 
     /**
-     * This method erases the shapes stored in <i>shapesDrawn</i> and replaces it with the a new list of <i>Shape</i> objects.
+     * This method erases the shapes stored in <i>shapesDrawn</i> and replaces
+     * it with the a new list of <i>Shape</i> objects.
      * @param newShapeList The list of <i>Shapes</i> that will override the current list.
      * @return Nothing.
      */
@@ -308,6 +313,33 @@ public class Canvas extends JPanel {
         drawController = (Graphics2D) g;
 
         for(ShapeControl shape : shapesDrawn) paintShapeToCanvas(shape);
+
+        if (gridOn)
+            for (ShapeControl line : getGridLineShapes()) paintShapeToCanvas(line);
+    }
+
+    //Generates the line objects that show the grid on the canvas
+    private List<ShapeControl> getGridLineShapes() {
+        int width = this.getWidth();
+        int height = this.getHeight();
+
+        int gridSize = getGridSize();
+        int numOfVerticalGridLines = width/gridSize;
+        int numOfHorizontalGridLines = height/gridSize;
+
+        List<ShapeControl> gridLines = new ArrayList<>();
+
+        for (int i = 1; i < numOfHorizontalGridLines+1; i++)
+            gridLines.add(new CustomLine(0,i*gridSize, width, i*gridSize, Color.BLACK));
+        for (int i = 1; i < numOfVerticalGridLines+1; i++)
+            gridLines.add(new CustomLine(i*gridSize,0, i*gridSize,height, Color.BLACK));
+        return gridLines;
+
+    }
+
+    private int getGridSize()
+    {
+        return gridnumbertest;
     }
 
     private void paintShapeToCanvas(ShapeControl shapeToDraw)

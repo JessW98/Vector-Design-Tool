@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -256,6 +258,12 @@ public class GUI extends JFrame {
             else if(e.getSource() == save){
                 io.SaveImage(drawingCanvas.GetShapesDrawn());
             }
+            else if(e.getSource() == gridButton){
+                drawingCanvas.toggleGrid();
+            }
+            else if(e.getSource() == gridEntry){
+                int i = 0;
+            }
 
             left.getActionMap().put("undo", new AbstractAction("undo") {
                 @Override
@@ -306,6 +314,17 @@ public class GUI extends JFrame {
         mainPanel.setVisible(true);
     }
 
+    private static void updateGridSize() {
+        try {
+            drawingCanvas.updateGrid(Integer.parseInt(gridEntry.getText()));
+            gridEntry.setBackground(Color.WHITE);
+        }
+        catch (Exception ex)
+        {
+            gridEntry.setBackground(Color.RED);
+        }
+    }
+
     private static void AttachActionListeners(){
         for(int i = 0; i < shapeButtons.length; i++){
             shapeButtons[i].addActionListener(actionListener);
@@ -314,7 +333,20 @@ public class GUI extends JFrame {
         clearButton.addActionListener(actionListener);
         fillPicker.addActionListener(actionListener);
         gridButton.addActionListener(actionListener);
-        gridEntry.addActionListener(actionListener);
+        gridEntry.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateGridSize();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateGridSize();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                updateGridSize();
+            }});
         load.addActionListener(actionListener);
         save.addActionListener(actionListener);
         mainPanel.addComponentListener(new ComponentAdapter( ) {

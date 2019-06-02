@@ -30,10 +30,21 @@ public class Canvas extends JPanel {
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
 
     private boolean gridOn = true;
-    private int gridnumbertest = 100;
+    private int gridSize = 10;
 
     public List<ShapeControl> GetShapesDrawn() {
         return shapesDrawn;
+    }
+
+    public void toggleGrid()
+    {
+        gridOn = !gridOn;
+        repaint();
+    }
+
+    public void updateGrid(int newSize) {
+        gridSize = newSize;
+        repaint();
     }
 
     /**
@@ -171,7 +182,6 @@ public class Canvas extends JPanel {
         destination = e.getPoint();
 
         if(origin != null){
-
             double x1 = roundIntForGrid(origin.x);
             double y1 = roundIntForGrid(origin.y);
             double x2 = roundIntForGrid(destination.x);
@@ -252,7 +262,7 @@ public class Canvas extends JPanel {
     private double roundIntForGrid(int valueToRound)
     {
         if (gridOn)
-            return Math.round(valueToRound / (double)getGridSize()) * getGridSize();
+            return Math.round(valueToRound / (double)gridSize) * gridSize;
         else
             return valueToRound;
     }
@@ -323,7 +333,6 @@ public class Canvas extends JPanel {
         int width = this.getWidth();
         int height = this.getHeight();
 
-        int gridSize = getGridSize();
         int numOfVerticalGridLines = width/gridSize;
         int numOfHorizontalGridLines = height/gridSize;
 
@@ -335,11 +344,6 @@ public class Canvas extends JPanel {
             gridLines.add(new CustomLine(i*gridSize,0, i*gridSize,height, Color.BLACK));
         return gridLines;
 
-    }
-
-    private int getGridSize()
-    {
-        return gridnumbertest;
     }
 
     private void paintShapeToCanvas(ShapeControl shapeToDraw)

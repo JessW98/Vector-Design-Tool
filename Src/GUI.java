@@ -30,6 +30,7 @@ public class GUI extends JFrame {
     private static JButton fillPicker;
     private static JButton clearButton;
     private static JButton gridButton;
+    private static JButton superKoolRainbowFunModeButton;
     private static JTextField gridEntry;
     private static double windowWidth;
     private static double windowHeight;
@@ -48,6 +49,8 @@ public class GUI extends JFrame {
     private static String[] shapeNames = new String[5];
     private static JButton[] shapeButtons = new JButton[5];
     private static Image[] buttonImageIcons = new Image[5];
+
+    public static boolean superKoolRainbowFunMode = false;
 
     private static void PopulatePathNamesArray(){
         pathNames[0] = "Src/images/line.png";
@@ -157,7 +160,8 @@ public class GUI extends JFrame {
         fillPicker = new JButton("Fill Colour");
         clearButton = new JButton("Clear");
         gridButton = new JButton("Grid View");
-        gridEntry = new JTextField();
+        superKoolRainbowFunModeButton = new JButton("Super Kool Rainbow Fun Mode");
+        gridEntry = new JTextField("10");
 
         for(int i = 0; i < shapeButtons.length; i++){
             if(fileNames[i].exists()){
@@ -225,6 +229,7 @@ public class GUI extends JFrame {
         bottom.add(colours, toolGridBagConstraints);
         colours.add(colorPicker);
         colours.add(fillPicker);
+        colours.add(superKoolRainbowFunModeButton);
 
         colorPicker.setBackground(drawingCanvas.GetPenColor());
         fillPicker.setBackground(drawingCanvas.GetFillColor());
@@ -278,6 +283,17 @@ public class GUI extends JFrame {
             }
             else if(e.getSource() == gridButton){
                 drawingCanvas.toggleGrid();
+            }
+            else if (e.getSource() == superKoolRainbowFunModeButton) {
+                superKoolRainbowFunMode = !superKoolRainbowFunMode;
+                if (superKoolRainbowFunMode){
+                    colorPicker.setEnabled(false);
+                    fillPicker.setEnabled(false);
+                }
+                else {
+                    colorPicker.setEnabled(true);
+                    fillPicker.setEnabled(true);
+                }
             }
             else if(e.getSource() == gridEntry){
                 int i = 0;
@@ -352,6 +368,7 @@ public class GUI extends JFrame {
         clearButton.addActionListener(actionListener);
         fillPicker.addActionListener(actionListener);
         gridButton.addActionListener(actionListener);
+        superKoolRainbowFunModeButton.addActionListener(actionListener);
         gridEntry.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

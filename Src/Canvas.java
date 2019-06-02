@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <h1>Canvas</h1>
@@ -29,7 +30,7 @@ public class Canvas extends JPanel {
     private GUI.ShapeType currentSelectedShape = GUI.ShapeType.LINE;
     private List<ShapeControl> shapesDrawn = new ArrayList<>();
 
-    private boolean gridOn = true;
+    private boolean gridOn = false;
     private int gridSize = 10;
 
     public List<ShapeControl> GetShapesDrawn() {
@@ -207,6 +208,18 @@ public class Canvas extends JPanel {
                     break;
             }
         }
+        if (GUI.superKoolRainbowFunMode) {
+            shapesDrawn.get(shapesDrawn.size() - 1).setShapeFillColour(randomColor());
+            shapesDrawn.get(shapesDrawn.size() - 1).setShapePenColour(randomColor());
+        }
+    }
+
+    public Color randomColor() {
+        Random random = new Random();
+        int r = random.nextInt(255);
+        int g = random.nextInt(255);
+        int b = random.nextInt(255);
+        return new Color(r,g,b);
     }
 
     //Ellipse and Rectangle are both drawn the same so can be combined.

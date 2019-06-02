@@ -163,7 +163,7 @@ public class Canvas extends JPanel {
 
     /**
      * Draws the currently selected shape where the mouse coordinates are.
-     * @param e This is the event passed from the mouse.
+     * @param e The event passed from the mouse.
      * @return Nothing.
      */
     private void DrawShapeAt(MouseEvent e)

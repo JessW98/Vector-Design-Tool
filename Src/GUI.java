@@ -10,15 +10,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * <h1>GUI</h1>
+ * <p>
+ * GUI is the graphical display for the Vector Design Tool.
+ * </p>
+ * @author Jessica Williams, William Daley, Jacob Kraut
+ * @version 1.0
+ * @since 2019-05-03
+ */
 public class GUI extends JFrame {
-    /**
-     * <h1>GUI</h1>
-     * <p>
-     * GUI is the graphical display for our Vector Design Tool.
-     * This class contains all graphical objects,
-     * </p>
-     * @author Jessica Williams, William Daley, Jacob Kraut
-     */
     enum ShapeType{
         RECTANGLE, ELLIPSE, LINE, PLOT, POLYGON
     }
@@ -329,7 +330,9 @@ public class GUI extends JFrame {
         AttachActionListeners();
     }
 
-    //Main entry point for program invokes creation of the GUI
+    /**
+     * Entry point of the program.
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {

@@ -13,13 +13,15 @@ import java.util.List;
  * of .vec files.
  * </p>
  * @author Jessica Williams, William Daley, Jacob Kraut
+ * @version 1.0
+ * @since 2019-05-03
  */
-
 public class IO {
     enum ioOptions{
         save,
         load,
     }
+
     private Container parentContainer;
     Canvas drawingCanvas;
     private File fileSelected;
@@ -36,8 +38,6 @@ public class IO {
         this.parentContainer = parentContainer;
         this.drawingCanvas = drawingCanvas;
     }
-
-
 
     private Boolean PromptUserToSelectFile(ioOptions options)
     {
